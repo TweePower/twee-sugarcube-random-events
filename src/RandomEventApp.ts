@@ -191,6 +191,7 @@ export default class RandomEventApp {
             const checkResult = this.constraintsVerificator.verify(randomEvent, rewriteConfiguration);
             result = checkResult.result;
             this.debugLogCollector
+                .addLog(null, `Verify:`, 2)
                 .increaseLevel()
                 .merge(checkResult.debugLogCollector)
                 .decreaseLevel();
@@ -248,11 +249,7 @@ export default class RandomEventApp {
                 const checkResult = this.constraintsVerificator.verifyThreshold(groupThreshold);
                 result = checkResult.result;
                 this.debugLogCollector
-                    .addLog(
-                        checkResult.result,
-                        'verify group threshold',
-                        2
-                    )
+                    .addLog(null, 'Verify group threshold', 2)
                     .increaseLevel()
                     .merge(checkResult.debugLogCollector)
                     .decreaseLevel();
@@ -270,6 +267,11 @@ export default class RandomEventApp {
 
             rewriteConfiguration.isValidateThreshold = false;
         }
+
+        this.debugLogCollector
+            .increaseLevel()
+            .addLog(null, 'Verify random events in group', 1)
+            .increaseLevel();
 
         let totalWeight = 0;
         const sucessRandomEventsResults: [RunRandomEventResultType?] = [];
@@ -289,14 +291,16 @@ export default class RandomEventApp {
             if (group === null) {
                 throw new Error(`Can't find group "${groupName}" in random event ${randomEvent.name}`);
             }
-            this.debugLogCollector.addLog(null, `verify random event ${randomEvent.name} with weight ${group.weight}`, 1);
-            this.debugLogCollector.increaseLevel();
+            this.debugLogCollector
+                .addLog(null, `Random event ${randomEvent.name} with weight ${group.weight}`, 1)
+                .increaseLevel()
 
             try {
                 const compiledTags = randomEvent.tags.getCompiledTags();
                 const checkResult = this.constraintsVerificator.verify(randomEvent, rewriteConfiguration);
                 const result = checkResult.result;
                 this.debugLogCollector
+                    .addLog(null, `Verify`, 2)
                     .increaseLevel()
                     .merge(checkResult.debugLogCollector)
                     .decreaseLevel();
@@ -329,6 +333,9 @@ export default class RandomEventApp {
 
         let winnerRandomEventResult: RunRandomEventResultType | null = null;
         if (sucessRandomEventsResults[0].group.type === GroupType.Sequential) {
+            this.debugLogCollector
+                .addLog(true, `Find winner event`, 2)
+                .increaseLevel();
             const sucessRandomEventsSequentialResults = sucessRandomEventsResults.filter((sucessRandomEventsResult) => {
                 return this.randomEventHistory.getHistoryFiredEventCount(sucessRandomEventsResult.randomEvent.name) < sucessRandomEventsResult.group.sequentialCount;
             });

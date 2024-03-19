@@ -1,6 +1,7 @@
 # Todo list
 
 - write readme
+- write errors with
 - add tests
 - add many exapmles
 - maybe: github.io

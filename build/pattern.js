@@ -1,4 +1,4 @@
-// repository: https://github.com/TweePower/test
+// repository: https://github.com/TweePower/twee-sugarcube-random-events
 (function () {
     'use strict';
 
@@ -93,7 +93,7 @@
 				return this.error('Need to pass just 1 tag');
 			}
 
-            if (typeof this.args[0] === 'string') {
+            if (typeof this.args[0] !== 'string') {
                 return this.error('Random event tag should be a string value');
             }
 
@@ -135,7 +135,7 @@
 				return this.error('Need to pass just 1 tag');
 			}
 
-            if (typeof this.args[0] === 'string') {
+            if (typeof this.args[0] !== 'string') {
                 return this.error('Random event tag should be a string value');
             }
 
@@ -177,7 +177,7 @@
 				return this.error('Need to pass just 1 tag');
 			}
 
-            if (typeof this.args[0] === 'string') {
+            if (typeof this.args[0] !== 'string') {
                 return this.error('Random event tag should be a string value');
             }
 
@@ -246,7 +246,7 @@
 
     Macro.add('REGroup', {
         handler: function() {
-            if (typeof this.args[0] === 'string') {
+            if (typeof this.args[0] !== 'string') {
                 return this.error('Random event group name should be a string value');
             }
             var groupName = this.args[0].toLowerCase();

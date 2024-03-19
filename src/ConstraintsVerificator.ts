@@ -155,11 +155,14 @@ export default class ConstraintsVerificator {
                         // skip checking limitationStrategy when current compiled tags have not included `limitation.tags`
                         for (let i = 0; i < limitationStrategyTags.length; i++) {
                             if (!compiledTags.includes(limitationStrategyTags[i])) {
-                                debugLogCollector.addLog(
-                                    true,
-                                    `tag '${limitationStrategyTags[i]}' not found in current tags (current tags: ${compiledTags.join(', ')}, limitation tags: ${limitationStrategyTags.join(', ')})`,
-                                    3
-                                );
+                                debugLogCollector
+                                    .addLog(false, `tag '${limitationStrategyTags[i]}' not found in current tags`, 3)
+                                    .increaseLevel()
+                                    .increaseLevel()
+                                    .addLog(null, `current tags   : ${compiledTags.join(', ')}`, 3)
+                                    .addLog(null, `limitation tags: ${limitationStrategyTags.join(', ')}`, 3)
+                                    .decreaseLevel()
+                                    .decreaseLevel();
                                 return;
                             }
                         }
