@@ -1,0 +1,28 @@
+{
+  "name": "twee-sugarcube-random-events",
+  "version": "1.0.0",
+  "description": "",
+  "types": "./src/type/*",
+  "scripts": {
+    "build-prod": "webpack -c webpack.prod.config.js && node ./build/build.js prod",
+    "build-dev": "webpack -c webpack.dev.config.js && node ./build/build.js dev",
+    "build-all": "npm run build-prod && npm run build-dev",
+    "lint": "eslint src",
+    "test": "jest --coverage"
+  },
+  "author": "tweepower@gmail.com",
+  "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@typescript-eslint/eslint-plugin": "^7.3.0",
+    "eslint": "^8.57.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.1.5",
+    "ts-loader": "^9.5.1",
+    "typescript": "^4.1.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=20.7"
+  }
+}
