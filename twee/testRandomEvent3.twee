@@ -1,0 +1,36 @@
+:: testRandomEvent3 [random_event]
+<<RandomEventDefinition>>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    tags: ["Uni", "Daily", "$CurrentDayTime", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Uni", "Morning"] },
+        { max: 1, tags: ["Uni", "Afternoon"] },
+        { max: 1, tags: ["Uni", "Evening"] },
+        { max: 2 }
+    ]
+}<</RandomEventDefinition>>
+
+<h3>testRandomEvent3</h3>
+
+This event may be fired just once per Morning, Afternoon, Evening. But also event may be fired just 2 times before reset.
+This event may be resetted by event name (but still may be limited by limitationStrategy)
+This event may be resetted by tags Uni, Daily, mySpecificTag AND Morning, Afternoon, Evening
+<pre>{ max: 2 }</pre> - means that event has limit by 2 before reset
+`mySpecificTag` added to show how to enable/disable event by some tags
+
+<pre>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    tags: ["Uni", "Daily", "$CurrentDayTime", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Uni", "Morning"] },
+        { max: 1, tags: ["Uni", "Afternoon"] },
+        { max: 1, tags: ["Uni", "Evening"] },
+        { max: 2 }
+    ]
+}</pre>

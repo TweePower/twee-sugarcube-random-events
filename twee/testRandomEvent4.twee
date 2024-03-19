@@ -1,0 +1,35 @@
+:: testRandomEvent4 [random_event]
+<<RandomEventDefinition>>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Uni", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Uni", "Morning"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Afternoon"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Evening"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Night"], isSeparate: true },
+        { max: 2 }
+    ]
+}<</RandomEventDefinition>>
+
+<h3>testRandomEvent4</h3>
+`isSeparate: true` - mean that this limitation works separately from others, another event with limitation strategy tags `["Uni", "Evening"]` will work fine
+
+<pre>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Uni", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Uni", "Morning"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Afternoon"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Evening"], isSeparate: true },
+        { max: 1, tags: ["Uni", "Night"], isSeparate: true },
+        { max: 2 }
+    ]
+}</pre>

@@ -1,0 +1,29 @@
+:: testRandomEvent1 [random_event]
+<<RandomEventDefinition>>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Uni"],
+    limitationStrategy: [
+        { max: 3 }
+    ]
+}<</RandomEventDefinition>>
+
+<h3>testRandomEvent1</h3>
+
+This event may be fired 3 times without any limitation by tags
+This event may be resetted only by event name
+
+<pre>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Uni"],
+    limitationStrategy: [
+        { max: 3 }
+    ]
+}</pre>

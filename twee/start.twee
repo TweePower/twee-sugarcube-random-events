@@ -1,0 +1,23 @@
+:: Start
+<<nobr>>
+    <<set $CurrentDayTime = "morning">>
+<</nobr>>\
+
+<<button [[DebugRandomEventPage]]>><</button>>
+
+<h2>Debug block::</h2>
+<pre>
+    <<print State.variables.randomEventHistory !== undefined ? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4) : ''>>
+</pre>
+
+:: StoryTitle
+Random event Twee/Sugarcube doc page
+
+:: StoryData
+{
+	"ifid": "A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "Start",
+	"zoom": 0.3
+}

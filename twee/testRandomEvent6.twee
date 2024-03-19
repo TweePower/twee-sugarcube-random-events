@@ -1,0 +1,29 @@
+:: testRandomEvent6 [random_event]
+<<RandomEventDefinition>>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Street", "Daily", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Street", "Daily"] }
+    ]
+}<</RandomEventDefinition>>
+
+<h3>testRandomEvent6</h3>
+
+After when some event with `limitationStrategy[...].tags: ["Daily"]` will be fired, it will not prevent this event running
+But after when some event with `limitationStrategy[...].tags: ["Street", "Daily"]` will be fired, it will prevent this event running
+
+<pre>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Street", "Daily", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Street", "Daily"] }
+    ]
+}</pre>

@@ -1,0 +1,35 @@
+:: testRandomEvent5 [random_event]
+<<RandomEventDefinition>>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Street", "Daily", "$CurrentDayTime", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Street", "Evening"] },
+        { max: 1, tags: ["Street", "Night"] },
+        { max: 1, tags: ["LimitationTagWitout"]}
+    ]
+}<</RandomEventDefinition>>
+
+<h3>testRandomEvent5</h3>
+
+After when some event with `limitationStrategy[...].tags: ["Uni", "Evening"]` will be fired, it will not prevent this event with `limitationStrategy[...].tags: ["Street", "Evening"]` running
+
+Note: `tags` should cower all `limitationStrategy[..].tags`
+In this exapmle we have `limitationStrategy` with `LimitationTagWitout` tag that is not in the `tags`, so this `limitationStrategy` will newer work
+
+<pre>{
+    isEnabled: true,
+    type: "embaded",
+    threshold: 100,
+    filter: `true`,
+    group: "myTestGroup",
+    tags: ["Street", "Daily", "$CurrentDayTime", "mySpecificTag"],
+    limitationStrategy: [
+        { max: 1, tags: ["Street", "Evening"] },
+        { max: 1, tags: ["Street", "Night"] },
+        { max: 1, tags: ["LimitationTagWitout"]}
+    ]
+}</pre>

@@ -6,7 +6,8 @@
   "scripts": {
     "build-prod": "webpack -c webpack.prod.config.js && node ./build/build.js prod",
     "build-dev": "webpack -c webpack.dev.config.js && node ./build/build.js dev",
-    "build-all": "npm run build-prod && npm run build-dev",
+    "boild-doc": "tweego -o ./doc/index.html ./twee ./dist/random-event.min.js",
+    "build-all": "npm run build-prod && npm run build-dev && npm run boild-doc",
     "lint": "eslint src",
     "test": "jest --coverage"
   },
