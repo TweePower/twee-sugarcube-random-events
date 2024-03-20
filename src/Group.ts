@@ -1,12 +1,12 @@
 import TypeChecker from "./tools/TypeChecker";
-import { GroupType } from "./enum/GroupType";
+import { GroupTypeEnum } from "./enum/GroupTypeEnum";
 import { GroupDefinitionType } from "./type/Definition";
 
 export default class Group {
     constructor(
         public name: string,
         public weight: number,
-        public type: GroupType,
+        public type: GroupTypeEnum,
         public sequentialIndex: number | null,
         public sequentialCount: number | null,
     ) {
@@ -19,7 +19,7 @@ export default class Group {
             return new Group(
                 groupDefinition.toLowerCase(),
                 10,
-                GroupType.Random,
+                GroupTypeEnum.Random,
                 null,
                 null
             );
@@ -52,7 +52,7 @@ export default class Group {
                 return new Group(
                     groupDefinition.name.toLowerCase(),
                     groupDefinition.weight ?? 10,
-                    groupDefinition.type === 'sequential' ? GroupType.Sequential : GroupType.Random,
+                    groupDefinition.type === 'sequential' ? GroupTypeEnum.Sequential : GroupTypeEnum.Random,
                     groupDefinition.type === 'sequential' ? groupDefinition.sequentialIndex : null,
                     groupDefinition.type === 'sequential' ? (groupDefinition.sequentialCount ?? 1) : null,
                 )

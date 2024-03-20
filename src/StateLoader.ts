@@ -1,14 +1,14 @@
 import TypeChecker from "./tools/TypeChecker";
-import RandomEventCollection from "./RandomEventCollection";
-import RandomEventHistory from "./RandomEventHistory";
+import History from "./History";
 import { LimitationStrategyVariableType } from "./type/Variables";
+import PassageMetadataCollection from "./PassageMetadataCollection";
 
 export default class StateLoader {
     isLoaded = false;
 
     constructor(
-        private randomEventCollection: RandomEventCollection,
-        private randomEventHistory: RandomEventHistory,
+        private passageMetadataCollection: PassageMetadataCollection,
+        private history: History,
     ) {
     }
 
@@ -26,12 +26,12 @@ export default class StateLoader {
 
             if (!this.isLoaded) {
                 if (variables.randomEventHistory !== undefined) {
-                    this.randomEventHistory.loadFromSerilizedString(variables.randomEventHistory);
-                    Object.keys(this.randomEventHistory.forceEventStatus).forEach((randomEventName) => {
-                        if (this.randomEventHistory.forceEventStatus[randomEventName]) {
-                            this.randomEventCollection.enable(randomEventName);
+                    this.history.loadFromSerilizedString(variables.randomEventHistory);
+                    Object.keys(this.history.forceEventStatus).forEach((passageName) => {
+                        if (this.history.forceEventStatus[passageName]) {
+                            this.passageMetadataCollection.enable(passageName);
                         } else {
-                            this.randomEventCollection.disable(randomEventName);
+                            this.passageMetadataCollection.disable(passageName);
                         }
                     })
 
@@ -49,10 +49,10 @@ export default class StateLoader {
                 Object.keys(firedEvents).forEach((firedEventsKey) => {
                     if (firedEventsKey !== "") {
                         if (TypeChecker.isInteger(firedEvents[firedEventsKey]) && firedEvents[firedEventsKey] > 0) {
-                            this.randomEventHistory.setActualRandomEventFiredCounter(firedEventsKey.toLowerCase(), firedEvents[firedEventsKey]);
-                            this.randomEventHistory.setHistoryRandomEventFiredCounter(firedEventsKey.toLowerCase(), firedEvents[firedEventsKey]);
+                            this.history.setActualRandomEventFiredCounter(firedEventsKey.toLowerCase(), firedEvents[firedEventsKey]);
+                            this.history.setHistoryRandomEventFiredCounter(firedEventsKey.toLowerCase(), firedEvents[firedEventsKey]);
                         } else {
-                            this.randomEventHistory.setHistoryRandomEventFiredCounter(firedEventsKey.toLowerCase(), 1);
+                            this.history.setHistoryRandomEventFiredCounter(firedEventsKey.toLowerCase(), 1);
                         }
                     }
                 });
@@ -65,10 +65,10 @@ export default class StateLoader {
                 Object.keys(firedTags).forEach((firedTagsKey) => {
                     if (firedTagsKey !== "") {
                         if (TypeChecker.isInteger(firedTags[firedTagsKey]) && firedTags[firedTagsKey] > 0) {
-                            this.randomEventHistory.setActualTagFiredCounter(firedTagsKey.toLowerCase(), firedTags[firedTagsKey]);
-                            this.randomEventHistory.setHistoryTagFiredCounter(firedTagsKey.toLowerCase(), firedTags[firedTagsKey]);
+                            this.history.setActualTagFiredCounter(firedTagsKey.toLowerCase(), firedTags[firedTagsKey]);
+                            this.history.setHistoryTagFiredCounter(firedTagsKey.toLowerCase(), firedTags[firedTagsKey]);
                         } else {
-                            this.randomEventHistory.setHistoryTagFiredCounter(firedTagsKey.toLowerCase(), 1);
+                            this.history.setHistoryTagFiredCounter(firedTagsKey.toLowerCase(), 1);
                         }
                     }
                 });
@@ -80,9 +80,9 @@ export default class StateLoader {
                 const enabledEvents: string[] = JSON.parse(variables.randomEventEnabledEvents);
                 if (TypeChecker.isArray(enabledEvents)) {
                     enabledEvents.forEach((eventName) => {
-                        if (this.randomEventCollection.has(eventName)) {
-                            this.randomEventCollection.enable(eventName);
-                            this.randomEventHistory.enable(eventName, false);
+                        if (this.passageMetadataCollection.has(eventName)) {
+                            this.passageMetadataCollection.enable(eventName);
+                            this.history.enable(eventName, false);
                         }
                     });
                 }
@@ -94,9 +94,9 @@ export default class StateLoader {
                 const disabledEvents: string[] = JSON.parse(variables.randomEventDisabledEvents);
                 if (TypeChecker.isArray(disabledEvents)) {
                     disabledEvents.forEach((eventName) => {
-                        if (this.randomEventCollection.has(eventName)) {
-                            this.randomEventCollection.disable(eventName);
-                            this.randomEventHistory.disable(eventName, false);
+                        if (this.passageMetadataCollection.has(eventName)) {
+                            this.passageMetadataCollection.disable(eventName);
+                            this.history.disable(eventName, false);
                         }
                     });
                 }
@@ -106,7 +106,7 @@ export default class StateLoader {
             }
 
             if (this.isLoaded) {
-                this.randomEventHistory.store();
+                this.history.store();
             }
         }
     }

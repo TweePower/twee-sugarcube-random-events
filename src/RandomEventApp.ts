@@ -1,8 +1,6 @@
 import TypeChecker from "./tools/TypeChecker";
-import RandomEventCollection from "./RandomEventCollection";
-import RandomEventHistory from "./RandomEventHistory";
-import RandomEvent from "./RandomEvent";
-import RandomEventCollector from "./RandomEventCollector";
+import History from "./History";
+import PassageMetadata from "./PassageMetadata";
 import Tags from "./Tags";
 import Lock from "./Lock";
 import StateLoader from "./StateLoader";
@@ -10,8 +8,10 @@ import DebugLogCollector from "./DebugLogCollector";
 import ConstraintsVerificator from "./ConstraintsVerificator";
 import { LimitationStrategyVariableType } from "./type/Variables";
 import { RewriteConfigurationType } from "./type/RewriteConfiguration";
-import { GroupType } from "./enum/GroupType";
+import { GroupTypeEnum } from "./enum/GroupTypeEnum";
 import Group from "./Group";
+import PassageMetadataApp from "./PassageMetadataApp";
+import PassageMetadataCollection from "./PassageMetadataCollection";
 
 declare let Story: {
     has(passageName: string): boolean;
@@ -20,36 +20,41 @@ declare let Story: {
 declare type RunRandomEventResultType = {
     isSuccess: boolean,
     debugLogCollector?: DebugLogCollector,
-    randomEvent?: RandomEvent,
+    passageMetadata?: PassageMetadata,
     usedTags?: [string[]?],
     group?: Group,
 };
 
 export default class RandomEventApp {
-    randomEventCollection: RandomEventCollection;
-    randomEventHistory: RandomEventHistory;
-    randomEventCollector: RandomEventCollector;
+    passageMetadataApp: PassageMetadataApp;
+    history: History;
     stateLoader: StateLoader;
     lock: Lock;
     debugLogCollector: DebugLogCollector;
     constraintsVerificator: ConstraintsVerificator;
+    passageMetadataCollection: PassageMetadataCollection;
 
     constructor(
-        private randomEventTag: string = 'random_event',
-        randomEventDefinitionRegex: RegExp = /<<RandomEventDefinition>>(.*)<<\/RandomEventDefinition>>/gms,
+        passageMetadataRegex: RegExp = /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
+        passageMetadataMode: string = 'byTag',// all
+        public passageMetadataModeParams: { filterTag?: string } = { filterTag: 'passage_metadata' },
         debugLevel: number = 0,
     ) {
-        this.randomEventCollection = new RandomEventCollection();
-        this.randomEventHistory = new RandomEventHistory();
-        this.randomEventCollector = new RandomEventCollector(this.randomEventCollection, randomEventTag, randomEventDefinitionRegex);
-        this.stateLoader = new StateLoader(this.randomEventCollection, this.randomEventHistory);
+        this.passageMetadataApp = new PassageMetadataApp(
+            passageMetadataRegex,
+            passageMetadataMode,
+            passageMetadataModeParams,
+        );
+        this.passageMetadataCollection = this.passageMetadataApp.passageMetadataCollection;
+        this.history = new History();
+        this.stateLoader = new StateLoader(this.passageMetadataApp.passageMetadataCollection, this.history);
         this.lock = new Lock();
         this.debugLogCollector = new DebugLogCollector(debugLevel);
-        this.constraintsVerificator = new ConstraintsVerificator(this.randomEventHistory);
+        this.constraintsVerificator = new ConstraintsVerificator(this.history);
     }
 
     init() {
-        this.randomEventCollector.init();
+        this.passageMetadataApp.collect();
     }
 
     get isLocked(): boolean {
@@ -67,80 +72,80 @@ export default class RandomEventApp {
     setStateAsLoaded = () => this.stateLoader.forceSetIsLoadedFlag(true);
     resetStateLoadedFlag = () => this.stateLoader.resetIsLoadedFlag();
 
-    has = (passageName: string) => this.randomEventCollection.has(passageName);
-    find = (passageName: string) => this.randomEventCollection.find(passageName);
+    has = (passageName: string) => this.passageMetadataCollection.has(passageName);
+    find = (passageName: string) => this.passageMetadataCollection.find(passageName);
     enable(passageName: string) {
-        if (!this.randomEventCollection.has(passageName)) {
+        if (!this.passageMetadataCollection.has(passageName)) {
             if (!Story.has(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
-            throw new Error(`passage "${passageName}" exist but without tag "${this.randomEventTag}"`);
+            throw new Error(`passage "${passageName}" exist but without tag "${this.passageMetadataModeParams.filterTag}"`);
         }
 
-        this.randomEventCollection.enable(passageName);
-        this.randomEventHistory.enable(passageName);
+        this.passageMetadataCollection.enable(passageName);
+        this.history.enable(passageName);
     }
     disable(passageName: string) {
-        if (!this.randomEventCollection.has(passageName)) {
+        if (!this.passageMetadataCollection.has(passageName)) {
             if (!Story.has(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
-            throw new Error(`passage "${passageName}" exist but without tag "${this.randomEventTag}"`);
+            throw new Error(`passage "${passageName}" exist but without tag "${this.passageMetadataModeParams.filterTag}"`);
         }
 
-        this.randomEventCollection.disable(passageName);
-        this.randomEventHistory.disable(passageName);
+        this.passageMetadataCollection.disable(passageName);
+        this.history.disable(passageName);
     }
     enableByTag(tag: string) {
         tag = tag.toLowerCase();
 
-        this.randomEventCollection.getEventsNamesByTag(tag).forEach((passageName) => {
-            this.randomEventCollection.enable(passageName);
-            this.randomEventHistory.enable(passageName, false);
+        this.passageMetadataCollection.getEventsNamesByTag(tag).forEach((passageName) => {
+            this.passageMetadataCollection.enable(passageName);
+            this.history.enable(passageName, false);
         });
-        this.randomEventHistory.store();
+        this.history.store();
     }
     disableByTag(tag: string) {
         tag = tag.toLowerCase();
 
-        this.randomEventCollection.getEventsNamesByTag(tag).forEach((passageName) => {
-            this.randomEventCollection.disable(passageName);
-            this.randomEventHistory.disable(passageName, false);
+        this.passageMetadataCollection.getEventsNamesByTag(tag).forEach((passageName) => {
+            this.passageMetadataCollection.disable(passageName);
+            this.history.disable(passageName, false);
         });
-        this.randomEventHistory.store();
+        this.history.store();
     }
     resetFiredCounterByRandomEvent(passageName: string) {
-        if (!this.randomEventCollection.has(passageName)) {
+        if (!this.passageMetadataCollection.has(passageName)) {
             if (!Story.has(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
-            throw new Error(`passage "${passageName}" exist but without tag "${this.randomEventTag}"`);
+            throw new Error(`passage "${passageName}" exist but without tag "${this.passageMetadataModeParams.filterTag}"`);
         }
 
-        this.randomEventHistory.resetRandomEventFiredCounter(passageName);
+        this.history.resetRandomEventFiredCounter(passageName);
     }
     resetFiredCounterByTag(tag: string) {
         tag = tag.toLowerCase();
 
-        this.randomEventHistory.resetTagFiredCounter(tag, false);
+        this.history.resetTagFiredCounter(tag, false);
 
-        this.randomEventCollection.getEventsNamesByTag(tag).forEach((passageName) => {
-            this.randomEventHistory.resetRandomEventFiredCounter(passageName, false);
+        this.passageMetadataCollection.getEventsNamesByTag(tag).forEach((passageName) => {
+            this.history.resetRandomEventFiredCounter(passageName, false);
         });
 
-        this.randomEventCollection.getEventsNamesByLimitationStrategyTag(tag).forEach((passageName) => {
-            this.randomEventHistory.resetRandomEventFiredCounter(passageName, false);
+        this.passageMetadataCollection.getEventsNamesByLimitationStrategyTag(tag).forEach((passageName) => {
+            this.history.resetRandomEventFiredCounter(passageName, false);
         });
 
-        this.randomEventCollection.getTagGroupsByLimitationStrategyTag(tag).forEach((tags) => {
+        this.passageMetadataCollection.getTagGroupsByLimitationStrategyTag(tag).forEach((tags) => {
             const tagsStringKey = (new Tags(tags)).toStringKey();
-            this.randomEventHistory.resetTagFiredCounter(tagsStringKey, false);
+            this.history.resetTagFiredCounter(tagsStringKey, false);
         });
 
-        this.randomEventHistory.store();
+        this.history.store();
     }
 
     runRandomEvent(passageName: string, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType {
@@ -160,16 +165,16 @@ export default class RandomEventApp {
             ...(rewriteConfiguration ?? {})
         }
 
-        if (!this.randomEventCollection.has(passageName)) {
+        if (!this.passageMetadataCollection.has(passageName)) {
             if (!Story.has(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
-            throw new Error(`passage "${passageName}" exist but without tag "${this.randomEventTag}"`);
+            throw new Error(`passage "${passageName}" exist but without tag "${this.passageMetadataModeParams.filterTag}"`);
         }
 
-        const randomEvent = this.randomEventCollection.get(passageName);
-        this.debugLogCollector.addLog(null, `Start random event ${randomEvent.name}`, 1);
+        const passageMetadata = this.passageMetadataCollection.get(passageName);
+        this.debugLogCollector.addLog(null, `Start random event ${passageMetadata.name}`, 1);
         this.debugLogCollector.increaseLevel();
 
         let result = true;
@@ -181,14 +186,14 @@ export default class RandomEventApp {
             return {
                 isSuccess: result,
                 debugLogCollector: this.debugLogCollector,
-                randomEvent,
+                passageMetadata,
                 usedTags: []
             };
         }
 
         try {
-            const compiledTags = randomEvent.tags.getCompiledTags();
-            const checkResult = this.constraintsVerificator.verify(randomEvent, rewriteConfiguration);
+            const compiledTags = passageMetadata.tags.getCompiledTags();
+            const checkResult = this.constraintsVerificator.verify(passageMetadata, rewriteConfiguration);
             result = checkResult.result;
             this.debugLogCollector
                 .addLog(null, `Verify:`, 2)
@@ -199,8 +204,8 @@ export default class RandomEventApp {
             return {
                 isSuccess: result,
                 debugLogCollector: this.debugLogCollector,
-                randomEvent,
-                usedTags: randomEvent.limitationStrategy.isTaged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags]
+                passageMetadata,
+                usedTags: passageMetadata.limitationStrategy.isTaged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags]
             };
         } catch (err) {
             // TODO add data to error
@@ -226,7 +231,7 @@ export default class RandomEventApp {
             ...(rewriteConfiguration ?? {})
         }
 
-        if (!this.randomEventCollection.hasGroup(groupName)) {
+        if (!this.passageMetadataCollection.hasGroup(groupName)) {
             throw new Error(`group "${groupName}" does not exist`);
         }
         this.debugLogCollector.addLog(null, `Start group ${groupName}`, 1);
@@ -275,29 +280,29 @@ export default class RandomEventApp {
 
         let totalWeight = 0;
         const sucessRandomEventsResults: [RunRandomEventResultType?] = [];
-        const passageNames = this.randomEventCollection.getEventsNamesByGroup(groupName);
+        const passageNames = this.passageMetadataCollection.getEventsNamesByGroup(groupName);
         for (let groupIndex = 0; groupIndex < passageNames.length; groupIndex++) {
             const passageName = passageNames[groupIndex];
-            if (!this.randomEventCollection.has(passageName)) {
+            if (!this.passageMetadataCollection.has(passageName)) {
                 if (!Story.has(passageName)) {
                     throw new Error(`passage "${passageName}" does not exist`);
                 }
 
-                throw new Error(`passage "${passageName}" exist but without tag "${this.randomEventTag}"`);
+                throw new Error(`passage "${passageName}" exist but without tag "${this.passageMetadataModeParams.filterTag}"`);
             }
 
-            const randomEvent = this.randomEventCollection.get(passageName);
-            const group = randomEvent.groups.getByName(groupName);
+            const passageMetadata = this.passageMetadataCollection.get(passageName);
+            const group = passageMetadata.groups.getByName(groupName);
             if (group === null) {
-                throw new Error(`Can't find group "${groupName}" in random event ${randomEvent.name}`);
+                throw new Error(`Can't find group "${groupName}" in random event ${passageMetadata.name}`);
             }
             this.debugLogCollector
-                .addLog(null, `Random event ${randomEvent.name} with weight ${group.weight}`, 1)
+                .addLog(null, `Random event ${passageMetadata.name} with weight ${group.weight}`, 1)
                 .increaseLevel()
 
             try {
-                const compiledTags = randomEvent.tags.getCompiledTags();
-                const checkResult = this.constraintsVerificator.verify(randomEvent, rewriteConfiguration);
+                const compiledTags = passageMetadata.tags.getCompiledTags();
+                const checkResult = this.constraintsVerificator.verify(passageMetadata, rewriteConfiguration);
                 const result = checkResult.result;
                 this.debugLogCollector
                     .addLog(null, `Verify`, 2)
@@ -309,8 +314,8 @@ export default class RandomEventApp {
                     totalWeight += group.weight;
                     sucessRandomEventsResults.push({
                         isSuccess: result,
-                        randomEvent: randomEvent,
-                        usedTags: randomEvent.limitationStrategy.isTaged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags],
+                        passageMetadata: passageMetadata,
+                        usedTags: passageMetadata.limitationStrategy.isTaged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags],
                         group: group,
                     });
                 }
@@ -332,12 +337,12 @@ export default class RandomEventApp {
         }
 
         let winnerRandomEventResult: RunRandomEventResultType | null = null;
-        if (sucessRandomEventsResults[0].group.type === GroupType.Sequential) {
+        if (sucessRandomEventsResults[0].group.type === GroupTypeEnum.Sequential) {
             this.debugLogCollector
                 .addLog(true, `Find winner event`, 2)
                 .increaseLevel();
             const sucessRandomEventsSequentialResults = sucessRandomEventsResults.filter((sucessRandomEventsResult) => {
-                return this.randomEventHistory.getHistoryFiredEventCount(sucessRandomEventsResult.randomEvent.name) < sucessRandomEventsResult.group.sequentialCount;
+                return this.history.getHistoryFiredEventCount(sucessRandomEventsResult.passageMetadata.name) < sucessRandomEventsResult.group.sequentialCount;
             });
             this.debugLogCollector.addLog(true, `sequential search found ${sucessRandomEventsSequentialResults.length} siutable events`, 3);
 
@@ -345,12 +350,12 @@ export default class RandomEventApp {
                 winnerRandomEventResult = sucessRandomEventsSequentialResults.sort((a: RunRandomEventResultType, b: RunRandomEventResultType): number => {
                     return a.group.sequentialIndex - b.group.sequentialIndex;
                 })[0];
-                this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.randomEvent.name}`, 3);
+                this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.passageMetadata.name}`, 3);
 
                 return {
                     isSuccess: result,
                     debugLogCollector: this.debugLogCollector,
-                    randomEvent: winnerRandomEventResult.randomEvent,
+                    passageMetadata: winnerRandomEventResult.passageMetadata,
                     usedTags: winnerRandomEventResult.usedTags,
                     group: winnerRandomEventResult.group,
                 };
@@ -368,23 +373,23 @@ export default class RandomEventApp {
                 break;
             }
         }
-        this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.randomEvent.name}`, 3);
+        this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.passageMetadata.name}`, 3);
 
         return {
             isSuccess: result,
             debugLogCollector: this.debugLogCollector,
-            randomEvent: winnerRandomEventResult.randomEvent,
+            passageMetadata: winnerRandomEventResult.passageMetadata,
             usedTags: winnerRandomEventResult.usedTags,
             group: winnerRandomEventResult.group,
         };
     }
 
-    incrementCounters(randomEvent: RandomEvent, usedTags?: [string[]?]) {
-        this.randomEventHistory.incrementRandomEventFiredCounter(randomEvent.name, false);
+    incrementCounters(passageMetadata: PassageMetadata, usedTags?: [string[]?]) {
+        this.history.incrementRandomEventFiredCounter(passageMetadata.name, false);
         usedTags.forEach(tags => {
-            this.randomEventHistory.incrementTagsFiredCounter([...tags, new Tags(tags).toStringKey()], false)
+            this.history.incrementTagsFiredCounter([...tags, new Tags(tags).toStringKey()], false)
         })
-        this.randomEventHistory.store();
+        this.history.store();
         this.stateLoader.forceSetIsLoadedFlag(true);
     }
 }

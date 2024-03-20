@@ -1,5 +1,5 @@
 import Group from "../src/Group";
-import { GroupType } from "../src/enum/GroupType";
+import { GroupTypeEnum } from "../src/enum/GroupTypeEnum";
 
 test('check createFromGroupDefinition error', async () => {
     expect(() => Group.createFromGroupDefinition(null)).toThrow();
@@ -19,7 +19,7 @@ test('check createFromGroupDefinition success with string', async () => {
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test');
     expect(group.weight).toBe(10);
-    expect(group.type).toBe(GroupType.Random);
+    expect(group.type).toBe(GroupTypeEnum.Random);
     expect(group.sequentialIndex).toBe(null);
     expect(group.sequentialCount).toBe(null);
 });
@@ -31,7 +31,7 @@ test('check createFromGroupDefinition success with object minimal params', async
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test');
     expect(group.weight).toBe(10);
-    expect(group.type).toBe(GroupType.Random);
+    expect(group.type).toBe(GroupTypeEnum.Random);
     expect(group.sequentialIndex).toBe(null);
     expect(group.sequentialCount).toBe(null);
 });
@@ -46,7 +46,7 @@ test('check createFromGroupDefinition success with object sequential type', asyn
     });
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test object');
-    expect(group.type).toBe(GroupType.Sequential);
+    expect(group.type).toBe(GroupTypeEnum.Sequential);
     expect(group.weight).toBe(100);
     expect(group.sequentialIndex).toBe(5);
     expect(group.sequentialCount).toBe(10);
@@ -61,7 +61,7 @@ test('check createFromGroupDefinition success with object sequential type withou
     });
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test object');
-    expect(group.type).toBe(GroupType.Sequential);
+    expect(group.type).toBe(GroupTypeEnum.Sequential);
     expect(group.weight).toBe(100);
     expect(group.sequentialIndex).toBe(5);
     expect(group.sequentialCount).toBe(1);
@@ -77,7 +77,7 @@ test('check createFromGroupDefinition success with object random type', async ()
     });
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test object');
-    expect(group.type).toBe(GroupType.Random);
+    expect(group.type).toBe(GroupTypeEnum.Random);
     expect(group.weight).toBe(100);
     expect(group.sequentialIndex).toBe(null);
     expect(group.sequentialCount).toBe(null);

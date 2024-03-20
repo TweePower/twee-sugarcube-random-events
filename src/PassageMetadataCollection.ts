@@ -1,26 +1,19 @@
-import RandomEvent from "./RandomEvent";
-import { GroupType } from "./enum/GroupType";
+import PassageMetadata from "./PassageMetadata";
+import {default as BasePassageMetadataCollection} from "./PassageMetadata/PassageMetadataCollection";
 import Tags from "./Tags";
-import TypeChecker from "./tools/TypeChecker";
+import { GroupTypeEnum } from "./enum/GroupTypeEnum";
 
-export default class RandomEventCollection {
-    items: { [key: string]: RandomEvent } = {};
+export default class PassageMetadataCollection extends BasePassageMetadataCollection {
     tagIndex: { [key: string]: string[] } = {};
     limitationStrategyTagIndex: { [key: string]: { tagGroups: { [key: string]: string[] }, events: string[] } } = {};
     groupIndex: { [key: string]: string[] } = {};
     validationGroup: { [key: string]: { type: string, indexes: number[] } } = {};
 
-    cleanUp(): void {
-        this.validationGroup = {};
-    }
-
-    add(randomEvent: RandomEvent): void {
-        if (!(randomEvent instanceof RandomEvent)) {
-            throw new Error(`randomEvent should be instance of RandomEvent`);
-        }
+    add(passageMetadata: PassageMetadata): void {
+        super.add(passageMetadata);
 
         // Build search indexes + validation
-        randomEvent.groups.all().forEach((group) => {
+        passageMetadata.groups.all().forEach((group) => {
             if (this.validationGroup[group.name] === undefined) {
                 this.validationGroup[group.name] = {
                     type: group.type.toString(),
@@ -28,12 +21,12 @@ export default class RandomEventCollection {
                 };
             } else {
                 if (this.validationGroup[group.name].type !== group.type) {
-                    throw new Error(`Group type should be the same. Group name: "${group.name}". Passage name: "${randomEvent.name}". Other passages: "${this.groupIndex[group.name].join(", ")}"`);
+                    throw new Error(`Group type should be the same. Group name: "${group.name}". Passage name: "${passageMetadata.name}". Other passages: "${this.groupIndex[group.name].join(", ")}"`);
                 }
 
-                if (group.type === GroupType.Sequential) {
+                if (group.type === GroupTypeEnum.Sequential) {
                     if (this.validationGroup[group.name].indexes.includes(group.sequentialIndex)) {
-                        throw new Error(`Random event with sequentialIndex ${group.sequentialIndex} should be unique (name: ${randomEvent.name} ,group: "${group.name}")`);
+                        throw new Error(`Random event with sequentialIndex ${group.sequentialIndex} should be unique (name: ${passageMetadata.name} ,group: "${group.name}")`);
                     }
 
                     this.validationGroup[group.name].indexes.push(group.sequentialIndex);
@@ -44,20 +37,20 @@ export default class RandomEventCollection {
                 this.groupIndex[group.name] = [];
             }
 
-            this.groupIndex[group.name].push(randomEvent.name);
+            this.groupIndex[group.name].push(passageMetadata.name);
         });
 
-        const stringTags = [...randomEvent.tags.getStringTags()];
+        const stringTags = [...passageMetadata.tags.getStringTags()];
         stringTags.forEach((tag) => {
             if (this.tagIndex[tag] === undefined) {
                 this.tagIndex[tag] = [];
             }
 
-            this.tagIndex[tag].push(randomEvent.name);
+            this.tagIndex[tag].push(passageMetadata.name);
         });
 
-        if (randomEvent.limitationStrategy.length > 0 && randomEvent.limitationStrategy.isTaged) {
-            randomEvent.limitationStrategy.all().forEach((limitationStrategy) => {
+        if (passageMetadata.limitationStrategy.length > 0 && passageMetadata.limitationStrategy.isTaged) {
+            passageMetadata.limitationStrategy.all().forEach((limitationStrategy) => {
                 limitationStrategy.tags.getStringTags().forEach((tag) => {
                     if (this.limitationStrategyTagIndex[tag] === undefined) {
                         this.limitationStrategyTagIndex[tag] = {
@@ -66,54 +59,36 @@ export default class RandomEventCollection {
                         };
                     }
 
-                    this.limitationStrategyTagIndex[tag].events.push(randomEvent.name);
+                    this.limitationStrategyTagIndex[tag].events.push(passageMetadata.name);
 
                     const limitationStrategyTags = [...limitationStrategy.tags.getStringTags()];
                     if (limitationStrategy.isSeparate) {
-                        limitationStrategyTags.push(randomEvent.name);
+                        limitationStrategyTags.push(passageMetadata.name);
                     }
                     this.limitationStrategyTagIndex[tag].tagGroups[new Tags(limitationStrategyTags).toStringKey()] = limitationStrategyTags;
                 });
             });
         }
-
-        this.items[randomEvent.name] = randomEvent;
     }
 
-    has(name: string): boolean {
-        if (!TypeChecker.isString(name)) {
-            throw new Error(`Invalid "RandomEventCollection.has" argument type`);
-        }
-
-        return this.items[name] !== undefined;
+    get(name: string): PassageMetadata {
+        return super.get(name) as PassageMetadata;
     }
 
-    get(name: string): RandomEvent {
-        if (!this.has(name)) {
-            throw new Error(`Random event with name ${name} doesn't exist`);
-        }
-
-        return this.items[name];
+    find(name: string): PassageMetadata | null {
+        return super.find(name) as PassageMetadata | null;
     }
 
-    find(name: string): RandomEvent | null {
-        return this.has(name) ? this.items[name] : null;
+    cleanUp(): void {
+        this.validationGroup = {};
     }
 
     enable(name: string): void {
-        if (!this.has(name)) {
-            throw new Error(`Random event with name ${name} doesn't exist`);
-        }
-
-        this.items[name].isEnabled = true;
+        this.get(name).isEnabled = true;
     }
 
     disable(name: string): void {
-        if (!this.has(name)) {
-            throw new Error(`Random event with name ${name} doesn't exist`);
-        }
-
-        this.items[name].isEnabled = false;
+        this.get(name).isEnabled = false;
     }
 
     getEventsNamesByTag(tag: string): string[] {

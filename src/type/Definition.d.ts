@@ -11,14 +11,3 @@ export type LimitationStrategyType = {
     tags: [string] | null,
     isSeparate: boolean,
 };
-
-export type RandomEventDefinitionType = {
-    name: string,
-    isEnabled: boolean | undefined,
-    type: string | undefined,
-    threshold: number | undefined,
-    filter: string | undefined,
-    tags: string[] | undefined,
-    group: GroupDefinitionType[] | GroupDefinitionType | undefined,
-    limitationStrategy: LimitationStrategyType[],
-};

@@ -1,4 +1,4 @@
-export enum GroupType {
+export enum GroupTypeEnum {
     Random = 'random',
     Sequential = 'sequential',
 }

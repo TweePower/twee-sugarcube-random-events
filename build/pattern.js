@@ -11,8 +11,9 @@
     ////////////////////////////////
 
     var re = new RandomEventApp(
-        'random_event',
-        /<<RandomEventDefinition>>(.*)<<\/RandomEventDefinition>>/gms,
+        /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
+        'byTag',
+        { filterTag: 'passage_metadata' },
         3, // max debug level
     );
     re.init();
@@ -213,11 +214,11 @@
             }
 
             if (Config.debug) {
-                var debugLog = 'RE "' + result.randomEvent.name + '"';
+                var debugLog = 'RE "' + result.passageMetadata.name + '"';
                 if (result.debugLogCollector.debugLevel > 0) {
                     debugLog = result.debugLogCollector.toString();
                 }
-                this.debugView.name = 'RE "' + result.randomEvent.name + '"';
+                this.debugView.name = 'RE "' + result.passageMetadata.name + '"';
                 this.debugView.title = debugLog;
                 this.debugView.modes({
                     nonvoid: true,
@@ -231,14 +232,14 @@
             }
 
             if (result.isSuccess) {
-                re.incrementCounters(result.randomEvent, result.usedTags);
+                re.incrementCounters(result.passageMetadata, result.usedTags);
 
-                if (result.randomEvent.type === 'embaded') {
+                if (result.passageMetadata.type === 'embaded') {
                     var $el = jQuery(this.output);
-                    $el.wiki(Story.get(result.randomEvent.name).processText());
+                    $el.wiki(Story.get(result.passageMetadata.name).processText());
                 } else {
                     re.acquireLock();
-                    setTimeout(function() { Engine.play(result.randomEvent.name, true), Engine.minDomActionDelay });
+                    setTimeout(function() { Engine.play(result.passageMetadata.name, true), Engine.minDomActionDelay });
                 }
             }
         },
@@ -277,14 +278,14 @@
             }
 
             if (result.isSuccess) {
-                re.incrementCounters(result.randomEvent, result.usedTags);
+                re.incrementCounters(result.passageMetadata, result.usedTags);
 
-                if (result.randomEvent.type === 'embaded') {
+                if (result.passageMetadata.type === 'embaded') {
                     var $el = jQuery(this.output);
-                    $el.wiki(Story.get(result.randomEvent.name).processText());
+                    $el.wiki(Story.get(result.passageMetadata.name).processText());
                 } else {
                     re.acquireLock();
-                    setTimeout(function() { Engine.play(result.randomEvent.name, true), Engine.minDomActionDelay });
+                    setTimeout(function() { Engine.play(result.passageMetadata.name, true), Engine.minDomActionDelay });
                 }
             }
         },
@@ -308,17 +309,17 @@
 
     window.isREFired = (passageName = '', isUseHistory = true) => {
         if (isUseHistory) {
-            return re.randomEventHistory.getHistoryFiredEventCount(passageName) > 0;
+            return re.history.getHistoryFiredEventCount(passageName) > 0;
         }
 
-        return re.randomEventHistory.getActualFiredEventCount(passageName) > 0;
+        return re.history.getActualFiredEventCount(passageName) > 0;
     }
 
     window.isRETagFired = (tag = '', isUseHistory = true) => {
         if (isUseHistory) {
-            return re.randomEventHistory.getHistoryFiredTagCount(tag) > 0;
+            return re.history.getHistoryFiredTagCount(tag) > 0;
         }
 
-        return re.randomEventHistory.getActualFiredTagCount(tag) > 0;
+        return re.history.getActualFiredTagCount(tag) > 0;
     }
 }());

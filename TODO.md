@@ -1,9 +1,10 @@
 # Todo list
 
-- write readme
-- write errors with
-- add tests
-- add many exapmles
-- maybe: github.io
-- generate pack
-- rename RandomEventDefinition to PassageMetadata + split RandomEventCollector to separate repository
+- write readme: in progress
+- write errors with scope
+- add tests: in progress
+- add many exapmles: in progress
+- create github.io page
+- setup automatically generated pack in ginhub
+- move PassageMetadata to separate repository (and, not sure how, but need rewrite to make more extandable)
+- setup Github actions

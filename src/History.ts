@@ -2,7 +2,7 @@ declare let State: {
     variables: { [key: string]: any } // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-export default class RandomEventHistory {
+export default class History {
     actualFiredEvents: { [eventName: string]: number } = {};
     actualFiredTags: { [tag: string]: number } = {};
     historyFiredEvents: { [eventName: string]: number } = {};
@@ -12,15 +12,15 @@ export default class RandomEventHistory {
     loadFromSerilizedString(serializedString: string): void {
         const state = JSON.parse(serializedString);
 
-        Object.keys(state.e).forEach((randomeEventName) => {
-            if (state.e[randomeEventName].a !== undefined) {
-                this.actualFiredEvents[randomeEventName] = state.e[randomeEventName].a;
+        Object.keys(state.e).forEach((passageName) => {
+            if (state.e[passageName].a !== undefined) {
+                this.actualFiredEvents[passageName] = state.e[passageName].a;
             }
-            if (state.e[randomeEventName].h !== undefined) {
-                this.historyFiredEvents[randomeEventName] = state.e[randomeEventName].h;
+            if (state.e[passageName].h !== undefined) {
+                this.historyFiredEvents[passageName] = state.e[passageName].h;
             }
-            if (state.e[randomeEventName].s !== undefined) {
-                this.forceEventStatus[randomeEventName] = state.e[randomeEventName].s === 1;
+            if (state.e[passageName].s !== undefined) {
+                this.forceEventStatus[passageName] = state.e[passageName].s === 1;
             }
         });
         Object.keys(state.t).forEach((tag) => {
@@ -39,23 +39,23 @@ export default class RandomEventHistory {
             t: { [key: string] : { a?: number, h?: number }},
         } = { e: {}, t: {} };
 
-        Object.keys(this.actualFiredEvents).forEach((randomeEventName) => {
-            if (result.e[randomeEventName] === undefined) {
-                result.e[randomeEventName] = {};
+        Object.keys(this.actualFiredEvents).forEach((passageName) => {
+            if (result.e[passageName] === undefined) {
+                result.e[passageName] = {};
             }
-            result.e[randomeEventName].a = this.actualFiredEvents[randomeEventName];
+            result.e[passageName].a = this.actualFiredEvents[passageName];
         });
-        Object.keys(this.historyFiredEvents).forEach((randomeEventName) => {
-            if (result.e[randomeEventName] === undefined) {
-                result.e[randomeEventName] = {};
+        Object.keys(this.historyFiredEvents).forEach((passageName) => {
+            if (result.e[passageName] === undefined) {
+                result.e[passageName] = {};
             }
-            result.e[randomeEventName].h = this.historyFiredEvents[randomeEventName];
+            result.e[passageName].h = this.historyFiredEvents[passageName];
         });
-        Object.keys(this.forceEventStatus).forEach((randomeEventName) => {
-            if (result.e[randomeEventName] === undefined) {
-                result.e[randomeEventName] = {};
+        Object.keys(this.forceEventStatus).forEach((passageName) => {
+            if (result.e[passageName] === undefined) {
+                result.e[passageName] = {};
             }
-            result.e[randomeEventName].s = this.forceEventStatus[randomeEventName] === true ? 1 : 0;
+            result.e[passageName].s = this.forceEventStatus[passageName] === true ? 1 : 0;
         });
         Object.keys(this.actualFiredTags).forEach((tag) => {
             if (result.t[tag] === undefined) {
@@ -78,9 +78,9 @@ export default class RandomEventHistory {
     }
 
     /** @deprecated only for backward compatibility */
-    setActualRandomEventFiredCounter(randomeEventName: string, count: number): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        this.actualFiredEvents[randomeEventName] = count;
+    setActualRandomEventFiredCounter(passageName: string, count: number): void {
+        passageName = passageName.toLowerCase();
+        this.actualFiredEvents[passageName] = count;
     }
 
     /** @deprecated only for backward compatibility */
@@ -90,9 +90,9 @@ export default class RandomEventHistory {
     }
 
     /** @deprecated only for backward compatibility */
-    setHistoryRandomEventFiredCounter(randomeEventName: string, count: number): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        this.historyFiredEvents[randomeEventName] = count;
+    setHistoryRandomEventFiredCounter(passageName: string, count: number): void {
+        passageName = passageName.toLowerCase();
+        this.historyFiredEvents[passageName] = count;
     }
 
     /** @deprecated only for backward compatibility */
@@ -101,28 +101,28 @@ export default class RandomEventHistory {
         this.historyFiredTags[tag] = count;
     }
 
-    enable(randomeEventName: string, isStoreImmediately: boolean = true): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        this.forceEventStatus[randomeEventName] = true;
+    enable(passageName: string, isStoreImmediately: boolean = true): void {
+        passageName = passageName.toLowerCase();
+        this.forceEventStatus[passageName] = true;
 
         if (isStoreImmediately) {
             this.store();
         }
     }
 
-    disable(randomeEventName: string, isStoreImmediately: boolean = true): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        this.forceEventStatus[randomeEventName] = false;
+    disable(passageName: string, isStoreImmediately: boolean = true): void {
+        passageName = passageName.toLowerCase();
+        this.forceEventStatus[passageName] = false;
 
         if (isStoreImmediately) {
             this.store();
         }
     }
 
-    incrementRandomEventFiredCounter(randomeEventName: string, isStoreImmediately: boolean = true): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        this.actualFiredEvents[randomeEventName] = this.actualFiredEvents[randomeEventName] === undefined ? 1 : this.actualFiredEvents[randomeEventName] + 1;
-        this.historyFiredEvents[randomeEventName] = this.historyFiredEvents[randomeEventName] === undefined ? 1 : this.historyFiredEvents[randomeEventName] + 1;
+    incrementRandomEventFiredCounter(passageName: string, isStoreImmediately: boolean = true): void {
+        passageName = passageName.toLowerCase();
+        this.actualFiredEvents[passageName] = this.actualFiredEvents[passageName] === undefined ? 1 : this.actualFiredEvents[passageName] + 1;
+        this.historyFiredEvents[passageName] = this.historyFiredEvents[passageName] === undefined ? 1 : this.historyFiredEvents[passageName] + 1;
 
         if (isStoreImmediately) {
             this.store();
@@ -145,10 +145,10 @@ export default class RandomEventHistory {
         }
     }
 
-    resetRandomEventFiredCounter(randomeEventName: string, isStoreImmediately: boolean = true): void {
-        randomeEventName = randomeEventName.toLowerCase();
-        if (this.actualFiredEvents[randomeEventName] !== undefined) {
-            delete this.actualFiredEvents[randomeEventName];
+    resetRandomEventFiredCounter(passageName: string, isStoreImmediately: boolean = true): void {
+        passageName = passageName.toLowerCase();
+        if (this.actualFiredEvents[passageName] !== undefined) {
+            delete this.actualFiredEvents[passageName];
         }
 
         if (isStoreImmediately) {
@@ -167,9 +167,9 @@ export default class RandomEventHistory {
         }
     }
 
-    getActualFiredEventCount(randomeEventName: string): number {
-        randomeEventName = randomeEventName.toLowerCase();
-        return this.actualFiredEvents[randomeEventName] ?? 0;
+    getActualFiredEventCount(passageName: string): number {
+        passageName = passageName.toLowerCase();
+        return this.actualFiredEvents[passageName] ?? 0;
     }
 
     getActualFiredTagCount(tag: string): number {
@@ -177,9 +177,9 @@ export default class RandomEventHistory {
         return this.actualFiredTags[tag] ?? 0;
     }
 
-    getHistoryFiredEventCount(randomeEventName: string): number {
-        randomeEventName = randomeEventName.toLowerCase();
-        return this.historyFiredEvents[randomeEventName] ?? 0;
+    getHistoryFiredEventCount(passageName: string): number {
+        passageName = passageName.toLowerCase();
+        return this.historyFiredEvents[passageName] ?? 0;
     }
 
     getHistoryFiredTagCount(tag: string): number {

@@ -1,9 +1,9 @@
-import RandomEventHistory from "./RandomEventHistory";
+import History from "./History";
 import LimitationStrategyList from "./LimitationStrategyList";
 import Tags from "./Tags";
 import DebugLogCollector from "./DebugLogCollector";
-import RandomEvent from "./RandomEvent";
 import { RewriteConfigurationType } from "./type/RewriteConfiguration";
+import PassageMetadata from "./PassageMetadata";
 
 declare const Scripting: {
     evalJavaScript (expression: string): any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -18,18 +18,18 @@ type ConstraintsVerificatingResult = {
 
 export default class ConstraintsVerificator {
     constructor(
-        private randomEventHistory: RandomEventHistory,
+        private history: History,
     ) {
     }
 
-    verify(randomEvent: RandomEvent, rewriteConfiguration: RewriteConfigurationType): ConstraintsVerificatingResult {
+    verify(passageMetadata: PassageMetadata, rewriteConfiguration: RewriteConfigurationType): ConstraintsVerificatingResult {
         let result = true;
         let usedLimitationStrategyTags = [];
         const debugLogCollector = new DebugLogCollector();
-        const compiledTags = randomEvent.tags.getCompiledTags();
+        const compiledTags = passageMetadata.tags.getCompiledTags();
 
         if (rewriteConfiguration.isValidateIsEnable === true) {
-            const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnable ?? randomEvent.isEnabled);
+            const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnable ?? passageMetadata.isEnabled);
             result = checkResult.result;
             debugLogCollector
                 .addLog(
@@ -45,7 +45,7 @@ export default class ConstraintsVerificator {
 
         if (result) {
             if (rewriteConfiguration.isValidateFilter === true) {
-                const checkResult = this.verifyFilter(rewriteConfiguration.filter ?? randomEvent.filter);
+                const checkResult = this.verifyFilter(rewriteConfiguration.filter ?? passageMetadata.filter);
                 result = checkResult.result;
                 debugLogCollector
                     .addLog(
@@ -62,7 +62,7 @@ export default class ConstraintsVerificator {
 
         if (result) {
             if (rewriteConfiguration.isValidateLimitationStrategy) {
-                const checkResult = this.verifyLimitationStrategy(compiledTags, rewriteConfiguration.limitationStrategy ?? randomEvent.limitationStrategy, randomEvent.name);
+                const checkResult = this.verifyLimitationStrategy(compiledTags, rewriteConfiguration.limitationStrategy ?? passageMetadata.limitationStrategy, passageMetadata.name);
                 result = checkResult.result;
                 debugLogCollector
                     .addLog(
@@ -80,7 +80,7 @@ export default class ConstraintsVerificator {
 
         if (result) {
             if (rewriteConfiguration.isValidateThreshold) {
-                const checkResult = this.verifyThreshold(rewriteConfiguration.threshold ?? randomEvent.threshold);
+                const checkResult = this.verifyThreshold(rewriteConfiguration.threshold ?? passageMetadata.threshold);
                 result = checkResult.result;
                 debugLogCollector
                     .addLog(
@@ -172,7 +172,7 @@ export default class ConstraintsVerificator {
                             ...(limitationStrategy.isSeparate ? [passageName] : [])
                         ];
                         const fullLimitationStrategyTagsKey = (new Tags(fullLimitationStrategyTags)).toStringKey()
-                        const actualFiredTagCount = this.randomEventHistory.getActualFiredTagCount(fullLimitationStrategyTagsKey);
+                        const actualFiredTagCount = this.history.getActualFiredTagCount(fullLimitationStrategyTagsKey);
                         if (actualFiredTagCount >= limitationStrategy.max) {
                             isSuccess = false;
                             debugLogCollector.addLog(
@@ -190,7 +190,7 @@ export default class ConstraintsVerificator {
                             );
                         }
                     } else {
-                        const actualFiredEventCount = this.randomEventHistory.getActualFiredEventCount(passageName);
+                        const actualFiredEventCount = this.history.getActualFiredEventCount(passageName);
                         if (actualFiredEventCount >= limitationStrategy.max) {
                             isSuccess = false;
                             debugLogCollector.addLog(
@@ -225,7 +225,7 @@ export default class ConstraintsVerificator {
                         return;
                     }
 
-                    const actualFiredEventCount = this.randomEventHistory.getActualFiredEventCount(passageName);
+                    const actualFiredEventCount = this.history.getActualFiredEventCount(passageName);
                     if (actualFiredEventCount >= limitationStrategy.max) {
                         isSuccess = false;
                         debugLogCollector.addLog(
