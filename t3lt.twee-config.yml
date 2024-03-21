@@ -1,0 +1,167 @@
+sugarcube-2:
+  macros:
+    PassageMetadata:
+      name: PassageMetadata
+      container: true
+      description: |-
+        *Syntax:* `<<PassageMetadata>>{...metadata here...}<</PassageMetadata>>`
+
+        The `<<PassageMetadata>>` add metadata to you passage
+
+        *Usage:*
+        ```
+          <<PassageMetadata>>{
+              isEnabled: true,
+              type: "goto",
+              threshold: 100,
+              filter: `true`,
+              tags: ["Place", "Daily", "Weekly", "$CurrentDayTime"],
+              groups: [
+                  {
+                      name: "GroupName",
+                      weight: 10,
+                      type: "sequential",
+                      sequentialIndex: 1,
+                      sequentialCount: 1
+                  },
+              ],
+              limitationStrategy: [
+                  { max: 1, tags: ["Place", "Morning"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Noon"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Afternoon"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Evening"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Night"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Daily"], isSeparate: true },
+                  { max: 1, tags: ["Place", "Weekly"], isSeparate: true },
+              ]
+          }<</PassageMetadata>>
+        ```
+    RE:
+      name: RE
+      description: |-
+        *Syntax:* `<<RE [[passage]]>>`
+
+        The `<<RE>>` run random event if it pass all filters
+
+        *Arguments:*
+          * `passage`: passage name.
+
+        *Usage:*
+        ```
+          <<RE [[SomePassageName]]>>
+        ```
+      parameters:
+        - "passage"
+    REGroup:
+      name: REGroup
+      description: |-
+        *Syntax:* `<<REGroup "groupName">>`
+
+        The `<<REGroup>>` find all random events with group, check all, and run one of them
+
+        *Arguments:*
+          * `groupName`: random event group name.
+
+        *Usage:*
+        ```
+          <<REGroup "SomeRandomEventGroupName">>
+        ```
+      parameters:
+        - string
+    REEnable:
+      name: REEnable
+      description: |-
+        *Syntax:* `<<REEnable [[passage]]>>`
+
+        The `<<REEnable>>` enable random event
+
+        *Arguments:*
+          * `passage`: passage name.
+
+        *Usage:*
+        ```
+          <<REEnable [[SomePassageName]]>>
+        ```
+      parameters:
+        - passage
+    REDisable:
+      name: REDisable
+      description: |-
+        *Syntax:* `<<REDisable [[passage]]>>`
+
+        The `<<REDisable>>` disable random event
+
+        *Arguments:*
+          * `passage`: passage name.
+
+        *Usage:*
+        ```
+          <<REDisable [[SomePassageName]]>>
+        ```
+      parameters:
+        - passage
+    REEnableByTag:
+      name: REEnableByTag
+      description: |-
+        *Syntax:* `<<REEnableByTag "tag">>`
+
+        The `<<REEnableByTag>>` find all random events by tag and enable them
+
+        *Arguments:*
+          * `tag`: random event tag.
+
+        *Usage:*
+        ```
+          <<REEnableByTag "MyTag">>
+        ```
+      parameters:
+        - string
+    REDisableByTag:
+      name: REDisableByTag
+      description: |-
+        *Syntax:* `<<REDisableByTag "tag">>`
+
+        The `<<REDisableByTag>>` find all random events by tag and disable them
+
+        *Arguments:*
+          * `tag`: random event tag.
+
+        *Usage:*
+        ```
+          <<REDisableByTag "MyTag">>
+        ```
+      parameters:
+        - string
+    REReset:
+      name: REReset
+      description: |-
+        *Syntax:* `<<REReset [[passage]]>>`
+
+        The `<<REReset>>` reset random event counter
+        Note: Don't clear any tags, limitation with tags will be active after it
+
+        *Arguments:*
+          * `passage`: passage name.
+
+        *Usage:*
+        ```
+          <<REReset [[SomePassageName]]>>
+        ```
+      parameters:
+        - passage
+    REResetByTag:
+      name: REResetByTag
+      description: |-
+        *Syntax:* `<<REResetByTag "tag">>`
+
+        The `<<REResetByTag>>` reset tag counter, find all random events by tag reset counter on them and also reset all siutable tags from limitation strategy
+
+        *Arguments:*
+          * `tag`: random event tag.
+
+        *Usage:*
+        ```
+          <<REResetByTag "MyTag">>
+        ```
+      parameters:
+        - string

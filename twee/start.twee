@@ -3,11 +3,13 @@
     <<set $CurrentDayTime = "morning">>
 <</nobr>>\
 
-base examples
-page with many REs
-page with groups
-include/goto
-tags and limitation strategy
-reset buttons
+Not finsehd, will write more examples:
+- base examples / 100 + random
+- include/goto
+- enable/disable
+- page with many REs
+- page with groups, with different group types
+- tags and limitation strategy
+- reset limitation strategy counters
 
 <<button [[DebugRandomEventPage]]>><</button>>
