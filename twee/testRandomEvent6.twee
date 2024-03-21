@@ -1,15 +1,15 @@
-:: testRandomEvent6 [random_event]
-<<RandomEventDefinition>>{
+:: testRandomEvent6 [passage_metadata]
+<<PassageMetadata>>{
     isEnabled: true,
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    grous: "myTestGroup",
     tags: ["Street", "Daily", "mySpecificTag"],
     limitationStrategy: [
         { max: 1, tags: ["Street", "Daily"] }
     ]
-}<</RandomEventDefinition>>
+}<</PassageMetadata>>
 
 <h3>testRandomEvent6</h3>
 
@@ -21,7 +21,7 @@ But after when some event with `limitationStrategy[...].tags: ["Street", "Daily"
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    groups: "myTestGroup",
     tags: ["Street", "Daily", "mySpecificTag"],
     limitationStrategy: [
         { max: 1, tags: ["Street", "Daily"] }

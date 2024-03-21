@@ -1,0 +1,12 @@
+:: StoryMenu
+<<link "Open debug">>
+	<<run
+		Dialog.setup("Debug");
+		Dialog.wiki("<pre>" + (
+			State.variables.randomEventHistory !== undefined
+        	? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
+        	: 'Currently empty'
+		) + "</pre>");
+		Dialog.open();
+	>>
+<</link>>

@@ -1,5 +1,5 @@
-:: testRandomEvent2 [random_event]
-<<RandomEventDefinition>>{
+:: testRandomEvent2 [passage_metadata]
+<<PassageMetadata>>{
     isEnabled: true,
     type: "embaded",
     threshold: 100,
@@ -8,7 +8,7 @@
     limitationStrategy: [
         { max: 1, tags: ["Uni", "Daily"] }
     ]
-}<</RandomEventDefinition>>
+}<</PassageMetadata>>
 
 <h3>testRandomEvent2</h3>
 

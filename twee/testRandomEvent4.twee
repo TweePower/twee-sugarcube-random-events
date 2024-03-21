@@ -1,10 +1,10 @@
-:: testRandomEvent4 [random_event]
-<<RandomEventDefinition>>{
+:: testRandomEvent4 [passage_metadata]
+<<PassageMetadata>>{
     isEnabled: true,
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    groups: "myTestGroup",
     tags: ["Uni", "Daily", "$CurrentDayTime"],
     limitationStrategy: [
         { max: 1, tags: ["Uni", "Morning"], isSeparate: true },
@@ -13,7 +13,7 @@
         { max: 1, tags: ["Uni", "Night"], isSeparate: true },
         { max: 2 }
     ]
-}<</RandomEventDefinition>>
+}<</PassageMetadata>>
 
 <h3>testRandomEvent4</h3>
 `isSeparate: true` - mean that this limitation works separately from others, another event with limitation strategy tags `["Uni", "Evening"]` will work fine
@@ -23,7 +23,7 @@
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    groups: "myTestGroup",
     tags: ["Uni", "Daily", "$CurrentDayTime"],
     limitationStrategy: [
         { max: 1, tags: ["Uni", "Morning"], isSeparate: true },

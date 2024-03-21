@@ -2,153 +2,118 @@
 
 <<link "run testRandomEvent1">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent1]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent2">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent2]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent3">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent3]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent4">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent4]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent5">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent5]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent6">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent6]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run testRandomEvent7">>
     <<replace "#testRandomEventBlock">><<RE [[testRandomEvent7]]>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 <<link "run gruop myTestGroup">>
     <<replace "#testRandomEventBlock">><<REGroup "myTestGroup" 100>><</replace>>
-    <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
 <</link>>
 
 <hr>
 Enable event: <<nobr>>
     <<link "testRandomEvent1">>
         <<REEnable [[testRandomEvent1]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent2">>
         <<REEnable [[testRandomEvent2]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent3">>
         <<REEnable [[testRandomEvent3]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent4">>
         <<REEnable [[testRandomEvent4]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent5">>
         <<REEnable [[testRandomEvent5]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent6">>
         <<REEnable [[testRandomEvent6]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent7">>
         <<REEnable [[testRandomEvent7]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 Disable event: <<nobr>>
     <<link "testRandomEvent1">>
         <<REDisable [[testRandomEvent1]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent2">>
         <<REDisable [[testRandomEvent2]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent3">>
         <<REDisable [[testRandomEvent3]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent4">>
         <<REDisable [[testRandomEvent4]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent5">>
         <<REDisable [[testRandomEvent5]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent6">>
         <<REDisable [[testRandomEvent6]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "testRandomEvent7">>
         <<REDisable [[testRandomEvent7]]>>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 <hr>
 Enable by tag: <<nobr>>
     <<link "mySpecificTag">>
         <<REEnableByTag "mySpecificTag">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 <hr>
 Disable by tag: <<nobr>>
     <<link "mySpecificTag">>
         <<REDisableByTag "mySpecificTag">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 <hr>
 Reset by event name: <<nobr>>
     <<link "testRandomEvent1">>
         <<REReset "testRandomEvent1">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 <hr>
 Reset by tag: <<nobr>>
     <<link "Morning">>
         <<REResetByTag "Morning">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Noon">>
         <<REResetByTag "Noon">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Afternoon">>
         <<REResetByTag "Afternoon">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Evening">>
         <<REResetByTag "Evening">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Night">>
         <<REResetByTag "Night">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Daily">>
         <<REResetByTag "Daily">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
     <<link "Weekly">>
         <<REResetByTag "Weekly">>
-        <<replace "#testRandomEventDegub">><<print JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)>><</replace>>
     <</link>>
 <</nobr>>
 
 <h2>Random event block:</h2>
 <div id="testRandomEventBlock"></div>
-
-<h2>Debug block::</h2>
-<pre id="testRandomEventDegub"></pre>

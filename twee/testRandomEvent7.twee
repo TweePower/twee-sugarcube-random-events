@@ -1,10 +1,10 @@
-:: testRandomEvent7 [random_event]
-<<RandomEventDefinition>>{
+:: testRandomEvent7 [passage_metadata]
+<<PassageMetadata>>{
     isEnabled: true,
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: {
+    groups: {
         name: "myTestGroup",
         weight: 20,
     },
@@ -12,7 +12,7 @@
     limitationStrategy: [
         { max: 1, tags: ["Daily"] }
     ]
-}<</RandomEventDefinition>>
+}<</PassageMetadata>>
 
 <h3>testRandomEvent7</h3>
 
@@ -30,7 +30,7 @@ When weight=10, win percent chance = (100/60)*10 ~= 16.6
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: {
+    groups: {
         name: "myTestGroup",
         weight: 20,
     },

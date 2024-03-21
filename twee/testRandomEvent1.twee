@@ -1,15 +1,15 @@
-:: testRandomEvent1 [random_event]
-<<RandomEventDefinition>>{
+:: testRandomEvent1 [passage_metadata]
+<<PassageMetadata>>{
     isEnabled: true,
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    groups: "myTestGroup",
     tags: ["Uni"],
     limitationStrategy: [
         { max: 3 }
     ]
-}<</RandomEventDefinition>>
+}<</PassageMetadata>>
 
 <h3>testRandomEvent1</h3>
 
@@ -21,7 +21,7 @@ This event may be resetted only by event name
     type: "embaded",
     threshold: 100,
     filter: `true`,
-    group: "myTestGroup",
+    groups: "myTestGroup",
     tags: ["Uni"],
     limitationStrategy: [
         { max: 3 }
