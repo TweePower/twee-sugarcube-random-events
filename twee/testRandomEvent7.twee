@@ -1,7 +1,7 @@
 :: testRandomEvent7 [passage_metadata]
 <<PassageMetadata>>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: {
@@ -27,7 +27,7 @@ When weight=10, win percent chance = (100/60)*10 ~= 16.6
 
 <pre>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: {

@@ -1,7 +1,7 @@
 :: testRandomEvent5 [passage_metadata]
 <<PassageMetadata>>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",
@@ -22,7 +22,7 @@ In this exapmle we have `limitationStrategy` with `LimitationTagWitout` tag that
 
 <pre>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",

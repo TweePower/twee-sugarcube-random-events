@@ -1,7 +1,7 @@
 :: testRandomEvent4 [passage_metadata]
 <<PassageMetadata>>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",
@@ -20,7 +20,7 @@
 
 <pre>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",

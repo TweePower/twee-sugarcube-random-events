@@ -1,7 +1,7 @@
 :: testRandomEvent1 [passage_metadata]
 <<PassageMetadata>>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",
@@ -18,7 +18,7 @@ This event may be resetted only by event name
 
 <pre>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     groups: "myTestGroup",

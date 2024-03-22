@@ -1,7 +1,7 @@
 :: testRandomEvent3 [passage_metadata]
 <<PassageMetadata>>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     tags: ["Uni", "Daily", "$CurrentDayTime", "mySpecificTag"],
@@ -23,7 +23,7 @@ This event may be resetted by tags Uni, Daily, mySpecificTag AND Morning, Aftern
 
 <pre>{
     isEnabled: true,
-    type: "embaded",
+    type: "embedded",
     threshold: 100,
     filter: `true`,
     tags: ["Uni", "Daily", "$CurrentDayTime", "mySpecificTag"],

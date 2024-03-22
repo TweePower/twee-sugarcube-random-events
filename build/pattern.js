@@ -234,7 +234,7 @@
             if (result.isSuccess) {
                 re.incrementCounters(result.passageMetadata, result.usedTags);
 
-                if (result.passageMetadata.type === 'embaded') {
+                if (result.passageMetadata.type === 'embedded') {
                     var $el = jQuery(this.output);
                     $el.wiki(Story.get(result.passageMetadata.name).processText());
                 } else {
@@ -280,7 +280,7 @@
             if (result.isSuccess) {
                 re.incrementCounters(result.passageMetadata, result.usedTags);
 
-                if (result.passageMetadata.type === 'embaded') {
+                if (result.passageMetadata.type === 'embedded') {
                     var $el = jQuery(this.output);
                     $el.wiki(Story.get(result.passageMetadata.name).processText());
                 } else {

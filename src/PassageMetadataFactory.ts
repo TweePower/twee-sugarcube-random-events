@@ -34,10 +34,10 @@ export default class PassageMetadataFactory extends BasePassageMetadataFactory {
         }
 
         if (passageMetadataObject.type === undefined) {
-            passageMetadataObject.type = 'embaded';
+            passageMetadataObject.type = 'embedded';
         } else {
-            if (passageMetadataObject.type !== 'embaded' && passageMetadataObject.type !== 'goto') {
-                throw new Error(`"definition.type" should be "embaded" or "goto" (name: ${passageMetadataObject.name})`);
+            if (passageMetadataObject.type !== 'embedded' && passageMetadataObject.type !== 'goto') {
+                throw new Error(`"definition.type" should be "embedded" or "goto" (name: ${passageMetadataObject.name})`);
             }
         }
 
