@@ -19,7 +19,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 <<RE [[MyRandomEventName]]>>
 ```
 
-# Your new options:
+# Feature list
 
 - **Configuration and Integration**: Add configuration directly to random event passage and effortlessly embed it into many passages using `<<RE>>`.
 - **Event Enablement/Disabling**: Create an enabled or disabled random event by default and enable or disable it after the player reaches a needed checkpoint.
