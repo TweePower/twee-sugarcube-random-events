@@ -24,7 +24,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 - **Configuration and Integration**: Add configuration directly to random event passage and effortlessly embed it into many passages using `<<RE>>`.
 - **Event Enablement/Disabling**: Create an enabled or disabled random event by default and enable or disable it after the player reaches a needed checkpoint.
 - **Event Trigger Chance**: Control and manage the chance of occurrence of a specific event or group of events.
-- **Event Show Behavior: Tailor event handling preferences, allowing embedding within the current page or direct redirection to a dedicated random event passage.
+- **Event Show Behavior**: Tailor event handling preferences, allowing embedding within the current page or direct redirection to a dedicated random event passage.
 - **Event Filters**: Create a filter to control whether a random event precisely matches the conditions.
 - **Event Grouping and Weighting**: Organize events into groups, assigning each event a weight and sequential number within the group. Choose between random or sequential event selection within groups.
 - **Tagging System And Limitation Strategy**: Leverage tags with variable support and limitation strategy to restrict event activation based on prior occurrences, ensuring diverse gameplay experiences.
