@@ -51,7 +51,7 @@ sugarcube-2:
           <<RE [[SomePassageName]]>>
         ```
       parameters:
-        - "passage"
+        - passage
     REGroup:
       name: REGroup
       description: |-
