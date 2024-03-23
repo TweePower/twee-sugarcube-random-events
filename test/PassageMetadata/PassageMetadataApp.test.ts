@@ -11,6 +11,7 @@ test('success create run app', async () => {
         }),
     ]);
     const passageMetadataApp = new PassageMetadataApp(sugarcubeFacade);
+    passageMetadataApp.init();
 
     passageMetadataApp.collect();
 

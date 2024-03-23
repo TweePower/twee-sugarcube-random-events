@@ -41,6 +41,7 @@ That's it
 # How to use
 
 Open you random event passage, add tag 'passage_metadata', and add `<<PassageMetadata>>` with necessary settings
+
 Example:
 
 ```html
@@ -81,6 +82,7 @@ And now the random event will be triggered:
 - once when variable $CurrentDayTime is equal to "morning", "afternoon" or "evening" but no more than two times per day
 
 Also, if you have the random event `MyRandomEvent2` with the same limitationStrategy, it will not be triggered in the morning when `MyRandomEvent` is already triggered in the morning.
+
 Because limitationStrategy works globally using tags. So you willn't have a mess with random events when they are called one by one.
 
 But if you want to separate the random event from others, add `isSeparate: true` to limitationStrategy:
@@ -102,16 +104,19 @@ When the game day is over, you need to reset limitation counters. Just add this 
 ```
 
 In some cases, you need to disable or enable some events.
+
 It's especially useful when:
 - player reaches some checkpoint
 - Make some important decision
 - Found some item or got some skill
 - etc
+
 Use this code:
 ```html
 <<REDisable [[MyRandomEvent]]>>
 <<REEnable [[MyRandomEvent2]]>>
 ```
+
 Or by tag:
 ```html
 <<REDisableByTag "Chapter1">>
@@ -121,6 +126,7 @@ Or by tag:
 # Debug
 
 If debug is enabled (see: https://www.motoslave.net/sugarcube/2/docs/#config-api-property-debug)
+
 You can check logs in the browser console. Logs will look like this:
 ```
 Start random event MyRandomEvent
@@ -137,10 +143,13 @@ Start random event MyRandomEvent
 # Examples + Docs
 
 Not finished!
+
 You can find interactive examples and docs here https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/index.html
+
 Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
 
 # Support
 
 If you find the bug, please create an issue or pull request.
+
 I'm not a professional frontend developer, so I'll be glad if you help me to make randome events better :)
