@@ -33,6 +33,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 # How to install
 
 - Open compiled file https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js
+  - or debug build https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js
 - Copy this file to your js folder
 - Or copy content to your passage with [script] tag
 
