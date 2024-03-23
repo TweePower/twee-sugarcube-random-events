@@ -1,7 +1,6 @@
 import TypeChecker from "./tools/TypeChecker";
 import History from "./History";
 import PassageMetadata from "./PassageMetadata";
-import Tags from "./Tags";
 import Lock from "./Lock";
 import StateLoader from "./StateLoader";
 import DebugLogCollector from "./DebugLogCollector";
@@ -12,10 +11,9 @@ import { GroupTypeEnum } from "./enum/GroupTypeEnum";
 import Group from "./Group";
 import PassageMetadataApp from "./PassageMetadataApp";
 import PassageMetadataCollection from "./PassageMetadataCollection";
-
-declare let Story: {
-    has(passageName: string): boolean;
-};
+import SugarcubeFacade from "./facade/SugarcubeFacade";
+import TagsManager from "./TagsManager";
+import LimitationStrategyFactory from "./factory/LimitationStrategyFactory";
 
 declare type RunRandomEventResultType = {
     isSuccess: boolean,
@@ -33,6 +31,9 @@ export default class RandomEventApp {
     debugLogCollector: DebugLogCollector;
     constraintsVerificator: ConstraintsVerificator;
     passageMetadataCollection: PassageMetadataCollection;
+    sugarcubeFacade: SugarcubeFacade;
+    tagsManager: TagsManager;
+    limitationStrategyFactory: LimitationStrategyFactory;
 
     constructor(
         passageMetadataRegex: RegExp = /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
@@ -40,17 +41,24 @@ export default class RandomEventApp {
         public passageMetadataModeParams: { filterTag?: string } = { filterTag: 'passage_metadata' },
         debugLevel: number = 0,
     ) {
+        this.sugarcubeFacade = new SugarcubeFacade();
+        this.tagsManager = new TagsManager(this.sugarcubeFacade);
+        this.limitationStrategyFactory = new LimitationStrategyFactory(this.tagsManager);
         this.passageMetadataApp = new PassageMetadataApp(
+            this.tagsManager,
+            this.limitationStrategyFactory,
+            this.sugarcubeFacade,
             passageMetadataRegex,
             passageMetadataMode,
             passageMetadataModeParams,
         );
+        this.passageMetadataApp.init();
         this.passageMetadataCollection = this.passageMetadataApp.passageMetadataCollection;
-        this.history = new History();
+        this.history = new History(this.sugarcubeFacade);
         this.stateLoader = new StateLoader(this.passageMetadataApp.passageMetadataCollection, this.history);
         this.lock = new Lock();
         this.debugLogCollector = new DebugLogCollector(debugLevel);
-        this.constraintsVerificator = new ConstraintsVerificator(this.history);
+        this.constraintsVerificator = new ConstraintsVerificator(this.sugarcubeFacade, this.tagsManager, this.history);
     }
 
     init() {
@@ -76,7 +84,7 @@ export default class RandomEventApp {
     find = (passageName: string) => this.passageMetadataCollection.find(passageName);
     enable(passageName: string) {
         if (!this.passageMetadataCollection.has(passageName)) {
-            if (!Story.has(passageName)) {
+            if (!this.sugarcubeFacade.hasPassage(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
@@ -88,7 +96,7 @@ export default class RandomEventApp {
     }
     disable(passageName: string) {
         if (!this.passageMetadataCollection.has(passageName)) {
-            if (!Story.has(passageName)) {
+            if (!this.sugarcubeFacade.hasPassage(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
@@ -118,7 +126,7 @@ export default class RandomEventApp {
     }
     resetFiredCounterByRandomEvent(passageName: string) {
         if (!this.passageMetadataCollection.has(passageName)) {
-            if (!Story.has(passageName)) {
+            if (!this.sugarcubeFacade.hasPassage(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
@@ -141,7 +149,7 @@ export default class RandomEventApp {
         });
 
         this.passageMetadataCollection.getTagGroupsByLimitationStrategyTag(tag).forEach((tags) => {
-            const tagsStringKey = (new Tags(tags)).toStringKey();
+            const tagsStringKey = this.tagsManager.convertTagsToStringKey(tags);
             this.history.resetTagFiredCounter(tagsStringKey, false);
         });
 
@@ -166,7 +174,7 @@ export default class RandomEventApp {
         }
 
         if (!this.passageMetadataCollection.has(passageName)) {
-            if (!Story.has(passageName)) {
+            if (!this.sugarcubeFacade.hasPassage(passageName)) {
                 throw new Error(`passage "${passageName}" does not exist`);
             }
 
@@ -192,7 +200,7 @@ export default class RandomEventApp {
         }
 
         try {
-            const compiledTags = passageMetadata.tags.getCompiledTags();
+            const compiledTags = this.tagsManager.prepareTags(passageMetadata.tags);
             const checkResult = this.constraintsVerificator.verify(passageMetadata, rewriteConfiguration);
             result = checkResult.result;
             this.debugLogCollector
@@ -284,7 +292,7 @@ export default class RandomEventApp {
         for (let groupIndex = 0; groupIndex < passageNames.length; groupIndex++) {
             const passageName = passageNames[groupIndex];
             if (!this.passageMetadataCollection.has(passageName)) {
-                if (!Story.has(passageName)) {
+                if (!this.sugarcubeFacade.hasPassage(passageName)) {
                     throw new Error(`passage "${passageName}" does not exist`);
                 }
 
@@ -301,7 +309,7 @@ export default class RandomEventApp {
                 .increaseLevel()
 
             try {
-                const compiledTags = passageMetadata.tags.getCompiledTags();
+                const compiledTags = this.tagsManager.prepareTags(passageMetadata.tags);
                 const checkResult = this.constraintsVerificator.verify(passageMetadata, rewriteConfiguration);
                 const result = checkResult.result;
                 this.debugLogCollector
@@ -387,7 +395,7 @@ export default class RandomEventApp {
     incrementCounters(passageMetadata: PassageMetadata, usedTags?: [string[]?]) {
         this.history.incrementRandomEventFiredCounter(passageMetadata.name, false);
         usedTags.forEach(tags => {
-            this.history.incrementTagsFiredCounter([...tags, new Tags(tags).toStringKey()], false)
+            this.history.incrementTagsFiredCounter([...tags, this.tagsManager.convertTagsToStringKey(tags)], false)
         })
         this.history.store();
         this.stateLoader.forceSetIsLoadedFlag(true);

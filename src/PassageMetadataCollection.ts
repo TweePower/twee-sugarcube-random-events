@@ -1,6 +1,6 @@
 import PassageMetadata from "./PassageMetadata";
 import {default as BasePassageMetadataCollection} from "./PassageMetadata/PassageMetadataCollection";
-import Tags from "./Tags";
+import TagsManager from "./TagsManager";
 import { GroupTypeEnum } from "./enum/GroupTypeEnum";
 
 export default class PassageMetadataCollection extends BasePassageMetadataCollection {
@@ -8,6 +8,10 @@ export default class PassageMetadataCollection extends BasePassageMetadataCollec
     limitationStrategyTagIndex: { [key: string]: { tagGroups: { [key: string]: string[] }, events: string[] } } = {};
     groupIndex: { [key: string]: string[] } = {};
     validationGroup: { [key: string]: { type: string, indexes: number[] } } = {};
+
+    constructor(private tagsManager: TagsManager) {
+        super();
+    }
 
     add(passageMetadata: PassageMetadata): void {
         super.add(passageMetadata);
@@ -40,7 +44,7 @@ export default class PassageMetadataCollection extends BasePassageMetadataCollec
             this.groupIndex[group.name].push(passageMetadata.name);
         });
 
-        const stringTags = [...passageMetadata.tags.getStringTags()];
+        const stringTags = [...passageMetadata.tags.stringTags];
         stringTags.forEach((tag) => {
             if (this.tagIndex[tag] === undefined) {
                 this.tagIndex[tag] = [];
@@ -51,7 +55,7 @@ export default class PassageMetadataCollection extends BasePassageMetadataCollec
 
         if (passageMetadata.limitationStrategy.length > 0 && passageMetadata.limitationStrategy.isTaged) {
             passageMetadata.limitationStrategy.all().forEach((limitationStrategy) => {
-                limitationStrategy.tags.getStringTags().forEach((tag) => {
+                this.tagsManager.prepareTags(limitationStrategy.tags).forEach((tag) => {
                     if (this.limitationStrategyTagIndex[tag] === undefined) {
                         this.limitationStrategyTagIndex[tag] = {
                             events: [],
@@ -61,11 +65,11 @@ export default class PassageMetadataCollection extends BasePassageMetadataCollec
 
                     this.limitationStrategyTagIndex[tag].events.push(passageMetadata.name);
 
-                    const limitationStrategyTags = [...limitationStrategy.tags.getStringTags()];
+                    const limitationStrategyTags = [...this.tagsManager.prepareTags(limitationStrategy.tags)];
                     if (limitationStrategy.isSeparate) {
                         limitationStrategyTags.push(passageMetadata.name);
                     }
-                    this.limitationStrategyTagIndex[tag].tagGroups[new Tags(limitationStrategyTags).toStringKey()] = limitationStrategyTags;
+                    this.limitationStrategyTagIndex[tag].tagGroups[this.tagsManager.convertTagsToStringKey(limitationStrategyTags)] = limitationStrategyTags;
                 });
             });
         }

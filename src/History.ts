@@ -1,6 +1,4 @@
-declare let State: {
-    variables: { [key: string]: any } // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+import SugarcubeFacade from "./facade/SugarcubeFacade";
 
 export default class History {
     actualFiredEvents: { [eventName: string]: number } = {};
@@ -8,6 +6,9 @@ export default class History {
     historyFiredEvents: { [eventName: string]: number } = {};
     historyFiredTags: { [tag: string]: number } = {};
     forceEventStatus: { [eventName: string]: boolean } = {};
+
+    constructor(private sugarcubeFacade: SugarcubeFacade) {
+    }
 
     loadFromSerilizedString(serializedString: string): void {
         const state = JSON.parse(serializedString);
@@ -74,7 +75,7 @@ export default class History {
     }
 
     store(): void {
-        State.variables.randomEventHistory = this.serialize();
+        this.sugarcubeFacade.saveVariable('randomEventHistory', this.serialize());
     }
 
     /** @deprecated only for backward compatibility */

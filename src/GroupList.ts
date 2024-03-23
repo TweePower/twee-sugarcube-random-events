@@ -1,5 +1,5 @@
 import Group from "./Group";
-import { GroupDefinitionType } from "./type/Definition";
+import { GroupPassageMetadataType } from "./type/PassageMetadata";
 
 export default class GroupList {
     nameIndex: { [key: string]: number } = {};
@@ -15,7 +15,7 @@ export default class GroupList {
         });
     }
 
-    static createFromGroupsDefinition(groupsDefinitions: GroupDefinitionType[] | GroupDefinitionType | undefined) {
+    static createFromGroupsPassageMetadata(groupsDefinitions: GroupPassageMetadataType[] | GroupPassageMetadataType | undefined) {
         if (groupsDefinitions === undefined) {
             return new GroupList([]);
         } else {
@@ -24,7 +24,7 @@ export default class GroupList {
             }
 
             return new GroupList(groupsDefinitions.map((groupsDefinition) => {
-                return Group.createFromGroupDefinition(groupsDefinition);
+                return Group.createFromGroupPassageMetadata(groupsDefinition);
             }));
         }
     }

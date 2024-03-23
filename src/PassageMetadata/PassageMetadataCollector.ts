@@ -1,13 +1,11 @@
 import PassageMetadataCollection from "./PassageMetadataCollection";
 import PassageMetadataError from "./error/PassageMetadataError";
 import PassageMetadataFactory from "./PassageMetadataFactory";
-
-declare let Story: {
-    lookup(): { tags: string[], title: string, element: { textContent: string } }[];
-};
+import SugarcubeFacade from "../facade/SugarcubeFacade";
 
 export default class PassageMetadataCollector {
     constructor(
+        public sugarcubeFacade: SugarcubeFacade,
         public passageMetadataRegex: RegExp = /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
         public mode: string = 'byTag',// all
         public modeParams: { filterTag?: string } = { filterTag: 'passage_metadata' }
@@ -18,7 +16,7 @@ export default class PassageMetadataCollector {
         passageMetadataCollection: PassageMetadataCollection,
         passageMetadataFactory: PassageMetadataFactory,
     ) {
-        var passages = Story.lookup();
+        let passages = this.sugarcubeFacade.getAllPassages();
 
         if (this.mode === 'byTag') {
             if (typeof this.modeParams.filterTag !== 'string') {
@@ -36,7 +34,7 @@ export default class PassageMetadataCollector {
             }
 
             try {
-                var passageMetadataEvalResult = this.createPassageMetadataObject(passageMetadataRegexResult[1]);
+                const passageMetadataEvalResult = this.createPassageMetadataObject(passageMetadataRegexResult[1]);
                 passageMetadataEvalResult.name = passage.title;
 
                 passageMetadataCollection.add(passageMetadataFactory.create(passageMetadataEvalResult));

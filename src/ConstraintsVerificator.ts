@@ -1,14 +1,10 @@
 import History from "./History";
-import LimitationStrategyList from "./LimitationStrategyList";
-import Tags from "./Tags";
+import LimitationStrategyList from "./model/LimitationStrategyList";
 import DebugLogCollector from "./DebugLogCollector";
 import { RewriteConfigurationType } from "./type/RewriteConfiguration";
 import PassageMetadata from "./PassageMetadata";
-
-declare const Scripting: {
-    evalJavaScript (expression: string): any; // eslint-disable-line @typescript-eslint/no-explicit-any
-    parse(expression: string): string;
-};
+import SugarcubeFacade from "./facade/SugarcubeFacade";
+import TagsManager from "./TagsManager";
 
 type ConstraintsVerificatingResult = {
     result: boolean,
@@ -18,6 +14,8 @@ type ConstraintsVerificatingResult = {
 
 export default class ConstraintsVerificator {
     constructor(
+        private sugarcubeFacade: SugarcubeFacade,
+        private tagsManager: TagsManager,
         private history: History,
     ) {
     }
@@ -26,7 +24,7 @@ export default class ConstraintsVerificator {
         let result = true;
         let usedLimitationStrategyTags = [];
         const debugLogCollector = new DebugLogCollector();
-        const compiledTags = passageMetadata.tags.getCompiledTags();
+        const compiledTags = this.tagsManager.prepareTags(passageMetadata.tags);
 
         if (rewriteConfiguration.isValidateIsEnable === true) {
             const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnable ?? passageMetadata.isEnabled);
@@ -116,7 +114,7 @@ export default class ConstraintsVerificator {
 
         if (filter !== null) {
             try {
-                if (!Scripting.evalJavaScript(Scripting.parse(filter))) {
+                if (!this.sugarcubeFacade.runTeweeScript(filter)) {
                     debugLogCollector.addLog(false, 'filter expression returns false', 3);
                     return { result: false, debugLogCollector };
                 }
@@ -150,7 +148,7 @@ export default class ConstraintsVerificator {
                     }
 
                     if (limitationStrategy.tags.length > 0) {
-                        const limitationStrategyTags = [...limitationStrategy.tags.getCompiledTags()];
+                        const limitationStrategyTags = [...this.tagsManager.prepareTags(limitationStrategy.tags)];
 
                         // skip checking limitationStrategy when current compiled tags have not included `limitation.tags`
                         for (let i = 0; i < limitationStrategyTags.length; i++) {
@@ -171,7 +169,7 @@ export default class ConstraintsVerificator {
                             ...limitationStrategyTags,
                             ...(limitationStrategy.isSeparate ? [passageName] : [])
                         ];
-                        const fullLimitationStrategyTagsKey = (new Tags(fullLimitationStrategyTags)).toStringKey()
+                        const fullLimitationStrategyTagsKey = this.tagsManager.convertTagsToStringKey(fullLimitationStrategyTags);
                         const actualFiredTagCount = this.history.getActualFiredTagCount(fullLimitationStrategyTagsKey);
                         if (actualFiredTagCount >= limitationStrategy.max) {
                             isSuccess = false;
@@ -257,7 +255,7 @@ export default class ConstraintsVerificator {
         let thresholdResult = 0;
         if (typeof threshold !== 'number' || isNaN(threshold) || threshold % 1 !== 0) {
             try {
-                thresholdResult = Scripting.evalJavaScript(Scripting.parse(threshold.toString()));
+                thresholdResult = this.sugarcubeFacade.runTeweeScript(threshold.toString());
             } catch (err) {
                 err.message = "bad evaluation: " + err.message;
                 throw err;

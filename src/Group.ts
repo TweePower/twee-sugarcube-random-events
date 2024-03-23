@@ -1,6 +1,6 @@
 import TypeChecker from "./tools/TypeChecker";
 import { GroupTypeEnum } from "./enum/GroupTypeEnum";
-import { GroupDefinitionType } from "./type/Definition";
+import { GroupPassageMetadataType } from "./type/PassageMetadata";
 
 export default class Group {
     constructor(
@@ -12,8 +12,8 @@ export default class Group {
     ) {
     }
 
-    static createFromGroupDefinition(
-        groupDefinition: string | GroupDefinitionType | any // eslint-disable-line @typescript-eslint/no-explicit-any
+    static createFromGroupPassageMetadata(
+        groupDefinition: string | GroupPassageMetadataType | any // eslint-disable-line @typescript-eslint/no-explicit-any
     ): Group {
         if (typeof groupDefinition === 'string') {
             return new Group(

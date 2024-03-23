@@ -1,13 +1,15 @@
+type ScopeType = { [key: string]: string };
+
 export default class PassageMetadataError extends Error {
-    public scope: { [key: string]: any } = {}
+    public scope: ScopeType = {}
 
-    constructor(message: string) {
+    constructor(message: string, scope: ScopeType = {}) {
         super(message);
-
+        this.scope = scope;
         Object.setPrototypeOf(this, PassageMetadataError.prototype);
     }
 
-    public static fromPreviousError(previousError: Error, scope: { [key: string]: string} = {}): PassageMetadataError {
+    public static fromPreviousError(previousError: Error, scope: ScopeType = {}): PassageMetadataError {
         const error = new PassageMetadataError(previousError.message);
         error.stack = previousError.stack;
         error.scope = {

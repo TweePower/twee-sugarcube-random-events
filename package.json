@@ -6,14 +6,15 @@
   "scripts": {
     "build-prod": "webpack -c webpack.prod.config.js && node ./build/build.js prod",
     "build-dev": "webpack -c webpack.dev.config.js && node ./build/build.js dev",
-    "boild-doc": "tweego -o ./doc/index.html ./twee ./dist/random-event.min.js",
+    "boild-doc": "tweego -o ./doc/index.html ./twee ./dist/random-event.js",
     "build-all": "npm run build-prod && npm run build-dev && npm run boild-doc",
     "lint": "eslint src",
-    "test": "jest --coverage"
+    "test": "jest --coverage --collectCoverageFrom='src/**/*.ts'"
   },
   "author": "tweepower@gmail.com",
   "devDependencies": {
     "@types/jest": "^27.5.2",
+    "@types/twine-sugarcube": "^2.36.11",
     "@typescript-eslint/eslint-plugin": "^7.3.0",
     "eslint": "^8.57.0",
     "jest": "^27.0.6",

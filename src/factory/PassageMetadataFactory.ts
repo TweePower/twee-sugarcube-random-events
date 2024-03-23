@@ -1,11 +1,15 @@
-import GroupList from "./GroupList";
-import LimitationStrategyList from "./LimitationStrategyList";
-import PassageMetadata from "./PassageMetadata";
-import {default as BasePassageMetadataFactory} from "./PassageMetadata/PassageMetadataFactory";
-import Tags from "./Tags";
+import GroupList from "../GroupList";
+import LimitationStrategyFactory from "./LimitationStrategyFactory";
+import PassageMetadata from "../PassageMetadata";
+import {default as BasePassageMetadataFactory} from "../PassageMetadata/PassageMetadataFactory";
+import Tags from "../Tags";
 
 export default class PassageMetadataFactory extends BasePassageMetadataFactory {
-    public create(passageMetadataObject: { [key: string]: any }): PassageMetadata {
+    constructor(private limitationStrategyFactory: LimitationStrategyFactory) {
+        super();
+    }
+
+    public create(passageMetadataObject: { [key: string]: any }): PassageMetadata { // eslint-disable-line @typescript-eslint/no-explicit-any
         if (typeof passageMetadataObject.name !== 'string') {
             throw new Error(`"PassageMetadata.name" should be string`);
         }
@@ -19,7 +23,7 @@ export default class PassageMetadataFactory extends BasePassageMetadataFactory {
         }
 
         try {
-            passageMetadataObject.groups = GroupList.createFromGroupsDefinition(passageMetadataObject.groups);
+            passageMetadataObject.groups = GroupList.createFromGroupsPassageMetadata(passageMetadataObject.groups);
         } catch (e) {
             e.message = `${e.message} (name: ${passageMetadataObject.name})`;
             throw e;
@@ -62,7 +66,7 @@ export default class PassageMetadataFactory extends BasePassageMetadataFactory {
         }
 
         try {
-            passageMetadataObject.limitationStrategy = LimitationStrategyList.createFromLimitationStrategiesDefinition(passageMetadataObject.limitationStrategy);
+            passageMetadataObject.limitationStrategy = this.limitationStrategyFactory.createLimitationStrategyListFromPassageMetadata(passageMetadataObject.limitationStrategy);
         } catch (e) {
             e.message = `${e.message} (name: ${passageMetadataObject.name})`;
             throw e;

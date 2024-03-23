@@ -1,4 +1,4 @@
-import LimitationStrategyList from "../LimitationStrategyList";
+import LimitationStrategyList from "../model/LimitationStrategyList";
 
 export type RewriteConfigurationType = {
     isValidateIsEnable?: boolean,

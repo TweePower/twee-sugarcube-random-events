@@ -1,21 +1,21 @@
 import Group from "../src/Group";
 import { GroupTypeEnum } from "../src/enum/GroupTypeEnum";
 
-test('check createFromGroupDefinition error', async () => {
-    expect(() => Group.createFromGroupDefinition(null)).toThrow();
-    expect(() => Group.createFromGroupDefinition(undefined)).toThrow();
-    expect(() => Group.createFromGroupDefinition([])).toThrow();
-    expect(() => Group.createFromGroupDefinition({})).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 123 })).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 'test', weight: false })).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 'test', type: false })).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 'test', type: 'sequential' })).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 'test', type: 'sequential', sequentialIndex: false })).toThrow();
-    expect(() => Group.createFromGroupDefinition({ name: 'test', type: 'sequential', sequentialIndex: 1, sequentialCount: false })).toThrow();
+test('check createFromGroupPassageMetadata error', async () => {
+    expect(() => Group.createFromGroupPassageMetadata(null)).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata(undefined)).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata([])).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({})).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 123 })).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 'test', weight: false })).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 'test', type: false })).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 'test', type: 'sequential' })).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 'test', type: 'sequential', sequentialIndex: false })).toThrow();
+    expect(() => Group.createFromGroupPassageMetadata({ name: 'test', type: 'sequential', sequentialIndex: 1, sequentialCount: false })).toThrow();
 });
 
-test('check createFromGroupDefinition success with string', async () => {
-    let group = Group.createFromGroupDefinition('test');
+test('check createFromGroupPassageMetadata success with string', async () => {
+    let group = Group.createFromGroupPassageMetadata('test');
     expect(group).toBeInstanceOf(Group);
     expect(group.name).toBe('test');
     expect(group.weight).toBe(10);
@@ -24,8 +24,8 @@ test('check createFromGroupDefinition success with string', async () => {
     expect(group.sequentialCount).toBe(null);
 });
 
-test('check createFromGroupDefinition success with object minimal params', async () => {
-    let group = Group.createFromGroupDefinition({
+test('check createFromGroupPassageMetadata success with object minimal params', async () => {
+    let group = Group.createFromGroupPassageMetadata({
         name: 'test'
     });
     expect(group).toBeInstanceOf(Group);
@@ -36,8 +36,8 @@ test('check createFromGroupDefinition success with object minimal params', async
     expect(group.sequentialCount).toBe(null);
 });
 
-test('check createFromGroupDefinition success with object sequential type', async () => {
-    let group = Group.createFromGroupDefinition({
+test('check createFromGroupPassageMetadata success with object sequential type', async () => {
+    let group = Group.createFromGroupPassageMetadata({
         name: 'test object',
         weight: 100,
         type: 'sequential',
@@ -52,8 +52,8 @@ test('check createFromGroupDefinition success with object sequential type', asyn
     expect(group.sequentialCount).toBe(10);
 });
 
-test('check createFromGroupDefinition success with object sequential type withoun count', async () => {
-    let group = Group.createFromGroupDefinition({
+test('check createFromGroupPassageMetadata success with object sequential type withoun count', async () => {
+    let group = Group.createFromGroupPassageMetadata({
         name: 'test object',
         weight: 100,
         type: 'sequential',
@@ -67,8 +67,8 @@ test('check createFromGroupDefinition success with object sequential type withou
     expect(group.sequentialCount).toBe(1);
 });
 
-test('check createFromGroupDefinition success with object random type', async () => {
-    let group = Group.createFromGroupDefinition({
+test('check createFromGroupPassageMetadata success with object random type', async () => {
+    let group = Group.createFromGroupPassageMetadata({
         name: 'test object',
         weight: 100,
         type: 'random',

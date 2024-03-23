@@ -1,8 +1,3 @@
-declare let Scripting: {
-    evalJavaScript(expression: string): any; // eslint-disable-line @typescript-eslint/no-explicit-any
-    parse(expression: string): string;
-};
-
 export default class Tags {
     isHaveTweeScriptTags = false;
     tags: null | { isHaveTweeScript: boolean; tag: string }[] = [];
@@ -59,31 +54,5 @@ export default class Tags {
         } else {
             return this.tags.length;
         }
-    }
-
-    getStringTags(): string[] {
-        return this.stringTags;
-    }
-
-    getCompiledTags(): string[] {
-        if (!this.isHaveTweeScriptTags) {
-            return this.stringTags;
-        } else {
-            return this.tags.map((tag) => {
-                if (!tag.isHaveTweeScript) {
-                    return tag.tag;
-                } else {
-                    try {
-                        return Scripting.evalJavaScript((Scripting.parse(tag.tag))).toLowerCase().trim().replace(' ', '__');
-                    } catch (err) {
-                        throw new Error("Invalid random event scripted tag: " + tag.tag);
-                    }
-                }
-            }).sort();
-        }
-    }
-
-    toStringKey(): string {
-        return this.getCompiledTags().join('_');
     }
 }

@@ -1,4 +1,4 @@
-export type GroupDefinitionType = {
+export type GroupPassageMetadataType = {
     name: string,
     weight: number | null,
     type: string | null,
@@ -6,7 +6,7 @@ export type GroupDefinitionType = {
     sequentialCount: number | null,
 };
 
-export type LimitationStrategyType = {
+export type LimitationStrategyPassageMetadataType = {
     max: number,
     tags: [string] | null,
     isSeparate: boolean,

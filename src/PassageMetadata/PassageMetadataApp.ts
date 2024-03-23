@@ -1,3 +1,4 @@
+import SugarcubeFacade from "../facade/SugarcubeFacade";
 import PassageMetadataCollection from "./PassageMetadataCollection";
 import PassageMetadataCollector from "./PassageMetadataCollector";
 import PassageMetadataFactory from "./PassageMetadataFactory";
@@ -9,18 +10,25 @@ export default class PassageMetadataApp {
     public passageMetadataCollector: PassageMetadataCollector;
 
     constructor(
-        passageMetadataRegex: RegExp = /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
-        mode: string = 'byTag',// all
-        modeParams: { filterTag?: string } = { filterTag: 'passage_metadata' }
+        private sugarcubeFacade: SugarcubeFacade,
+        private passageMetadataRegex: RegExp = /<<PassageMetadata>>(.*)<<\/PassageMetadata>>/gms,
+        private mode: string = 'byTag',// all
+        private modeParams: { filterTag?: string } = { filterTag: 'passage_metadata' }
     ) {
+    }
+
+    public init(): this {
         this.passageMetadataCollection = this.createPassageMetadataCollection();
         this.passageMetadataFactory = this.createPassageMetadataFactory();
 
         this.passageMetadataCollector = new PassageMetadataCollector(
-            passageMetadataRegex,
-            mode,
-            modeParams
+            this.sugarcubeFacade,
+            this.passageMetadataRegex,
+            this.mode,
+            this.modeParams
         );
+
+        return this;
     }
 
     public createPassageMetadataCollection(): PassageMetadataCollection {
