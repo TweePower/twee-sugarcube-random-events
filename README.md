@@ -137,7 +137,7 @@ Start random event MyRandomEvent
 # Examples + Docs
 
 Not finished!
-More examples and docs here https://html-preview.github.io/?url=https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/index.html
+You can find interactive examples and docs here https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/index.html
 Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
 
 # Support
