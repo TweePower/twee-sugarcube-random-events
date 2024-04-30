@@ -145,7 +145,7 @@ Start random event MyRandomEvent
 
 Not finished!
 
-You can find interactive examples and docs here https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/index.html
+You can find interactive examples and docs here https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html
 
 Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
 

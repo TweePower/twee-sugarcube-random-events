@@ -3,3 +3,4 @@ window.getDebug = () => {
         ? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
         : 'Currently empty';
 }
+window.State = State;
