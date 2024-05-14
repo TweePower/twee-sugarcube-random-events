@@ -542,6 +542,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 			}
 
             try {
+                re.loadState(State.variables);
                 // TODO: maybe need to add more rewrite widget arguments
                 var result = re.runRandomEvent(randomEventPassageName, {
                     threshold: this.args[1]
@@ -590,6 +591,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
             var groupName = this.args[0].toLowerCase();
 
             try {
+                re.loadState(State.variables);
                 // TODO: maybe need to add more rewrite widget arguments
                 var result = re.runGroup(groupName, this.args[1]);
             } catch (err) {
@@ -646,10 +648,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
     window.isREFired = (passageName = '', isUseHistory = true) => {
         if (isUseHistory) {
-            return re.history.getHistoryFiredEventCount(passageName) > 0;
+            return re.history.getHistoryFiredEventCount(passageName.toLowerCase()) > 0;
         }
 
-        return re.history.getActualFiredEventCount(passageName) > 0;
+        return re.history.getActualFiredEventCount(passageName.toLowerCase()) > 0;
     }
 
     window.isRETagFired = (tag = '', isUseHistory = true) => {
