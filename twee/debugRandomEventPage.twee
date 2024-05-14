@@ -87,7 +87,7 @@ Disable by tag: <<nobr>>
 <hr>
 Reset by event name: <<nobr>>
     <<link "testRandomEvent1">>
-        <<REReset "testRandomEvent1">>
+        <<REReset [[testRandomEvent1]]>>
     <</link>>
 <</nobr>>
 <hr>

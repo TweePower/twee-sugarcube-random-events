@@ -51,7 +51,7 @@ sugarcube-2:
           <<RE [[SomePassageName]]>>
         ```
       parameters:
-        - passage
+        - link
     REGroup:
       name: REGroup
       description: |-
@@ -67,7 +67,7 @@ sugarcube-2:
           <<REGroup "SomeRandomEventGroupName">>
         ```
       parameters:
-        - string
+        - string |+ number
     REEnable:
       name: REEnable
       description: |-
@@ -83,7 +83,7 @@ sugarcube-2:
           <<REEnable [[SomePassageName]]>>
         ```
       parameters:
-        - passage
+        - link
     REDisable:
       name: REDisable
       description: |-
@@ -99,7 +99,7 @@ sugarcube-2:
           <<REDisable [[SomePassageName]]>>
         ```
       parameters:
-        - passage
+        - link
     REEnableByTag:
       name: REEnableByTag
       description: |-
@@ -148,7 +148,7 @@ sugarcube-2:
           <<REReset [[SomePassageName]]>>
         ```
       parameters:
-        - passage
+        - link
     REResetByTag:
       name: REResetByTag
       description: |-
