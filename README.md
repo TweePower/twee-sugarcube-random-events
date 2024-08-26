@@ -30,6 +30,12 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 - **Tagging System And Limitation Strategy**: Leverage tags with variable support and limitation strategy to restrict event activation based on prior occurrences, ensuring diverse gameplay experiences.
 - **Event Blocking System**: A robust random event-blocking mechanism. Random events will be automatically blocked after the user is redirected to another random event passage to prevent multiple random events triggering in a single piece of time. Manual blocking from the JS code is also supported for advanced control.
 
+# Examples + Docs
+
+You can find quick start with examples and docs here https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html
+
+Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
+
 # How to install
 
 - Open compiled file https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js
@@ -140,14 +146,6 @@ Start random event MyRandomEvent
     + verify threshold using: definition configuration
       + threshold passed (random=97 <= threshold=100)
 ```
-
-# Examples + Docs
-
-Not finished!
-
-You can find interactive examples and docs here https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html
-
-Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
 
 # Support
 
