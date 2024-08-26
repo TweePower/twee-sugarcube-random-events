@@ -1,0 +1,47 @@
+:: QuickStartStep5
+
+!Quick Start - Step 5 - Enable/disable events
+
+Disable the event after completing the side quest. For this, add to the passage "QuickStartStep5MarketNeedHeroEventAcceptQuest"
+<<AddCodeBlock>>
+    Side quest was complite
+    <<REDisable [[QuickStartStep5MarketNeedHeroEvent]]>>\
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide event code">>
+    :: QuickStartStep5MarketNeedHeroEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep5MarketEvents"],
+    }<</PassageMetadata>>
+    Hey, I know you! You are hero! Can you help me?
+
+    <<link [["Sure (+sidequest +reputation)"|QuickStartStep5MarketNeedHeroEventAcceptQuest]]>><</link>>
+    <<link [["Sorry, I have no time (-reputation)"|QuickStartStep5MarketNeedHeroEventDeclineQuest]]>><</link>>
+
+    :: QuickStartStep5MarketNeedHeroEventAcceptQuest
+    Some content with super hero quest here
+
+    Your hero reputation was increased
+    Side quest was complite
+    <<REDisable [[QuickStartStep5MarketNeedHeroEvent]]>>\
+
+    <<button [[Return to market|QuickStartStep5Market]]>><</button>>
+
+    :: QuickStartStep5MarketNeedHeroEventDeclineQuest
+    Rumors about your declined quest were spreading...
+
+    Your hero reputation was decreased
+
+    <<button [[Return to market|QuickStartStep5Market]]>><</button>>
+<</AddCodeBlock>>
+
+And that's all, player will see notification about that the quest was complite and this event willn't start again
+
+<<button [["Open market passage"|QuickStartStep5Market]]>><</button>>
+
+<<button [[Previous step - Adding new events to the group|QuickStartStep4]]>><</button>>
+<<button [[Next step - Filters|QuickStartStep6]]>><</button>>
+<<button [[Return to Quick Start|QuickStart]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step5">Open folder with .twee files in Github</a>

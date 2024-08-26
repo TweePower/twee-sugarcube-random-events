@@ -1,0 +1,22 @@
+:: Examples
+
+<h3>Embedded event below:</h3>
+
+<<AddCodeBlock 'show/hide run code'>>
+    <<RE [[TypeEmbeddedEvent]]>>
+<</AddCodeBlock>>\
+<<AddCodeBlock 'show/hide passage code'>>
+    :: TypeEmbeddedEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+    }<</PassageMetadata>>
+
+    <h3>Embeded event 1</h3>
+
+    This is an example of an event which may be embedded to current passage
+<</AddCodeBlock>>\
+<<button "run TypeEmbeddedEvent">>
+    <<replace "#resultBlock">><<RE [[TypeEmbeddedEvent]]>><</replace>>
+<</button>>
+
+<div id="resultBlock"></div>

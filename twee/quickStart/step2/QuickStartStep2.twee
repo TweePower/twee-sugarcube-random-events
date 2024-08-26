@@ -1,0 +1,55 @@
+:: QuickStartStep2
+
+!Quick Start - Step 2 - Interrupting events (type: "goto")
+
+Create event passages
+<<AddCodeBlock>>
+    :: QuickStartStep2MarketStealEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "goto",
+        threshold: 50,
+    }<</PassageMetadata>>
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    <<link [[Go left|QuickStartStep2MarketStealEventLeft]]>><</link>>
+    <<link [[Go right|QuickStartStep2MarketStealEventRight]]>><</link>>
+
+    <<button [[Reload page|passage()]]>><</button>>
+<</AddCodeBlock>>\
+
+Add events into your passage
+<<AddCodeBlock>>
+    <<RE [[QuickStartStep2MarketStealEvent]]>>\
+<</AddCodeBlock>>\
+<<AddCodeBlock "show/hide market passage code">>
+    :: QuickStartStep2Market
+    <img src="images/market.jpg">
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    <<RE [[QuickStartStep2MarketNeedHeroEvent]]>>\
+    <<RE [[QuickStartStep2MarketHiddenStoreEvent]]>>\
+    <<RE [[QuickStartStep2MarketStealEvent]]>>\
+
+    You have $appleCount apple(s).
+    <<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>
+
+    <<button [[Reload page|passage()]]>><</button>>
+    <<button [[Return to Step 2|QuickStartStep2]]>><</button>>
+<</AddCodeBlock>>\
+
+Now market passage contain interupting event
+
+<<button [["Open market passage"|QuickStartStep2Market]]>><</button>>
+
+<<button [[Previous step - Embedded events (type: "embedded")|QuickStartStep1]]>><</button>>
+<<button [[Next step - Groupe events|QuickStartStep3]]>><</button>>
+<<button [[Return to Quick Start|QuickStart]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step2">Open folder with .twee files in Github</a>

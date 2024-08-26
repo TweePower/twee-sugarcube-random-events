@@ -1,0 +1,15 @@
+:: QuickStartStep6MarketHiddenStoreEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep6MarketEvents"],
+    filter: `$appleCount >= 5`,
+}<</PassageMetadata>>
+Hi there, do you want to buy really rare?
+
+<<link [[Go to shop|QuickStartStep6MarketHiddenStoreEventHiddenStore]]>><</link>>
+
+:: QuickStartStep6MarketHiddenStoreEventHiddenStore
+You followed the seller and he led you to a shop full of various artifacts.
+
+<<button [[Return to market|QuickStartStep6Market]]>><</button>>

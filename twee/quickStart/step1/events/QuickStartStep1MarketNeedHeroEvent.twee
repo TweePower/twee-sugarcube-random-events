@@ -1,0 +1,23 @@
+:: QuickStartStep1MarketNeedHeroEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+}<</PassageMetadata>>
+Hey, I know you! You are hero! Can you help me?
+
+<<link [["Sure (+sidequest +reputation)"|QuickStartStep1MarketNeedHeroEventAcceptQuest]]>><</link>>
+<<link [["Sorry, I have no time (-reputation)"|QuickStartStep1MarketNeedHeroEventDeclineQuest]]>><</link>>
+
+:: QuickStartStep1MarketNeedHeroEventAcceptQuest
+Some content with super hero quest here
+
+Your hero reputation was increased
+
+<<button [[Return to market|QuickStartStep1Market]]>><</button>>
+
+:: QuickStartStep1MarketNeedHeroEventDeclineQuest
+Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+<<button [[Return to market|QuickStartStep1Market]]>><</button>>

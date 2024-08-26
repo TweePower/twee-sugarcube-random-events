@@ -1,0 +1,8 @@
+:: TypeEmbeddedEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+}<</PassageMetadata>>
+
+<h3>Embeded event example</h3>
+
+This is an example of an event which may be embedded to current passage

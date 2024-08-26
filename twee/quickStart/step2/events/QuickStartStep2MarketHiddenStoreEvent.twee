@@ -1,0 +1,13 @@
+:: QuickStartStep2MarketHiddenStoreEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+}<</PassageMetadata>>
+Hi there, do you want to buy really rare?
+
+<<link [[Go to shop|QuickStartStep2MarketHiddenStoreEventHiddenStore]]>><</link>>
+
+:: QuickStartStep2MarketHiddenStoreEventHiddenStore
+You followed the seller and he led you to a shop full of various artifacts.
+
+<<button [[Return to market|QuickStartStep2Market]]>><</button>>

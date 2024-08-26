@@ -1,0 +1,70 @@
+:: QuickStartStep3
+
+!Quick Start - Step 3 - Groupe events
+
+Add group to all events
+<<AddCodeBlock>>
+    groups: ["QuickStartStep3MarketEvents"],
+<</AddCodeBlock>>\
+<<AddCodeBlock "show/hide events passages">>
+    :: QuickStartStep3MarketHiddenStoreEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep3MarketEvents"],
+    }<</PassageMetadata>>
+    ...
+
+    :: QuickStartStep3MarketNeedHeroEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep3MarketEvents"],
+    }<</PassageMetadata>>
+    ...
+
+    :: QuickStartStep3MarketStealEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "goto",
+        threshold: 50,
+        groups: ["QuickStartStep3MarketEvents"],
+    }<</PassageMetadata>>
+    ...
+<</AddCodeBlock>>\
+
+Replace events calling to group call in marker passage
+replace:
+<<AddCodeBlock>>
+    <<RE [[QuickStartStep3MarketNeedHeroEvent]]>>\
+    <<RE [[QuickStartStep3MarketHiddenStoreEvent]]>>\
+    <<RE [[QuickStartStep3MarketStealEvent]]>>\
+<</AddCodeBlock>>\
+to:
+<<AddCodeBlock>>
+    <<REGroup "QuickStartStep3MarketEvents" 100>>\
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide market passage code">>
+    :: QuickStartStep3Market
+    <img src="images/market.jpg">
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    <<REGroup "QuickStartStep3MarketEvents" 100>>\
+
+    You have $appleCount apple(s).
+    <<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>
+
+    <<button [[Reload page|passage()]]>><</button>>
+    <<button [[Return to Step 3|QuickStartStep3]]>><</button>>
+<</AddCodeBlock>>\
+
+Now in the market passage with 100% probability exactly one event from the group will be called
+
+<<button [["Open market passage"|QuickStartStep3Market]]>><</button>>
+
+<<button [[Previous step - Interrupting events (type: "goto")|QuickStartStep2]]>><</button>>
+<<button [[Next step - Adding new events to the group|QuickStartStep4]]>><</button>>
+<<button [[Return to Quick Start|QuickStart]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step3">Open folder with .twee files in Github</a>

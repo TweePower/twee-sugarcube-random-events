@@ -1,21 +1,19 @@
 :: StoryMenu
-<<button [[Main page|Start]]>><</button>>
+<<link [[Main page|Start]]>><</link>>
 <<link [[Move time|passage()]]>>
-	<<set _index = $DayTimeArray.indexOf($CurrentDayTime)>>
-	<<if (_index + 1 >= $DayTimeArray.length)>>
-		<<set $CurrentDayTime = $DayTimeArray[0]>>
-	<<else>>
-		<<set $CurrentDayTime = $DayTimeArray[_index + 1]>>
-	<</if>>
+	<<ChangeTime>>
 <</link>>
 <<link "Open debug">>
 	<<run
 		Dialog.setup("Debug");
-		Dialog.wiki("<pre>" + (
+		Dialog.wiki("<pre><code>" + (
 			State.variables.randomEventHistory !== undefined
-        	? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
-        	: 'Currently empty'
-		) + "</pre>");
+				? hljs.highlight(
+					JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4),
+					{ language: 'json' }
+				).value
+				: 'Currently empty'
+		) + "</code></pre>");
 		Dialog.open();
 	>>
 <</link>>

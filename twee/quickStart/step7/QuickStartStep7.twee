@@ -1,0 +1,402 @@
+:: QuickStartStep7
+
+!Quick Start - Step 7 - Limits
+
+This is probably one of the most difficult steps, the strategies of limitations are complex functionality, but I will try to add a description for each step
+
+!! Step 7.1 - Simple limitation strategy
+Add limitations to QuickStartStep7MarketStealEvent so that it is only available once per day.
+For this need to add tags and limitationStrategy to PassageMetadata
+<<AddCodeBlock>>
+    tags: ["Market", "Daily"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily"]},
+    ],
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide event code">>
+    :: QuickStartStep7MarketStealEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "goto",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily"],
+        limitationStrategy: [
+            { max: 1, tags: ["Market", "Daily"]},
+        ]
+    }<</PassageMetadata>>
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    <<link [[Go left|QuickStartStep7MarketStealEventLeft]]>><</link>>
+    <<link [[Go right|QuickStartStep7MarketStealEventRight]]>><</link>>
+
+    <<button [[Reload page|passage()]]>><</button>>
+
+    :: QuickStartStep7MarketStealEventLeft
+    You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+
+    :: QuickStartStep7MarketStealEventRight
+    You found nothing but clothing stalls.
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+<</AddCodeBlock>>
+
+Note: <code>`tags: ["Market", "Daily"],`</code> are needed to understand what strategy can be applied now.
+In this example, the tags match because it is a simple strategy, but tags can also store variables or even expressions (for example: <code>`tags: ["$CurrentPlace", "$appleCount > 10 ? 'buyer': 'just_watch'"],`</code>).
+Note: <code>`max`</code> in limitationStrategy means how many times an event may be started by that limitation.
+Warning: However, the event will be skipped if limitationStrategy contains items with tags and no one item doesn't contain tags that exist in PassageMetadata tags.
+
+!! Step 7.2 - Using variables
+Let's do the same for QuickStartStep7MarketHiddenStoreEvent but make it available only in noon and afternoon
+<<AddCodeBlock>>
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily", "noon"]},
+        { max: 1, tags: ["Market", "Daily", "afternoon"]},
+        { max: 1, tags: ["Market", "Daily"]},
+    ],
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide event code">>
+    :: QuickStartStep7MarketHiddenStoreEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        filter: `$appleCount >= 5`,
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 1, tags: ["Market", "Daily", "noon"]},
+            { max: 1, tags: ["Market", "Daily", "afternoon"]},
+            { max: 1, tags: ["Market", "Daily"]},
+        ],
+    }<</PassageMetadata>>
+    Hi there, do you want to buy really rare?
+
+    <<link [[Go to shop|QuickStartStep7MarketHiddenStoreEventHiddenStore]]>><</link>>
+
+    :: QuickStartStep7MarketHiddenStoreEventHiddenStore
+    You followed the seller and he led you to a shop full of various artifacts.
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+<</AddCodeBlock>>
+
+Note: Here we use variable in tags and have limitationStrategy with 3 items
+* <code>`{ max: 1, tags: ["Market", "Daily", "noon"]},`</code> - mean that this event may start just once at the noon
+* <code>`{ max: 1, tags: ["Market", "Daily", "afternoon"]},`</code> - mean that this event may start just once at the afternoon
+* <code>`{ max: 1, tags: ["Market", "Daily"]},`</code> - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
+
+Looks good, but there is a problem here, it is that limitationStrategy works globally for all events, this is done to remove "spam" of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategy
+We have two events with the strategy <code>`["Market", "Daily"]`</code>, which means that after one event has triggered, the second event will no longer trigger because an event with such tags has already been triggered earlier
+
+!! Step 7.3 - Resolve the same tags issue
+There are two ways to fix this:
+* Add a specific tag to each event (example: <code>`["Market", "Daily", "MyCustomTag"]`</code>)
+* Add <code>`isSeparate: true`</code> to necessary limitationStrategy items
+We will consider the second way
+<<AddCodeBlock>>
+    tags: ["Market", "Daily"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+    ],
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide event code">>
+    :: QuickStartStep7MarketStealEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "goto",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily"],
+        limitationStrategy: [
+            { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+        ],
+    }<</PassageMetadata>>
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    <<link [[Go left|QuickStartStep7MarketStealEventLeft]]>><</link>>
+    <<link [[Go right|QuickStartStep7MarketStealEventRight]]>><</link>>
+
+    <<button [[Reload page|passage()]]>><</button>>
+
+    :: QuickStartStep7MarketStealEventLeft
+    You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+
+    :: QuickStartStep7MarketStealEventRight
+    You found nothing but clothing stalls.
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+<</AddCodeBlock>>
+
+<<AddCodeBlock>>
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily", "noon"], isSeparate: true },
+        { max: 1, tags: ["Market", "Daily", "afternoon"], isSeparate: true },
+        { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+    ],
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide event code">>
+    :: QuickStartStep7MarketHiddenStoreEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        filter: `$appleCount >= 5`,
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 1, tags: ["Market", "Daily", "noon"], isSeparate: true },
+            { max: 1, tags: ["Market", "Daily", "afternoon"], isSeparate: true },
+            { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+        ],
+    }<</PassageMetadata>>
+    Hi there, do you want to buy really rare?
+
+    <<link [[Go to shop|QuickStartStep7MarketHiddenStoreEventHiddenStore]]>><</link>>
+
+    :: QuickStartStep7MarketHiddenStoreEventHiddenStore
+    You followed the seller and he led you to a shop full of various artifacts.
+
+    <<button [[Return to market|QuickStartStep7Market]]>><</button>>
+<</AddCodeBlock>>
+
+Events now work independently of each other
+
+!! Step 7.4 - Dialogs beautify
+Now, the dialogues between the seller and the buyer work at any time of the day. This looks implausible.
+Add limitationStrategy to each dialogue to make them available only during noon and afternoon
+<<AddCodeBlock>>
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 10, tags: ["Market", "Daily", "noon"] },
+        { max: 10, tags: ["Market", "Daily", "afternoon"] },
+    ],
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide events code">>
+    :: QuickStartStep7MarketDialogEvent1 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 10, tags: ["Market", "Daily", "noon"] },
+            { max: 10, tags: ["Market", "Daily", "afternoon"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: "These tomatoes look overripe. How can you charge so much for them?"
+    Seller: "They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket."
+    Buyer: "I still think they’re too expensive for their condition."
+    Seller: "Quality has a price, my friend."
+
+    :: QuickStartStep7MarketDialogEvent2 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 10, tags: ["Market", "Daily", "noon"] },
+            { max: 10, tags: ["Market", "Daily", "afternoon"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: "Why is this lettuce so wilted? It’s hardly fresh."
+    Seller: "That’s just the outer leaves. Inside, it’s crisp and fresh."
+    Buyer: "I don’t think so. You should lower the price."
+    Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
+
+    :: QuickStartStep7MarketDialogEvent3 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 10, tags: ["Market", "Daily", "noon"] },
+            { max: 10, tags: ["Market", "Daily", "afternoon"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: "These potatoes have too many blemishes. They’re not worth the asking price."
+    Seller: "A few spots don’t affect the taste. They’re still the best you’ll find."
+    Buyer: "I’m not paying full price for something that doesn’t look perfect."
+    Seller: "Then you’re missing out on some excellent potatoes."
+
+    :: QuickStartStep7MarketDialogEvent4 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 10, tags: ["Market", "Daily", "noon"] },
+            { max: 10, tags: ["Market", "Daily", "afternoon"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: "This bunch of parsley is too small for what you’re charging."
+    Seller: "It’s small because it’s packed with flavor. A little goes a long way."
+    Buyer: "I’m not convinced. It seems overpriced."
+    Seller: "Quality over quantity. You won’t regret it."
+
+    :: QuickStartStep7MarketDialogEvent5 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 10, tags: ["Market", "Daily", "noon"] },
+            { max: 10, tags: ["Market", "Daily", "afternoon"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: "The strawberries are not as sweet as you said they’d be."
+    Seller: "They’re naturally sweet, just not overloaded with sugar like store-bought ones."
+    Buyer: "I expected more for the price."
+    Seller: "These are fresh from the farm. You’re paying for real taste, not just sugar."
+<</AddCodeBlock>>
+
+Also add dialogues for morning and evening
+<<AddCodeBlock "show/hide events code">>
+    :: QuickStartStep7MarketDialogEvent6 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 4, tags: ["Market", "Daily", "evening"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between sellers:
+
+    Seller 1: "Today was rough. Hardly anyone bought anything after noon."
+    Seller 2: "Tell me about it. I’ve got crates of unsold tomatoes just sitting here."
+    Seller 1: "Same here. Maybe tomorrow will be better."
+
+    :: QuickStartStep7MarketDialogEvent7 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 4, tags: ["Market", "Daily", "evening"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between sellers:
+
+    Seller 1: "Not a bad day, huh? Sold out of all my peppers by lunchtime!"
+    Seller 2: "Lucky you! I had a good run with the zucchinis, but still have some left."
+    Seller 1: "Seems like people were really into fresh veggies today. Let’s hope it keeps up."
+
+    :: QuickStartStep7MarketDialogEvent8 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 4, tags: ["Market", "Daily", "morning"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between sellers:
+
+    Seller 1: "Looks like it’s going to be a busy day. The weather’s perfect for the market."
+    Seller 2: "Yeah, I’m expecting a good crowd. Hope I brought enough fresh greens."
+    Seller 1: "Same here. Let’s see if we can sell out before lunch."
+
+    :: QuickStartStep7MarketDialogEvent9 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 4, tags: ["Market", "Daily", "morning"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between sellers:
+
+    Seller 1: "You think we’ll get many customers today? It’s a bit cloudy."
+    Seller 2: "Clouds won’t keep people away. As long as it doesn’t rain, we should be fine."
+    Seller 1: "Good point. I’ve got a feeling it’ll pick up by mid-morning."
+<</AddCodeBlock>>
+
+Perfect, now dialogs loocs really good
+
+!! Step 7.5 - The last but not least, reset limits on day-end
+All restrictions must be reset to play the events again on the new day.
+A widget "ChangeTime" was created to change the time.
+<<AddCodeBlock "show/hide widget code">>
+    :: DayTimeWidgets [widget]
+    <<widget "ChangeTime">>
+        <<set _index = $DayTimeArray.indexOf($CurrentDayTime)>>
+        <<if (_index + 1 >= $DayTimeArray.length)>>
+            <<set $CurrentDayTime = $DayTimeArray[0]>>
+        <<else>>
+            <<set $CurrentDayTime = $DayTimeArray[_index + 1]>>
+        <</if>>
+    <</widget>>
+<</AddCodeBlock>>
+Let's add a reset limits code at the end of this widget.
+<<AddCodeBlock>>
+    <<if $CurrentDayTime === 'morning'>>
+        <<REResetByTag "Daily">>
+    <</if>>
+<</AddCodeBlock>>
+<<AddCodeBlock "show/hide widget code">>
+    :: DayTimeWidgets [widget]
+    <<widget "ChangeTime">>
+        <<set _index = $DayTimeArray.indexOf($CurrentDayTime)>>
+        <<if (_index + 1 >= $DayTimeArray.length)>>
+            <<set $CurrentDayTime = $DayTimeArray[0]>>
+        <<else>>
+            <<set $CurrentDayTime = $DayTimeArray[_index + 1]>>
+        <</if>>
+
+        <<if $CurrentDayTime === 'morning'>>
+            <<REResetByTag "Daily">>
+        <</if>>
+    <</widget>>
+<</AddCodeBlock>>
+
+Excellent. Now, all limits work fine. We have daily events and different dialogues depending on the time of day, and at the end of the day, all limits are reset.
+
+Note: To change time, use the button "Move time" in the sidebar
+<img src="images/move_time_button.png" style="max-width: 300px">
+
+<<button [["Open market passage"|QuickStartStep7Market]]>><</button>>
+
+<<button [[Previous step - Filters|QuickStartStep6]]>><</button>>
+<<button [[Return to Quick Start|QuickStart]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step7">Open folder with .twee files in Github</a>

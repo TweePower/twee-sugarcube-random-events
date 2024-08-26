@@ -1,0 +1,20 @@
+:: QuickStartStep0
+
+! Quick Start - Step 0 - Preparation
+
+How to install
+
+!!! If you use <a href="https://www.motoslave.net/tweego/">tweego</a> to build your project, then
+Copy file <a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js">random-event.min.js</a> (or you can use debug build: <a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js">random-event.js</a>)
+And paste it into folder with other js files
+
+Note: if you don't use specific folder with js files then you can copy/paste content to passage with <code>`[script]`</code> tag
+
+!!! If you use <a href="https://twinery.org/">twinery</a> to build your project, then
+Copy content from file <a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js">random-event.min.js</a> (or you can use debug build: <a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js">random-event.js</a>)
+Open JavaScript window:
+<img src="images/twinery_js.png">
+And paste content theare
+
+<<button [[Next step - Embedded events (type: "embedded")|QuickStartStep1]]>><</button>>
+<<button [[Return to Quick Start|QuickStart]]>><</button>>

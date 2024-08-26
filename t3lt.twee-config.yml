@@ -1,5 +1,7 @@
 sugarcube-2:
   macros:
+    ChangeTime:
+      name: ChangeTime
     PassageMetadata:
       name: PassageMetadata
       container: true
@@ -36,6 +38,43 @@ sugarcube-2:
               ]
           }<</PassageMetadata>>
         ```
+    AddCodeBlock:
+      name: AddCodeBlock
+      container: true
+      description: |-
+        *Syntax:* `<<AddCodeBlock [[showHideLinkText]] [[language]]>>`
+
+        The `<<AddCodeBlock>>` pritnt passage code
+
+        *Arguments:*
+          * `showHideLinkText`: show/hide link text (default: null), don't add show/hide link if argument not setted
+          * `language`: language format (default: 'xml', possible values: 'xml', 'json', 'javascript', 'css').
+
+        *Usage:*
+        ```
+          <<AddCodeBlock>>[[ SOME CODE HERE ]]<</AddCodeBlock>>
+          <<AddCodeBlock "show/hide json">>[[  SOME CODE HERE ]]<</AddCodeBlock>>
+          <<AddCodeBlock "show/hide json" "json">>[[ SOME CODE HERE ]]<</AddCodeBlock>>
+        ```
+      parameters:
+        - "|+ string |+ string"
+
+    PassageCode:
+      name: PassageCode
+      description: |-
+        *Syntax:* `<<PassageCode [[passage]]>>`
+
+        The `<<PassageCode>>` pritnt passage code
+
+        *Arguments:*
+          * `passage`: passage name.
+
+        *Usage:*
+        ```
+          <<PassageCode [[SomePassageName]]>>
+        ```
+      parameters:
+        - link
     RE:
       name: RE
       description: |-
@@ -55,16 +94,18 @@ sugarcube-2:
     REGroup:
       name: REGroup
       description: |-
-        *Syntax:* `<<REGroup "groupName">>`
+        *Syntax:* `<<REGroup "groupName" 50>>`
 
         The `<<REGroup>>` find all random events with group, check all, and run one of them
 
         *Arguments:*
           * `groupName`: random event group name.
+          * `groupThreshold`: group threshold.
 
         *Usage:*
         ```
           <<REGroup "SomeRandomEventGroupName">>
+          <<REGroup "SomeRandomEventGroupName" 50>>
         ```
       parameters:
         - string |+ number

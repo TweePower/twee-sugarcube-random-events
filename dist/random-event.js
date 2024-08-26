@@ -355,6 +355,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     );
     re.init();
 
+    // For detail see: https://github.com/tmedwards/sugarcube-2/pull/299
+    let realCurrentPassage = null;
+    $(document).on(':passageinit', (ev) => {
+        realCurrentPassage = ev.passage.title;
+    });
+
     // TODO start: If somebody knows how to rewrite these more beautifully/correctly, please let me know :)
     $(document).on(':passageend', function() {
         re.releaseLock();
@@ -382,7 +388,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     Config.navigation.override = (destinationPassage) => {
         if (re.isLocked && !re.has(destinationPassage)) {
             // if random event fired in <<button>> or <<link>>, return previous passage to normal history forward work
-            return passage();
+            return realCurrentPassage ?? passage();
         }
 
         return destinationPassage;
@@ -592,7 +598,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
             try {
                 re.loadState(State.variables);
-                // TODO: maybe need to add more rewrite widget arguments
+                // TODO: maybe need to add more arguments
                 var result = re.runGroup(groupName, this.args[1]);
             } catch (err) {
                 this.error(err.message);
@@ -639,7 +645,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     }
 
     window.isPassageRE = function() {
-        return re.has(passage());
+        return re.has(realCurrentPassage ?? passage());
     }
 
     window.isPreviousRE = function() {

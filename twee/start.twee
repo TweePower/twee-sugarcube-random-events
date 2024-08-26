@@ -3,4 +3,15 @@
     <<set $DayTimeArray = ["morning", "noon", "afternoon", "evening", "night"]>>
     <<set $CurrentDayTime = "morning">>
 <</nobr>>\
-<<button [[DebugRandomEventPage]]>><</button>>
+
+<<button [[Quick start|QuickStart]]>><</button>>
+
+TODO: None of the below has been done yet.
+<<button "Cookbook">><</button>>
+<<button "Documentation">><</button>>
+
+<<button "Event based minigame">><</button>>
+
+<<button [[Debug page|DebugRandomEventPage]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events">Return to Github</a>

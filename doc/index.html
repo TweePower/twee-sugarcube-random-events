@@ -98,14 +98,766 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11// --><tw-storydata name="Random event Twee+Sugarcube documentation and exapmles" startnode="1" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11" zoom="0.3" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "debug.js" */
-window.getDebug = () => {
-    return State.variables.randomEventHistory !== undefined
-        ? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
-        : 'Currently empty';
+	<!-- UUID://A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11// --><tw-storydata name="Random event Twee+Sugarcube documentation and exapmles" startnode="1" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11" zoom="0.3" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "atom-one-dark-reasonable.min.css" */
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#abb2bf;background:#282c34}.hljs-keyword,.hljs-operator,.hljs-pattern-match{color:#f92672}.hljs-function,.hljs-pattern-match .hljs-constructor{color:#61aeee}.hljs-function .hljs-params{color:#a6e22e}.hljs-function .hljs-params .hljs-typing{color:#fd971f}.hljs-module-access .hljs-module{color:#7e57c2}.hljs-constructor{color:#e2b93d}.hljs-constructor .hljs-string{color:#9ccc65}.hljs-comment,.hljs-quote{color:#b18eb1;font-style:italic}.hljs-doctag,.hljs-formula{color:#c678dd}.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-addition,.hljs-attribute,.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title,.hljs-title.class_{color:#e6c07b}.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#d19a66}.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-link{text-decoration:underline}
+/* twine-user-stylesheet #2: "custom.css" */
+br {
+    line-height: 0px;
 }
+
+pre.code-block {
+    border: 1px white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-left-width: 1px;
+    border-left-style: solid;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+a.toggle-code-block-link {
+    border: 1px dashed white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    color: white;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "debug.js" */
+// Config.debug = true;
+window.Story = Story;
 window.State = State;
-/* twine-user-script #2: "random-event.js" */
+/* twine-user-script #2: "1_highlight.min.js" */
+/*!
+  Highlight.js v11.9.0 (git: b7ec4bfafc)
+  (c) 2006-2024 undefined and other contributors
+  License: BSD-3-Clause
+ */
+var hljs=function(){"use strict";function e(t){
+return t instanceof Map?t.clear=t.delete=t.set=()=>{
+throw Error("map is read-only")}:t instanceof Set&&(t.add=t.clear=t.delete=()=>{
+throw Error("set is read-only")
+}),Object.freeze(t),Object.getOwnPropertyNames(t).forEach((n=>{
+const i=t[n],s=typeof i;"object"!==s&&"function"!==s||Object.isFrozen(i)||e(i)
+})),t}class t{constructor(e){
+void 0===e.data&&(e.data={}),this.data=e.data,this.isMatchIgnored=!1}
+ignoreMatch(){this.isMatchIgnored=!0}}function n(e){
+return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;")
+}function i(e,...t){const n=Object.create(null);for(const t in e)n[t]=e[t]
+;return t.forEach((e=>{for(const t in e)n[t]=e[t]})),n}const s=e=>!!e.scope
+;class o{constructor(e,t){
+this.buffer="",this.classPrefix=t.classPrefix,e.walk(this)}addText(e){
+this.buffer+=n(e)}openNode(e){if(!s(e))return;const t=((e,{prefix:t})=>{
+if(e.startsWith("language:"))return e.replace("language:","language-")
+;if(e.includes(".")){const n=e.split(".")
+;return[`${t}${n.shift()}`,...n.map(((e,t)=>`${e}${"_".repeat(t+1)}`))].join(" ")
+}return`${t}${e}`})(e.scope,{prefix:this.classPrefix});this.span(t)}
+closeNode(e){s(e)&&(this.buffer+="</span>")}value(){return this.buffer}span(e){
+this.buffer+=`<span class="${e}">`}}const r=(e={})=>{const t={children:[]}
+;return Object.assign(t,e),t};class a{constructor(){
+this.rootNode=r(),this.stack=[this.rootNode]}get top(){
+return this.stack[this.stack.length-1]}get root(){return this.rootNode}add(e){
+this.top.children.push(e)}openNode(e){const t=r({scope:e})
+;this.add(t),this.stack.push(t)}closeNode(){
+if(this.stack.length>1)return this.stack.pop()}closeAllNodes(){
+for(;this.closeNode(););}toJSON(){return JSON.stringify(this.rootNode,null,4)}
+walk(e){return this.constructor._walk(e,this.rootNode)}static _walk(e,t){
+return"string"==typeof t?e.addText(t):t.children&&(e.openNode(t),
+t.children.forEach((t=>this._walk(e,t))),e.closeNode(t)),e}static _collapse(e){
+"string"!=typeof e&&e.children&&(e.children.every((e=>"string"==typeof e))?e.children=[e.children.join("")]:e.children.forEach((e=>{
+a._collapse(e)})))}}class c extends a{constructor(e){super(),this.options=e}
+addText(e){""!==e&&this.add(e)}startScope(e){this.openNode(e)}endScope(){
+this.closeNode()}__addSublanguage(e,t){const n=e.root
+;t&&(n.scope="language:"+t),this.add(n)}toHTML(){
+return new o(this,this.options).value()}finalize(){
+return this.closeAllNodes(),!0}}function l(e){
+return e?"string"==typeof e?e:e.source:null}function g(e){return h("(?=",e,")")}
+function u(e){return h("(?:",e,")*")}function d(e){return h("(?:",e,")?")}
+function h(...e){return e.map((e=>l(e))).join("")}function f(...e){const t=(e=>{
+const t=e[e.length-1]
+;return"object"==typeof t&&t.constructor===Object?(e.splice(e.length-1,1),t):{}
+})(e);return"("+(t.capture?"":"?:")+e.map((e=>l(e))).join("|")+")"}
+function p(e){return RegExp(e.toString()+"|").exec("").length-1}
+const b=/\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./
+;function m(e,{joinWith:t}){let n=0;return e.map((e=>{n+=1;const t=n
+;let i=l(e),s="";for(;i.length>0;){const e=b.exec(i);if(!e){s+=i;break}
+s+=i.substring(0,e.index),
+i=i.substring(e.index+e[0].length),"\\"===e[0][0]&&e[1]?s+="\\"+(Number(e[1])+t):(s+=e[0],
+"("===e[0]&&n++)}return s})).map((e=>`(${e})`)).join(t)}
+const E="[a-zA-Z]\\w*",x="[a-zA-Z_]\\w*",w="\\b\\d+(\\.\\d+)?",y="(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)",_="\\b(0b[01]+)",O={
+begin:"\\\\[\\s\\S]",relevance:0},v={scope:"string",begin:"'",end:"'",
+illegal:"\\n",contains:[O]},k={scope:"string",begin:'"',end:'"',illegal:"\\n",
+contains:[O]},N=(e,t,n={})=>{const s=i({scope:"comment",begin:e,end:t,
+contains:[]},n);s.contains.push({scope:"doctag",
+begin:"[ ]*(?=(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):)",
+end:/(TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):/,excludeBegin:!0,relevance:0})
+;const o=f("I","a","is","so","us","to","at","if","in","it","on",/[A-Za-z]+['](d|ve|re|ll|t|s|n)/,/[A-Za-z]+[-][a-z]+/,/[A-Za-z][a-z]{2,}/)
+;return s.contains.push({begin:h(/[ ]+/,"(",o,/[.]?[:]?([.][ ]|[ ])/,"){3}")}),s
+},S=N("//","$"),M=N("/\\*","\\*/"),R=N("#","$");var j=Object.freeze({
+__proto__:null,APOS_STRING_MODE:v,BACKSLASH_ESCAPE:O,BINARY_NUMBER_MODE:{
+scope:"number",begin:_,relevance:0},BINARY_NUMBER_RE:_,COMMENT:N,
+C_BLOCK_COMMENT_MODE:M,C_LINE_COMMENT_MODE:S,C_NUMBER_MODE:{scope:"number",
+begin:y,relevance:0},C_NUMBER_RE:y,END_SAME_AS_BEGIN:e=>Object.assign(e,{
+"on:begin":(e,t)=>{t.data._beginMatch=e[1]},"on:end":(e,t)=>{
+t.data._beginMatch!==e[1]&&t.ignoreMatch()}}),HASH_COMMENT_MODE:R,IDENT_RE:E,
+MATCH_NOTHING_RE:/\b\B/,METHOD_GUARD:{begin:"\\.\\s*"+x,relevance:0},
+NUMBER_MODE:{scope:"number",begin:w,relevance:0},NUMBER_RE:w,
+PHRASAL_WORDS_MODE:{
+begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
+},QUOTE_STRING_MODE:k,REGEXP_MODE:{scope:"regexp",begin:/\/(?=[^/\n]*\/)/,
+end:/\/[gimuy]*/,contains:[O,{begin:/\[/,end:/\]/,relevance:0,contains:[O]}]},
+RE_STARTERS_RE:"!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~",
+SHEBANG:(e={})=>{const t=/^#![ ]*\//
+;return e.binary&&(e.begin=h(t,/.*\b/,e.binary,/\b.*/)),i({scope:"meta",begin:t,
+end:/$/,relevance:0,"on:begin":(e,t)=>{0!==e.index&&t.ignoreMatch()}},e)},
+TITLE_MODE:{scope:"title",begin:E,relevance:0},UNDERSCORE_IDENT_RE:x,
+UNDERSCORE_TITLE_MODE:{scope:"title",begin:x,relevance:0}});function A(e,t){
+"."===e.input[e.index-1]&&t.ignoreMatch()}function I(e,t){
+void 0!==e.className&&(e.scope=e.className,delete e.className)}function T(e,t){
+t&&e.beginKeywords&&(e.begin="\\b("+e.beginKeywords.split(" ").join("|")+")(?!\\.)(?=\\b|\\s)",
+e.__beforeBegin=A,e.keywords=e.keywords||e.beginKeywords,delete e.beginKeywords,
+void 0===e.relevance&&(e.relevance=0))}function L(e,t){
+Array.isArray(e.illegal)&&(e.illegal=f(...e.illegal))}function B(e,t){
+if(e.match){
+if(e.begin||e.end)throw Error("begin & end are not supported with match")
+;e.begin=e.match,delete e.match}}function P(e,t){
+void 0===e.relevance&&(e.relevance=1)}const D=(e,t)=>{if(!e.beforeMatch)return
+;if(e.starts)throw Error("beforeMatch cannot be used with starts")
+;const n=Object.assign({},e);Object.keys(e).forEach((t=>{delete e[t]
+})),e.keywords=n.keywords,e.begin=h(n.beforeMatch,g(n.begin)),e.starts={
+relevance:0,contains:[Object.assign(n,{endsParent:!0})]
+},e.relevance=0,delete n.beforeMatch
+},H=["of","and","for","in","not","or","if","then","parent","list","value"],C="keyword"
+;function $(e,t,n=C){const i=Object.create(null)
+;return"string"==typeof e?s(n,e.split(" ")):Array.isArray(e)?s(n,e):Object.keys(e).forEach((n=>{
+Object.assign(i,$(e[n],t,n))})),i;function s(e,n){
+t&&(n=n.map((e=>e.toLowerCase()))),n.forEach((t=>{const n=t.split("|")
+;i[n[0]]=[e,U(n[0],n[1])]}))}}function U(e,t){
+return t?Number(t):(e=>H.includes(e.toLowerCase()))(e)?0:1}const z={},W=e=>{
+console.error(e)},X=(e,...t)=>{console.log("WARN: "+e,...t)},G=(e,t)=>{
+z[`${e}/${t}`]||(console.log(`Deprecated as of ${e}. ${t}`),z[`${e}/${t}`]=!0)
+},K=Error();function F(e,t,{key:n}){let i=0;const s=e[n],o={},r={}
+;for(let e=1;e<=t.length;e++)r[e+i]=s[e],o[e+i]=!0,i+=p(t[e-1])
+;e[n]=r,e[n]._emit=o,e[n]._multi=!0}function Z(e){(e=>{
+e.scope&&"object"==typeof e.scope&&null!==e.scope&&(e.beginScope=e.scope,
+delete e.scope)})(e),"string"==typeof e.beginScope&&(e.beginScope={
+_wrap:e.beginScope}),"string"==typeof e.endScope&&(e.endScope={_wrap:e.endScope
+}),(e=>{if(Array.isArray(e.begin)){
+if(e.skip||e.excludeBegin||e.returnBegin)throw W("skip, excludeBegin, returnBegin not compatible with beginScope: {}"),
+K
+;if("object"!=typeof e.beginScope||null===e.beginScope)throw W("beginScope must be object"),
+K;F(e,e.begin,{key:"beginScope"}),e.begin=m(e.begin,{joinWith:""})}})(e),(e=>{
+if(Array.isArray(e.end)){
+if(e.skip||e.excludeEnd||e.returnEnd)throw W("skip, excludeEnd, returnEnd not compatible with endScope: {}"),
+K
+;if("object"!=typeof e.endScope||null===e.endScope)throw W("endScope must be object"),
+K;F(e,e.end,{key:"endScope"}),e.end=m(e.end,{joinWith:""})}})(e)}function V(e){
+function t(t,n){
+return RegExp(l(t),"m"+(e.case_insensitive?"i":"")+(e.unicodeRegex?"u":"")+(n?"g":""))
+}class n{constructor(){
+this.matchIndexes={},this.regexes=[],this.matchAt=1,this.position=0}
+addRule(e,t){
+t.position=this.position++,this.matchIndexes[this.matchAt]=t,this.regexes.push([t,e]),
+this.matchAt+=p(e)+1}compile(){0===this.regexes.length&&(this.exec=()=>null)
+;const e=this.regexes.map((e=>e[1]));this.matcherRe=t(m(e,{joinWith:"|"
+}),!0),this.lastIndex=0}exec(e){this.matcherRe.lastIndex=this.lastIndex
+;const t=this.matcherRe.exec(e);if(!t)return null
+;const n=t.findIndex(((e,t)=>t>0&&void 0!==e)),i=this.matchIndexes[n]
+;return t.splice(0,n),Object.assign(t,i)}}class s{constructor(){
+this.rules=[],this.multiRegexes=[],
+this.count=0,this.lastIndex=0,this.regexIndex=0}getMatcher(e){
+if(this.multiRegexes[e])return this.multiRegexes[e];const t=new n
+;return this.rules.slice(e).forEach((([e,n])=>t.addRule(e,n))),
+t.compile(),this.multiRegexes[e]=t,t}resumingScanAtSamePosition(){
+return 0!==this.regexIndex}considerAll(){this.regexIndex=0}addRule(e,t){
+this.rules.push([e,t]),"begin"===t.type&&this.count++}exec(e){
+const t=this.getMatcher(this.regexIndex);t.lastIndex=this.lastIndex
+;let n=t.exec(e)
+;if(this.resumingScanAtSamePosition())if(n&&n.index===this.lastIndex);else{
+const t=this.getMatcher(0);t.lastIndex=this.lastIndex+1,n=t.exec(e)}
+return n&&(this.regexIndex+=n.position+1,
+this.regexIndex===this.count&&this.considerAll()),n}}
+if(e.compilerExtensions||(e.compilerExtensions=[]),
+e.contains&&e.contains.includes("self"))throw Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.")
+;return e.classNameAliases=i(e.classNameAliases||{}),function n(o,r){const a=o
+;if(o.isCompiled)return a
+;[I,B,Z,D].forEach((e=>e(o,r))),e.compilerExtensions.forEach((e=>e(o,r))),
+o.__beforeBegin=null,[T,L,P].forEach((e=>e(o,r))),o.isCompiled=!0;let c=null
+;return"object"==typeof o.keywords&&o.keywords.$pattern&&(o.keywords=Object.assign({},o.keywords),
+c=o.keywords.$pattern,
+delete o.keywords.$pattern),c=c||/\w+/,o.keywords&&(o.keywords=$(o.keywords,e.case_insensitive)),
+a.keywordPatternRe=t(c,!0),
+r&&(o.begin||(o.begin=/\B|\b/),a.beginRe=t(a.begin),o.end||o.endsWithParent||(o.end=/\B|\b/),
+o.end&&(a.endRe=t(a.end)),
+a.terminatorEnd=l(a.end)||"",o.endsWithParent&&r.terminatorEnd&&(a.terminatorEnd+=(o.end?"|":"")+r.terminatorEnd)),
+o.illegal&&(a.illegalRe=t(o.illegal)),
+o.contains||(o.contains=[]),o.contains=[].concat(...o.contains.map((e=>(e=>(e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map((t=>i(e,{
+variants:null},t)))),e.cachedVariants?e.cachedVariants:q(e)?i(e,{
+starts:e.starts?i(e.starts):null
+}):Object.isFrozen(e)?i(e):e))("self"===e?o:e)))),o.contains.forEach((e=>{n(e,a)
+})),o.starts&&n(o.starts,r),a.matcher=(e=>{const t=new s
+;return e.contains.forEach((e=>t.addRule(e.begin,{rule:e,type:"begin"
+}))),e.terminatorEnd&&t.addRule(e.terminatorEnd,{type:"end"
+}),e.illegal&&t.addRule(e.illegal,{type:"illegal"}),t})(a),a}(e)}function q(e){
+return!!e&&(e.endsWithParent||q(e.starts))}class J extends Error{
+constructor(e,t){super(e),this.name="HTMLInjectionError",this.html=t}}
+const Y=n,Q=i,ee=Symbol("nomatch"),te=n=>{
+const i=Object.create(null),s=Object.create(null),o=[];let r=!0
+;const a="Could not find the language '{}', did you forget to load/include a language module?",l={
+disableAutodetect:!0,name:"Plain text",contains:[]};let p={
+ignoreUnescapedHTML:!1,throwUnescapedHTML:!1,noHighlightRe:/^(no-?highlight)$/i,
+languageDetectRe:/\blang(?:uage)?-([\w-]+)\b/i,classPrefix:"hljs-",
+cssSelector:"pre code",languages:null,__emitter:c};function b(e){
+return p.noHighlightRe.test(e)}function m(e,t,n){let i="",s=""
+;"object"==typeof t?(i=e,
+n=t.ignoreIllegals,s=t.language):(G("10.7.0","highlight(lang, code, ...args) has been deprecated."),
+G("10.7.0","Please use highlight(code, options) instead.\nhttps://github.com/highlightjs/highlight.js/issues/2277"),
+s=e,i=t),void 0===n&&(n=!0);const o={code:i,language:s};N("before:highlight",o)
+;const r=o.result?o.result:E(o.language,o.code,n)
+;return r.code=o.code,N("after:highlight",r),r}function E(e,n,s,o){
+const c=Object.create(null);function l(){if(!N.keywords)return void M.addText(R)
+;let e=0;N.keywordPatternRe.lastIndex=0;let t=N.keywordPatternRe.exec(R),n=""
+;for(;t;){n+=R.substring(e,t.index)
+;const s=_.case_insensitive?t[0].toLowerCase():t[0],o=(i=s,N.keywords[i]);if(o){
+const[e,i]=o
+;if(M.addText(n),n="",c[s]=(c[s]||0)+1,c[s]<=7&&(j+=i),e.startsWith("_"))n+=t[0];else{
+const n=_.classNameAliases[e]||e;u(t[0],n)}}else n+=t[0]
+;e=N.keywordPatternRe.lastIndex,t=N.keywordPatternRe.exec(R)}var i
+;n+=R.substring(e),M.addText(n)}function g(){null!=N.subLanguage?(()=>{
+if(""===R)return;let e=null;if("string"==typeof N.subLanguage){
+if(!i[N.subLanguage])return void M.addText(R)
+;e=E(N.subLanguage,R,!0,S[N.subLanguage]),S[N.subLanguage]=e._top
+}else e=x(R,N.subLanguage.length?N.subLanguage:null)
+;N.relevance>0&&(j+=e.relevance),M.__addSublanguage(e._emitter,e.language)
+})():l(),R=""}function u(e,t){
+""!==e&&(M.startScope(t),M.addText(e),M.endScope())}function d(e,t){let n=1
+;const i=t.length-1;for(;n<=i;){if(!e._emit[n]){n++;continue}
+const i=_.classNameAliases[e[n]]||e[n],s=t[n];i?u(s,i):(R=s,l(),R=""),n++}}
+function h(e,t){
+return e.scope&&"string"==typeof e.scope&&M.openNode(_.classNameAliases[e.scope]||e.scope),
+e.beginScope&&(e.beginScope._wrap?(u(R,_.classNameAliases[e.beginScope._wrap]||e.beginScope._wrap),
+R=""):e.beginScope._multi&&(d(e.beginScope,t),R="")),N=Object.create(e,{parent:{
+value:N}}),N}function f(e,n,i){let s=((e,t)=>{const n=e&&e.exec(t)
+;return n&&0===n.index})(e.endRe,i);if(s){if(e["on:end"]){const i=new t(e)
+;e["on:end"](n,i),i.isMatchIgnored&&(s=!1)}if(s){
+for(;e.endsParent&&e.parent;)e=e.parent;return e}}
+if(e.endsWithParent)return f(e.parent,n,i)}function b(e){
+return 0===N.matcher.regexIndex?(R+=e[0],1):(T=!0,0)}function m(e){
+const t=e[0],i=n.substring(e.index),s=f(N,e,i);if(!s)return ee;const o=N
+;N.endScope&&N.endScope._wrap?(g(),
+u(t,N.endScope._wrap)):N.endScope&&N.endScope._multi?(g(),
+d(N.endScope,e)):o.skip?R+=t:(o.returnEnd||o.excludeEnd||(R+=t),
+g(),o.excludeEnd&&(R=t));do{
+N.scope&&M.closeNode(),N.skip||N.subLanguage||(j+=N.relevance),N=N.parent
+}while(N!==s.parent);return s.starts&&h(s.starts,e),o.returnEnd?0:t.length}
+let w={};function y(i,o){const a=o&&o[0];if(R+=i,null==a)return g(),0
+;if("begin"===w.type&&"end"===o.type&&w.index===o.index&&""===a){
+if(R+=n.slice(o.index,o.index+1),!r){const t=Error(`0 width match regex (${e})`)
+;throw t.languageName=e,t.badRule=w.rule,t}return 1}
+if(w=o,"begin"===o.type)return(e=>{
+const n=e[0],i=e.rule,s=new t(i),o=[i.__beforeBegin,i["on:begin"]]
+;for(const t of o)if(t&&(t(e,s),s.isMatchIgnored))return b(n)
+;return i.skip?R+=n:(i.excludeBegin&&(R+=n),
+g(),i.returnBegin||i.excludeBegin||(R=n)),h(i,e),i.returnBegin?0:n.length})(o)
+;if("illegal"===o.type&&!s){
+const e=Error('Illegal lexeme "'+a+'" for mode "'+(N.scope||"<unnamed>")+'"')
+;throw e.mode=N,e}if("end"===o.type){const e=m(o);if(e!==ee)return e}
+if("illegal"===o.type&&""===a)return 1
+;if(I>1e5&&I>3*o.index)throw Error("potential infinite loop, way more iterations than matches")
+;return R+=a,a.length}const _=O(e)
+;if(!_)throw W(a.replace("{}",e)),Error('Unknown language: "'+e+'"')
+;const v=V(_);let k="",N=o||v;const S={},M=new p.__emitter(p);(()=>{const e=[]
+;for(let t=N;t!==_;t=t.parent)t.scope&&e.unshift(t.scope)
+;e.forEach((e=>M.openNode(e)))})();let R="",j=0,A=0,I=0,T=!1;try{
+if(_.__emitTokens)_.__emitTokens(n,M);else{for(N.matcher.considerAll();;){
+I++,T?T=!1:N.matcher.considerAll(),N.matcher.lastIndex=A
+;const e=N.matcher.exec(n);if(!e)break;const t=y(n.substring(A,e.index),e)
+;A=e.index+t}y(n.substring(A))}return M.finalize(),k=M.toHTML(),{language:e,
+value:k,relevance:j,illegal:!1,_emitter:M,_top:N}}catch(t){
+if(t.message&&t.message.includes("Illegal"))return{language:e,value:Y(n),
+illegal:!0,relevance:0,_illegalBy:{message:t.message,index:A,
+context:n.slice(A-100,A+100),mode:t.mode,resultSoFar:k},_emitter:M};if(r)return{
+language:e,value:Y(n),illegal:!1,relevance:0,errorRaised:t,_emitter:M,_top:N}
+;throw t}}function x(e,t){t=t||p.languages||Object.keys(i);const n=(e=>{
+const t={value:Y(e),illegal:!1,relevance:0,_top:l,_emitter:new p.__emitter(p)}
+;return t._emitter.addText(e),t})(e),s=t.filter(O).filter(k).map((t=>E(t,e,!1)))
+;s.unshift(n);const o=s.sort(((e,t)=>{
+if(e.relevance!==t.relevance)return t.relevance-e.relevance
+;if(e.language&&t.language){if(O(e.language).supersetOf===t.language)return 1
+;if(O(t.language).supersetOf===e.language)return-1}return 0})),[r,a]=o,c=r
+;return c.secondBest=a,c}function w(e){let t=null;const n=(e=>{
+let t=e.className+" ";t+=e.parentNode?e.parentNode.className:""
+;const n=p.languageDetectRe.exec(t);if(n){const t=O(n[1])
+;return t||(X(a.replace("{}",n[1])),
+X("Falling back to no-highlight mode for this block.",e)),t?n[1]:"no-highlight"}
+return t.split(/\s+/).find((e=>b(e)||O(e)))})(e);if(b(n))return
+;if(N("before:highlightElement",{el:e,language:n
+}),e.dataset.highlighted)return void console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.",e)
+;if(e.children.length>0&&(p.ignoreUnescapedHTML||(console.warn("One of your code blocks includes unescaped HTML. This is a potentially serious security risk."),
+console.warn("https://github.com/highlightjs/highlight.js/wiki/security"),
+console.warn("The element with unescaped HTML:"),
+console.warn(e)),p.throwUnescapedHTML))throw new J("One of your code blocks includes unescaped HTML.",e.innerHTML)
+;t=e;const i=t.textContent,o=n?m(i,{language:n,ignoreIllegals:!0}):x(i)
+;e.innerHTML=o.value,e.dataset.highlighted="yes",((e,t,n)=>{const i=t&&s[t]||n
+;e.classList.add("hljs"),e.classList.add("language-"+i)
+})(e,n,o.language),e.result={language:o.language,re:o.relevance,
+relevance:o.relevance},o.secondBest&&(e.secondBest={
+language:o.secondBest.language,relevance:o.secondBest.relevance
+}),N("after:highlightElement",{el:e,result:o,text:i})}let y=!1;function _(){
+"loading"!==document.readyState?document.querySelectorAll(p.cssSelector).forEach(w):y=!0
+}function O(e){return e=(e||"").toLowerCase(),i[e]||i[s[e]]}
+function v(e,{languageName:t}){"string"==typeof e&&(e=[e]),e.forEach((e=>{
+s[e.toLowerCase()]=t}))}function k(e){const t=O(e)
+;return t&&!t.disableAutodetect}function N(e,t){const n=e;o.forEach((e=>{
+e[n]&&e[n](t)}))}
+"undefined"!=typeof window&&window.addEventListener&&window.addEventListener("DOMContentLoaded",(()=>{
+y&&_()}),!1),Object.assign(n,{highlight:m,highlightAuto:x,highlightAll:_,
+highlightElement:w,
+highlightBlock:e=>(G("10.7.0","highlightBlock will be removed entirely in v12.0"),
+G("10.7.0","Please use highlightElement now."),w(e)),configure:e=>{p=Q(p,e)},
+initHighlighting:()=>{
+_(),G("10.6.0","initHighlighting() deprecated.  Use highlightAll() now.")},
+initHighlightingOnLoad:()=>{
+_(),G("10.6.0","initHighlightingOnLoad() deprecated.  Use highlightAll() now.")
+},registerLanguage:(e,t)=>{let s=null;try{s=t(n)}catch(t){
+if(W("Language definition for '{}' could not be registered.".replace("{}",e)),
+!r)throw t;W(t),s=l}
+s.name||(s.name=e),i[e]=s,s.rawDefinition=t.bind(null,n),s.aliases&&v(s.aliases,{
+languageName:e})},unregisterLanguage:e=>{delete i[e]
+;for(const t of Object.keys(s))s[t]===e&&delete s[t]},
+listLanguages:()=>Object.keys(i),getLanguage:O,registerAliases:v,
+autoDetection:k,inherit:Q,addPlugin:e=>{(e=>{
+e["before:highlightBlock"]&&!e["before:highlightElement"]&&(e["before:highlightElement"]=t=>{
+e["before:highlightBlock"](Object.assign({block:t.el},t))
+}),e["after:highlightBlock"]&&!e["after:highlightElement"]&&(e["after:highlightElement"]=t=>{
+e["after:highlightBlock"](Object.assign({block:t.el},t))})})(e),o.push(e)},
+removePlugin:e=>{const t=o.indexOf(e);-1!==t&&o.splice(t,1)}}),n.debugMode=()=>{
+r=!1},n.safeMode=()=>{r=!0},n.versionString="11.9.0",n.regex={concat:h,
+lookahead:g,either:f,optional:d,anyNumberOfTimes:u}
+;for(const t in j)"object"==typeof j[t]&&e(j[t]);return Object.assign(n,j),n
+},ne=te({});return ne.newInstance=()=>te({}),ne}()
+;"object"==typeof exports&&"undefined"!=typeof module&&(module.exports=hljs);/*! `css` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict"
+;const e=["a","abbr","address","article","aside","audio","b","blockquote","body","button","canvas","caption","cite","code","dd","del","details","dfn","div","dl","dt","em","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","html","i","iframe","img","input","ins","kbd","label","legend","li","main","mark","menu","nav","object","ol","p","q","quote","samp","section","span","strong","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","ul","var","video","defs","g","marker","mask","pattern","svg","switch","symbol","feBlend","feColorMatrix","feComponentTransfer","feComposite","feConvolveMatrix","feDiffuseLighting","feDisplacementMap","feFlood","feGaussianBlur","feImage","feMerge","feMorphology","feOffset","feSpecularLighting","feTile","feTurbulence","linearGradient","radialGradient","stop","circle","ellipse","image","line","path","polygon","polyline","rect","text","use","textPath","tspan","foreignObject","clipPath"],r=["any-hover","any-pointer","aspect-ratio","color","color-gamut","color-index","device-aspect-ratio","device-height","device-width","display-mode","forced-colors","grid","height","hover","inverted-colors","monochrome","orientation","overflow-block","overflow-inline","pointer","prefers-color-scheme","prefers-contrast","prefers-reduced-motion","prefers-reduced-transparency","resolution","scan","scripting","update","width","min-width","max-width","min-height","max-height"].sort().reverse(),o=["active","any-link","blank","checked","current","default","defined","dir","disabled","drop","empty","enabled","first","first-child","first-of-type","fullscreen","future","focus","focus-visible","focus-within","has","host","host-context","hover","indeterminate","in-range","invalid","is","lang","last-child","last-of-type","left","link","local-link","not","nth-child","nth-col","nth-last-child","nth-last-col","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","past","placeholder-shown","read-only","read-write","required","right","root","scope","target","target-within","user-invalid","valid","visited","where"].sort().reverse(),t=["after","backdrop","before","cue","cue-region","first-letter","first-line","grammar-error","marker","part","placeholder","selection","slotted","spelling-error"].sort().reverse(),i=["align-content","align-items","align-self","alignment-baseline","all","animation","animation-delay","animation-direction","animation-duration","animation-fill-mode","animation-iteration-count","animation-name","animation-play-state","animation-timing-function","backface-visibility","background","background-attachment","background-blend-mode","background-clip","background-color","background-image","background-origin","background-position","background-repeat","background-size","baseline-shift","block-size","border","border-block","border-block-color","border-block-end","border-block-end-color","border-block-end-style","border-block-end-width","border-block-start","border-block-start-color","border-block-start-style","border-block-start-width","border-block-style","border-block-width","border-bottom","border-bottom-color","border-bottom-left-radius","border-bottom-right-radius","border-bottom-style","border-bottom-width","border-collapse","border-color","border-image","border-image-outset","border-image-repeat","border-image-slice","border-image-source","border-image-width","border-inline","border-inline-color","border-inline-end","border-inline-end-color","border-inline-end-style","border-inline-end-width","border-inline-start","border-inline-start-color","border-inline-start-style","border-inline-start-width","border-inline-style","border-inline-width","border-left","border-left-color","border-left-style","border-left-width","border-radius","border-right","border-right-color","border-right-style","border-right-width","border-spacing","border-style","border-top","border-top-color","border-top-left-radius","border-top-right-radius","border-top-style","border-top-width","border-width","bottom","box-decoration-break","box-shadow","box-sizing","break-after","break-before","break-inside","cx","cy","caption-side","caret-color","clear","clip","clip-path","clip-rule","color","color-interpolation","color-interpolation-filters","color-profile","color-rendering","column-count","column-fill","column-gap","column-rule","column-rule-color","column-rule-style","column-rule-width","column-span","column-width","columns","contain","content","content-visibility","counter-increment","counter-reset","cue","cue-after","cue-before","cursor","direction","display","dominant-baseline","empty-cells","enable-background","fill","fill-opacity","fill-rule","filter","flex","flex-basis","flex-direction","flex-flow","flex-grow","flex-shrink","flex-wrap","float","flow","flood-color","flood-opacity","font","font-display","font-family","font-feature-settings","font-kerning","font-language-override","font-size","font-size-adjust","font-smoothing","font-stretch","font-style","font-synthesis","font-variant","font-variant-caps","font-variant-east-asian","font-variant-ligatures","font-variant-numeric","font-variant-position","font-variation-settings","font-weight","gap","glyph-orientation-horizontal","glyph-orientation-vertical","grid","grid-area","grid-auto-columns","grid-auto-flow","grid-auto-rows","grid-column","grid-column-end","grid-column-start","grid-gap","grid-row","grid-row-end","grid-row-start","grid-template","grid-template-areas","grid-template-columns","grid-template-rows","hanging-punctuation","height","hyphens","icon","image-orientation","image-rendering","image-resolution","ime-mode","inline-size","isolation","kerning","justify-content","left","letter-spacing","lighting-color","line-break","line-height","list-style","list-style-image","list-style-position","list-style-type","marker","marker-end","marker-mid","marker-start","mask","margin","margin-block","margin-block-end","margin-block-start","margin-bottom","margin-inline","margin-inline-end","margin-inline-start","margin-left","margin-right","margin-top","marks","mask","mask-border","mask-border-mode","mask-border-outset","mask-border-repeat","mask-border-slice","mask-border-source","mask-border-width","mask-clip","mask-composite","mask-image","mask-mode","mask-origin","mask-position","mask-repeat","mask-size","mask-type","max-block-size","max-height","max-inline-size","max-width","min-block-size","min-height","min-inline-size","min-width","mix-blend-mode","nav-down","nav-index","nav-left","nav-right","nav-up","none","normal","object-fit","object-position","opacity","order","orphans","outline","outline-color","outline-offset","outline-style","outline-width","overflow","overflow-wrap","overflow-x","overflow-y","padding","padding-block","padding-block-end","padding-block-start","padding-bottom","padding-inline","padding-inline-end","padding-inline-start","padding-left","padding-right","padding-top","page-break-after","page-break-before","page-break-inside","pause","pause-after","pause-before","perspective","perspective-origin","pointer-events","position","quotes","r","resize","rest","rest-after","rest-before","right","row-gap","scroll-margin","scroll-margin-block","scroll-margin-block-end","scroll-margin-block-start","scroll-margin-bottom","scroll-margin-inline","scroll-margin-inline-end","scroll-margin-inline-start","scroll-margin-left","scroll-margin-right","scroll-margin-top","scroll-padding","scroll-padding-block","scroll-padding-block-end","scroll-padding-block-start","scroll-padding-bottom","scroll-padding-inline","scroll-padding-inline-end","scroll-padding-inline-start","scroll-padding-left","scroll-padding-right","scroll-padding-top","scroll-snap-align","scroll-snap-stop","scroll-snap-type","scrollbar-color","scrollbar-gutter","scrollbar-width","shape-image-threshold","shape-margin","shape-outside","shape-rendering","stop-color","stop-opacity","stroke","stroke-dasharray","stroke-dashoffset","stroke-linecap","stroke-linejoin","stroke-miterlimit","stroke-opacity","stroke-width","speak","speak-as","src","tab-size","table-layout","text-anchor","text-align","text-align-all","text-align-last","text-combine-upright","text-decoration","text-decoration-color","text-decoration-line","text-decoration-style","text-emphasis","text-emphasis-color","text-emphasis-position","text-emphasis-style","text-indent","text-justify","text-orientation","text-overflow","text-rendering","text-shadow","text-transform","text-underline-position","top","transform","transform-box","transform-origin","transform-style","transition","transition-delay","transition-duration","transition-property","transition-timing-function","unicode-bidi","vector-effect","vertical-align","visibility","voice-balance","voice-duration","voice-family","voice-pitch","voice-range","voice-rate","voice-stress","voice-volume","white-space","widows","width","will-change","word-break","word-spacing","word-wrap","writing-mode","x","y","z-index"].sort().reverse()
+;return n=>{const a=n.regex,l=(e=>({IMPORTANT:{scope:"meta",begin:"!important"},
+BLOCK_COMMENT:e.C_BLOCK_COMMENT_MODE,HEXCOLOR:{scope:"number",
+begin:/#(([0-9a-fA-F]{3,4})|(([0-9a-fA-F]{2}){3,4}))\b/},FUNCTION_DISPATCH:{
+className:"built_in",begin:/[\w-]+(?=\()/},ATTRIBUTE_SELECTOR_MODE:{
+scope:"selector-attr",begin:/\[/,end:/\]/,illegal:"$",
+contains:[e.APOS_STRING_MODE,e.QUOTE_STRING_MODE]},CSS_NUMBER_MODE:{
+scope:"number",
+begin:e.NUMBER_RE+"(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",
+relevance:0},CSS_VARIABLE:{className:"attr",begin:/--[A-Za-z_][A-Za-z0-9_-]*/}
+}))(n),s=[n.APOS_STRING_MODE,n.QUOTE_STRING_MODE];return{name:"CSS",
+case_insensitive:!0,illegal:/[=|'\$]/,keywords:{keyframePosition:"from to"},
+classNameAliases:{keyframePosition:"selector-tag"},contains:[l.BLOCK_COMMENT,{
+begin:/-(webkit|moz|ms|o)-(?=[a-z])/},l.CSS_NUMBER_MODE,{
+className:"selector-id",begin:/#[A-Za-z0-9_-]+/,relevance:0},{
+className:"selector-class",begin:"\\.[a-zA-Z-][a-zA-Z0-9_-]*",relevance:0
+},l.ATTRIBUTE_SELECTOR_MODE,{className:"selector-pseudo",variants:[{
+begin:":("+o.join("|")+")"},{begin:":(:)?("+t.join("|")+")"}]},l.CSS_VARIABLE,{
+className:"attribute",begin:"\\b("+i.join("|")+")\\b"},{begin:/:/,end:/[;}{]/,
+contains:[l.BLOCK_COMMENT,l.HEXCOLOR,l.IMPORTANT,l.CSS_NUMBER_MODE,...s,{
+begin:/(url|data-uri)\(/,end:/\)/,relevance:0,keywords:{built_in:"url data-uri"
+},contains:[...s,{className:"string",begin:/[^)]/,endsWithParent:!0,
+excludeEnd:!0}]},l.FUNCTION_DISPATCH]},{begin:a.lookahead(/@/),end:"[{;]",
+relevance:0,illegal:/:/,contains:[{className:"keyword",begin:/@-?\w[\w]*(-\w+)*/
+},{begin:/\s/,endsWithParent:!0,excludeEnd:!0,relevance:0,keywords:{
+$pattern:/[a-z-]+/,keyword:"and or not only",attribute:r.join(" ")},contains:[{
+begin:/[a-z-]+(?=:)/,className:"attribute"},...s,l.CSS_NUMBER_MODE]}]},{
+className:"selector-tag",begin:"\\b("+e.join("|")+")\\b"}]}}})()
+;hljs.registerLanguage("css",e)})();/*! `javascript` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict"
+;const e="[A-Za-z$_][0-9A-Za-z$_]*",n=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends"],a=["true","false","null","undefined","NaN","Infinity"],t=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],s=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],r=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],c=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],i=[].concat(r,t,s)
+;return o=>{const l=o.regex,b=e,d={begin:/<[A-Za-z0-9\\._:-]+/,
+end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(e,n)=>{
+const a=e[0].length+e.index,t=e.input[a]
+;if("<"===t||","===t)return void n.ignoreMatch();let s
+;">"===t&&(((e,{after:n})=>{const a="</"+e[0].slice(1)
+;return-1!==e.input.indexOf(a,n)})(e,{after:a})||n.ignoreMatch())
+;const r=e.input.substring(a)
+;((s=r.match(/^\s*=/))||(s=r.match(/^\s+extends\s+/))&&0===s.index)&&n.ignoreMatch()
+}},g={$pattern:e,keyword:n,literal:a,built_in:i,"variable.language":c
+},u="[0-9](_?[0-9])*",m=`\\.(${u})`,E="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",A={
+className:"number",variants:[{
+begin:`(\\b(${E})((${m})|\\.)?|(${m}))[eE][+-]?(${u})\\b`},{
+begin:`\\b(${E})\\b((${m})\\b|\\.)?|(${m})\\b`},{
+begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{
+begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{
+begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{
+begin:"\\b0[0-7]+n?\\b"}],relevance:0},y={className:"subst",begin:"\\$\\{",
+end:"\\}",keywords:g,contains:[]},h={begin:"html`",end:"",starts:{end:"`",
+returnEnd:!1,contains:[o.BACKSLASH_ESCAPE,y],subLanguage:"xml"}},N={
+begin:"css`",end:"",starts:{end:"`",returnEnd:!1,
+contains:[o.BACKSLASH_ESCAPE,y],subLanguage:"css"}},_={begin:"gql`",end:"",
+starts:{end:"`",returnEnd:!1,contains:[o.BACKSLASH_ESCAPE,y],
+subLanguage:"graphql"}},f={className:"string",begin:"`",end:"`",
+contains:[o.BACKSLASH_ESCAPE,y]},v={className:"comment",
+variants:[o.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{
+begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",
+begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,
+excludeBegin:!0,relevance:0},{className:"variable",begin:b+"(?=\\s*(-)|$)",
+endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]
+}),o.C_BLOCK_COMMENT_MODE,o.C_LINE_COMMENT_MODE]
+},p=[o.APOS_STRING_MODE,o.QUOTE_STRING_MODE,h,N,_,f,{match:/\$\d+/},A]
+;y.contains=p.concat({begin:/\{/,end:/\}/,keywords:g,contains:["self"].concat(p)
+});const S=[].concat(v,y.contains),w=S.concat([{begin:/\(/,end:/\)/,keywords:g,
+contains:["self"].concat(S)}]),R={className:"params",begin:/\(/,end:/\)/,
+excludeBegin:!0,excludeEnd:!0,keywords:g,contains:w},O={variants:[{
+match:[/class/,/\s+/,b,/\s+/,/extends/,/\s+/,l.concat(b,"(",l.concat(/\./,b),")*")],
+scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{
+match:[/class/,/\s+/,b],scope:{1:"keyword",3:"title.class"}}]},k={relevance:0,
+match:l.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),
+className:"title.class",keywords:{_:[...t,...s]}},I={variants:[{
+match:[/function/,/\s+/,b,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],
+className:{1:"keyword",3:"title.function"},label:"func.def",contains:[R],
+illegal:/%/},x={
+match:l.concat(/\b/,(T=[...r,"super","import"],l.concat("(?!",T.join("|"),")")),b,l.lookahead(/\(/)),
+className:"title.function",relevance:0};var T;const C={
+begin:l.concat(/\./,l.lookahead(l.concat(b,/(?![0-9A-Za-z$_(])/))),end:b,
+excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},M={
+match:[/get|set/,/\s+/,b,/(?=\()/],className:{1:"keyword",3:"title.function"},
+contains:[{begin:/\(\)/},R]
+},B="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+o.UNDERSCORE_IDENT_RE+")\\s*=>",$={
+match:[/const|var|let/,/\s+/,b,/\s*/,/=\s*/,/(async\s*)?/,l.lookahead(B)],
+keywords:"async",className:{1:"keyword",3:"title.function"},contains:[R]}
+;return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:g,exports:{
+PARAMS_CONTAINS:w,CLASS_REFERENCE:k},illegal:/#(?![$_A-z])/,
+contains:[o.SHEBANG({label:"shebang",binary:"node",relevance:5}),{
+label:"use_strict",className:"meta",relevance:10,
+begin:/^\s*['"]use (strict|asm)['"]/
+},o.APOS_STRING_MODE,o.QUOTE_STRING_MODE,h,N,_,f,v,{match:/\$\d+/},A,k,{
+className:"attr",begin:b+l.lookahead(":"),relevance:0},$,{
+begin:"("+o.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",
+keywords:"return throw case",relevance:0,contains:[v,o.REGEXP_MODE,{
+className:"function",begin:B,returnBegin:!0,end:"\\s*=>",contains:[{
+className:"params",variants:[{begin:o.UNDERSCORE_IDENT_RE,relevance:0},{
+className:null,begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,
+excludeEnd:!0,keywords:g,contains:w}]}]},{begin:/,/,relevance:0},{match:/\s+/,
+relevance:0},{variants:[{begin:"<>",end:"</>"},{
+match:/<[A-Za-z0-9\\._:-]+\s*\/>/},{begin:d.begin,
+"on:begin":d.isTrulyOpeningTag,end:d.end}],subLanguage:"xml",contains:[{
+begin:d.begin,end:d.end,skip:!0,contains:["self"]}]}]},I,{
+beginKeywords:"while if switch catch for"},{
+begin:"\\b(?!function)"+o.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
+returnBegin:!0,label:"func.def",contains:[R,o.inherit(o.TITLE_MODE,{begin:b,
+className:"title.function"})]},{match:/\.\.\./,relevance:0},C,{match:"\\$"+b,
+relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},
+contains:[R]},x,{relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,
+className:"variable.constant"},O,M,{match:/\$[(.]/}]}}})()
+;hljs.registerLanguage("javascript",e)})();/*! `json` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict";return e=>{const a=["true","false","null"],n={
+scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",keywords:{
+literal:a},contains:[{className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,
+relevance:1.01},{match:/[{}[\],:]/,className:"punctuation",relevance:0
+},e.QUOTE_STRING_MODE,n,e.C_NUMBER_MODE,e.C_LINE_COMMENT_MODE,e.C_BLOCK_COMMENT_MODE],
+illegal:"\\S"}}})();hljs.registerLanguage("json",e)})();/*! `xml` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict";return e=>{
+const a=e.regex,n=a.concat(/[\p{L}_]/u,a.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),s={
+className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},t={begin:/\s/,
+contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]
+},i=e.inherit(t,{begin:/\(/,end:/\)/}),c=e.inherit(e.APOS_STRING_MODE,{
+className:"string"}),l=e.inherit(e.QUOTE_STRING_MODE,{className:"string"}),r={
+endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",
+begin:/[\p{L}0-9._:-]+/u,relevance:0},{begin:/=\s*/,relevance:0,contains:[{
+className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[s]},{
+begin:/'/,end:/'/,contains:[s]},{begin:/[^\s"'=<>`]+/}]}]}]};return{
+name:"HTML, XML",
+aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],
+case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,
+end:/>/,relevance:10,contains:[t,l,c,i,{begin:/\[/,end:/\]/,contains:[{
+className:"meta",begin:/<![a-z]/,end:/>/,contains:[t,i,l,c]}]}]
+},e.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,
+relevance:10},s,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,
+relevance:10,contains:[l]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",
+begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[r],starts:{
+end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",
+begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[r],starts:{
+end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{
+className:"tag",begin:/<>|<\/>/},{className:"tag",
+begin:a.concat(/</,a.lookahead(a.concat(n,a.either(/\/>/,/>/,/\s/)))),
+end:/\/?>/,contains:[{className:"name",begin:n,relevance:0,starts:r}]},{
+className:"tag",begin:a.concat(/<\//,a.lookahead(a.concat(n,/>/))),contains:[{
+className:"name",begin:n,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}
+})();hljs.registerLanguage("xml",e)})();
+/* twine-user-script #3: "2_css.min.js" */
+/*! `css` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict"
+;const e=["a","abbr","address","article","aside","audio","b","blockquote","body","button","canvas","caption","cite","code","dd","del","details","dfn","div","dl","dt","em","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","html","i","iframe","img","input","ins","kbd","label","legend","li","main","mark","menu","nav","object","ol","p","q","quote","samp","section","span","strong","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","ul","var","video","defs","g","marker","mask","pattern","svg","switch","symbol","feBlend","feColorMatrix","feComponentTransfer","feComposite","feConvolveMatrix","feDiffuseLighting","feDisplacementMap","feFlood","feGaussianBlur","feImage","feMerge","feMorphology","feOffset","feSpecularLighting","feTile","feTurbulence","linearGradient","radialGradient","stop","circle","ellipse","image","line","path","polygon","polyline","rect","text","use","textPath","tspan","foreignObject","clipPath"],r=["any-hover","any-pointer","aspect-ratio","color","color-gamut","color-index","device-aspect-ratio","device-height","device-width","display-mode","forced-colors","grid","height","hover","inverted-colors","monochrome","orientation","overflow-block","overflow-inline","pointer","prefers-color-scheme","prefers-contrast","prefers-reduced-motion","prefers-reduced-transparency","resolution","scan","scripting","update","width","min-width","max-width","min-height","max-height"].sort().reverse(),o=["active","any-link","blank","checked","current","default","defined","dir","disabled","drop","empty","enabled","first","first-child","first-of-type","fullscreen","future","focus","focus-visible","focus-within","has","host","host-context","hover","indeterminate","in-range","invalid","is","lang","last-child","last-of-type","left","link","local-link","not","nth-child","nth-col","nth-last-child","nth-last-col","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","past","placeholder-shown","read-only","read-write","required","right","root","scope","target","target-within","user-invalid","valid","visited","where"].sort().reverse(),t=["after","backdrop","before","cue","cue-region","first-letter","first-line","grammar-error","marker","part","placeholder","selection","slotted","spelling-error"].sort().reverse(),i=["align-content","align-items","align-self","alignment-baseline","all","animation","animation-delay","animation-direction","animation-duration","animation-fill-mode","animation-iteration-count","animation-name","animation-play-state","animation-timing-function","backface-visibility","background","background-attachment","background-blend-mode","background-clip","background-color","background-image","background-origin","background-position","background-repeat","background-size","baseline-shift","block-size","border","border-block","border-block-color","border-block-end","border-block-end-color","border-block-end-style","border-block-end-width","border-block-start","border-block-start-color","border-block-start-style","border-block-start-width","border-block-style","border-block-width","border-bottom","border-bottom-color","border-bottom-left-radius","border-bottom-right-radius","border-bottom-style","border-bottom-width","border-collapse","border-color","border-image","border-image-outset","border-image-repeat","border-image-slice","border-image-source","border-image-width","border-inline","border-inline-color","border-inline-end","border-inline-end-color","border-inline-end-style","border-inline-end-width","border-inline-start","border-inline-start-color","border-inline-start-style","border-inline-start-width","border-inline-style","border-inline-width","border-left","border-left-color","border-left-style","border-left-width","border-radius","border-right","border-right-color","border-right-style","border-right-width","border-spacing","border-style","border-top","border-top-color","border-top-left-radius","border-top-right-radius","border-top-style","border-top-width","border-width","bottom","box-decoration-break","box-shadow","box-sizing","break-after","break-before","break-inside","cx","cy","caption-side","caret-color","clear","clip","clip-path","clip-rule","color","color-interpolation","color-interpolation-filters","color-profile","color-rendering","column-count","column-fill","column-gap","column-rule","column-rule-color","column-rule-style","column-rule-width","column-span","column-width","columns","contain","content","content-visibility","counter-increment","counter-reset","cue","cue-after","cue-before","cursor","direction","display","dominant-baseline","empty-cells","enable-background","fill","fill-opacity","fill-rule","filter","flex","flex-basis","flex-direction","flex-flow","flex-grow","flex-shrink","flex-wrap","float","flow","flood-color","flood-opacity","font","font-display","font-family","font-feature-settings","font-kerning","font-language-override","font-size","font-size-adjust","font-smoothing","font-stretch","font-style","font-synthesis","font-variant","font-variant-caps","font-variant-east-asian","font-variant-ligatures","font-variant-numeric","font-variant-position","font-variation-settings","font-weight","gap","glyph-orientation-horizontal","glyph-orientation-vertical","grid","grid-area","grid-auto-columns","grid-auto-flow","grid-auto-rows","grid-column","grid-column-end","grid-column-start","grid-gap","grid-row","grid-row-end","grid-row-start","grid-template","grid-template-areas","grid-template-columns","grid-template-rows","hanging-punctuation","height","hyphens","icon","image-orientation","image-rendering","image-resolution","ime-mode","inline-size","isolation","kerning","justify-content","left","letter-spacing","lighting-color","line-break","line-height","list-style","list-style-image","list-style-position","list-style-type","marker","marker-end","marker-mid","marker-start","mask","margin","margin-block","margin-block-end","margin-block-start","margin-bottom","margin-inline","margin-inline-end","margin-inline-start","margin-left","margin-right","margin-top","marks","mask","mask-border","mask-border-mode","mask-border-outset","mask-border-repeat","mask-border-slice","mask-border-source","mask-border-width","mask-clip","mask-composite","mask-image","mask-mode","mask-origin","mask-position","mask-repeat","mask-size","mask-type","max-block-size","max-height","max-inline-size","max-width","min-block-size","min-height","min-inline-size","min-width","mix-blend-mode","nav-down","nav-index","nav-left","nav-right","nav-up","none","normal","object-fit","object-position","opacity","order","orphans","outline","outline-color","outline-offset","outline-style","outline-width","overflow","overflow-wrap","overflow-x","overflow-y","padding","padding-block","padding-block-end","padding-block-start","padding-bottom","padding-inline","padding-inline-end","padding-inline-start","padding-left","padding-right","padding-top","page-break-after","page-break-before","page-break-inside","pause","pause-after","pause-before","perspective","perspective-origin","pointer-events","position","quotes","r","resize","rest","rest-after","rest-before","right","row-gap","scroll-margin","scroll-margin-block","scroll-margin-block-end","scroll-margin-block-start","scroll-margin-bottom","scroll-margin-inline","scroll-margin-inline-end","scroll-margin-inline-start","scroll-margin-left","scroll-margin-right","scroll-margin-top","scroll-padding","scroll-padding-block","scroll-padding-block-end","scroll-padding-block-start","scroll-padding-bottom","scroll-padding-inline","scroll-padding-inline-end","scroll-padding-inline-start","scroll-padding-left","scroll-padding-right","scroll-padding-top","scroll-snap-align","scroll-snap-stop","scroll-snap-type","scrollbar-color","scrollbar-gutter","scrollbar-width","shape-image-threshold","shape-margin","shape-outside","shape-rendering","stop-color","stop-opacity","stroke","stroke-dasharray","stroke-dashoffset","stroke-linecap","stroke-linejoin","stroke-miterlimit","stroke-opacity","stroke-width","speak","speak-as","src","tab-size","table-layout","text-anchor","text-align","text-align-all","text-align-last","text-combine-upright","text-decoration","text-decoration-color","text-decoration-line","text-decoration-style","text-emphasis","text-emphasis-color","text-emphasis-position","text-emphasis-style","text-indent","text-justify","text-orientation","text-overflow","text-rendering","text-shadow","text-transform","text-underline-position","top","transform","transform-box","transform-origin","transform-style","transition","transition-delay","transition-duration","transition-property","transition-timing-function","unicode-bidi","vector-effect","vertical-align","visibility","voice-balance","voice-duration","voice-family","voice-pitch","voice-range","voice-rate","voice-stress","voice-volume","white-space","widows","width","will-change","word-break","word-spacing","word-wrap","writing-mode","x","y","z-index"].sort().reverse()
+;return n=>{const a=n.regex,l=(e=>({IMPORTANT:{scope:"meta",begin:"!important"},
+BLOCK_COMMENT:e.C_BLOCK_COMMENT_MODE,HEXCOLOR:{scope:"number",
+begin:/#(([0-9a-fA-F]{3,4})|(([0-9a-fA-F]{2}){3,4}))\b/},FUNCTION_DISPATCH:{
+className:"built_in",begin:/[\w-]+(?=\()/},ATTRIBUTE_SELECTOR_MODE:{
+scope:"selector-attr",begin:/\[/,end:/\]/,illegal:"$",
+contains:[e.APOS_STRING_MODE,e.QUOTE_STRING_MODE]},CSS_NUMBER_MODE:{
+scope:"number",
+begin:e.NUMBER_RE+"(%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px|deg|grad|rad|turn|s|ms|Hz|kHz|dpi|dpcm|dppx)?",
+relevance:0},CSS_VARIABLE:{className:"attr",begin:/--[A-Za-z_][A-Za-z0-9_-]*/}
+}))(n),s=[n.APOS_STRING_MODE,n.QUOTE_STRING_MODE];return{name:"CSS",
+case_insensitive:!0,illegal:/[=|'\$]/,keywords:{keyframePosition:"from to"},
+classNameAliases:{keyframePosition:"selector-tag"},contains:[l.BLOCK_COMMENT,{
+begin:/-(webkit|moz|ms|o)-(?=[a-z])/},l.CSS_NUMBER_MODE,{
+className:"selector-id",begin:/#[A-Za-z0-9_-]+/,relevance:0},{
+className:"selector-class",begin:"\\.[a-zA-Z-][a-zA-Z0-9_-]*",relevance:0
+},l.ATTRIBUTE_SELECTOR_MODE,{className:"selector-pseudo",variants:[{
+begin:":("+o.join("|")+")"},{begin:":(:)?("+t.join("|")+")"}]},l.CSS_VARIABLE,{
+className:"attribute",begin:"\\b("+i.join("|")+")\\b"},{begin:/:/,end:/[;}{]/,
+contains:[l.BLOCK_COMMENT,l.HEXCOLOR,l.IMPORTANT,l.CSS_NUMBER_MODE,...s,{
+begin:/(url|data-uri)\(/,end:/\)/,relevance:0,keywords:{built_in:"url data-uri"
+},contains:[...s,{className:"string",begin:/[^)]/,endsWithParent:!0,
+excludeEnd:!0}]},l.FUNCTION_DISPATCH]},{begin:a.lookahead(/@/),end:"[{;]",
+relevance:0,illegal:/:/,contains:[{className:"keyword",begin:/@-?\w[\w]*(-\w+)*/
+},{begin:/\s/,endsWithParent:!0,excludeEnd:!0,relevance:0,keywords:{
+$pattern:/[a-z-]+/,keyword:"and or not only",attribute:r.join(" ")},contains:[{
+begin:/[a-z-]+(?=:)/,className:"attribute"},...s,l.CSS_NUMBER_MODE]}]},{
+className:"selector-tag",begin:"\\b("+e.join("|")+")\\b"}]}}})()
+;hljs.registerLanguage("css",e)})();
+/* twine-user-script #4: "2_javascript.min.js" */
+/*! `javascript` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict"
+;const e="[A-Za-z$_][0-9A-Za-z$_]*",n=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends"],a=["true","false","null","undefined","NaN","Infinity"],t=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],s=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],r=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],c=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],i=[].concat(r,t,s)
+;return o=>{const l=o.regex,b=e,d={begin:/<[A-Za-z0-9\\._:-]+/,
+end:/\/[A-Za-z0-9\\._:-]+>|\/>/,isTrulyOpeningTag:(e,n)=>{
+const a=e[0].length+e.index,t=e.input[a]
+;if("<"===t||","===t)return void n.ignoreMatch();let s
+;">"===t&&(((e,{after:n})=>{const a="</"+e[0].slice(1)
+;return-1!==e.input.indexOf(a,n)})(e,{after:a})||n.ignoreMatch())
+;const r=e.input.substring(a)
+;((s=r.match(/^\s*=/))||(s=r.match(/^\s+extends\s+/))&&0===s.index)&&n.ignoreMatch()
+}},g={$pattern:e,keyword:n,literal:a,built_in:i,"variable.language":c
+},u="[0-9](_?[0-9])*",m=`\\.(${u})`,E="0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*",A={
+className:"number",variants:[{
+begin:`(\\b(${E})((${m})|\\.)?|(${m}))[eE][+-]?(${u})\\b`},{
+begin:`\\b(${E})\\b((${m})\\b|\\.)?|(${m})\\b`},{
+begin:"\\b(0|[1-9](_?[0-9])*)n\\b"},{
+begin:"\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\b"},{
+begin:"\\b0[bB][0-1](_?[0-1])*n?\\b"},{begin:"\\b0[oO][0-7](_?[0-7])*n?\\b"},{
+begin:"\\b0[0-7]+n?\\b"}],relevance:0},y={className:"subst",begin:"\\$\\{",
+end:"\\}",keywords:g,contains:[]},h={begin:"html`",end:"",starts:{end:"`",
+returnEnd:!1,contains:[o.BACKSLASH_ESCAPE,y],subLanguage:"xml"}},N={
+begin:"css`",end:"",starts:{end:"`",returnEnd:!1,
+contains:[o.BACKSLASH_ESCAPE,y],subLanguage:"css"}},_={begin:"gql`",end:"",
+starts:{end:"`",returnEnd:!1,contains:[o.BACKSLASH_ESCAPE,y],
+subLanguage:"graphql"}},f={className:"string",begin:"`",end:"`",
+contains:[o.BACKSLASH_ESCAPE,y]},v={className:"comment",
+variants:[o.COMMENT(/\/\*\*(?!\/)/,"\\*/",{relevance:0,contains:[{
+begin:"(?=@[A-Za-z]+)",relevance:0,contains:[{className:"doctag",
+begin:"@[A-Za-z]+"},{className:"type",begin:"\\{",end:"\\}",excludeEnd:!0,
+excludeBegin:!0,relevance:0},{className:"variable",begin:b+"(?=\\s*(-)|$)",
+endsParent:!0,relevance:0},{begin:/(?=[^\n])\s/,relevance:0}]}]
+}),o.C_BLOCK_COMMENT_MODE,o.C_LINE_COMMENT_MODE]
+},p=[o.APOS_STRING_MODE,o.QUOTE_STRING_MODE,h,N,_,f,{match:/\$\d+/},A]
+;y.contains=p.concat({begin:/\{/,end:/\}/,keywords:g,contains:["self"].concat(p)
+});const S=[].concat(v,y.contains),w=S.concat([{begin:/\(/,end:/\)/,keywords:g,
+contains:["self"].concat(S)}]),R={className:"params",begin:/\(/,end:/\)/,
+excludeBegin:!0,excludeEnd:!0,keywords:g,contains:w},O={variants:[{
+match:[/class/,/\s+/,b,/\s+/,/extends/,/\s+/,l.concat(b,"(",l.concat(/\./,b),")*")],
+scope:{1:"keyword",3:"title.class",5:"keyword",7:"title.class.inherited"}},{
+match:[/class/,/\s+/,b],scope:{1:"keyword",3:"title.class"}}]},k={relevance:0,
+match:l.either(/\bJSON/,/\b[A-Z][a-z]+([A-Z][a-z]*|\d)*/,/\b[A-Z]{2,}([A-Z][a-z]+|\d)+([A-Z][a-z]*)*/,/\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\d)*([A-Z][a-z]*)*/),
+className:"title.class",keywords:{_:[...t,...s]}},I={variants:[{
+match:[/function/,/\s+/,b,/(?=\s*\()/]},{match:[/function/,/\s*(?=\()/]}],
+className:{1:"keyword",3:"title.function"},label:"func.def",contains:[R],
+illegal:/%/},x={
+match:l.concat(/\b/,(T=[...r,"super","import"],l.concat("(?!",T.join("|"),")")),b,l.lookahead(/\(/)),
+className:"title.function",relevance:0};var T;const C={
+begin:l.concat(/\./,l.lookahead(l.concat(b,/(?![0-9A-Za-z$_(])/))),end:b,
+excludeBegin:!0,keywords:"prototype",className:"property",relevance:0},M={
+match:[/get|set/,/\s+/,b,/(?=\()/],className:{1:"keyword",3:"title.function"},
+contains:[{begin:/\(\)/},R]
+},B="(\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)|"+o.UNDERSCORE_IDENT_RE+")\\s*=>",$={
+match:[/const|var|let/,/\s+/,b,/\s*/,/=\s*/,/(async\s*)?/,l.lookahead(B)],
+keywords:"async",className:{1:"keyword",3:"title.function"},contains:[R]}
+;return{name:"JavaScript",aliases:["js","jsx","mjs","cjs"],keywords:g,exports:{
+PARAMS_CONTAINS:w,CLASS_REFERENCE:k},illegal:/#(?![$_A-z])/,
+contains:[o.SHEBANG({label:"shebang",binary:"node",relevance:5}),{
+label:"use_strict",className:"meta",relevance:10,
+begin:/^\s*['"]use (strict|asm)['"]/
+},o.APOS_STRING_MODE,o.QUOTE_STRING_MODE,h,N,_,f,v,{match:/\$\d+/},A,k,{
+className:"attr",begin:b+l.lookahead(":"),relevance:0},$,{
+begin:"("+o.RE_STARTERS_RE+"|\\b(case|return|throw)\\b)\\s*",
+keywords:"return throw case",relevance:0,contains:[v,o.REGEXP_MODE,{
+className:"function",begin:B,returnBegin:!0,end:"\\s*=>",contains:[{
+className:"params",variants:[{begin:o.UNDERSCORE_IDENT_RE,relevance:0},{
+className:null,begin:/\(\s*\)/,skip:!0},{begin:/\(/,end:/\)/,excludeBegin:!0,
+excludeEnd:!0,keywords:g,contains:w}]}]},{begin:/,/,relevance:0},{match:/\s+/,
+relevance:0},{variants:[{begin:"<>",end:"</>"},{
+match:/<[A-Za-z0-9\\._:-]+\s*\/>/},{begin:d.begin,
+"on:begin":d.isTrulyOpeningTag,end:d.end}],subLanguage:"xml",contains:[{
+begin:d.begin,end:d.end,skip:!0,contains:["self"]}]}]},I,{
+beginKeywords:"while if switch catch for"},{
+begin:"\\b(?!function)"+o.UNDERSCORE_IDENT_RE+"\\([^()]*(\\([^()]*(\\([^()]*\\)[^()]*)*\\)[^()]*)*\\)\\s*\\{",
+returnBegin:!0,label:"func.def",contains:[R,o.inherit(o.TITLE_MODE,{begin:b,
+className:"title.function"})]},{match:/\.\.\./,relevance:0},C,{match:"\\$"+b,
+relevance:0},{match:[/\bconstructor(?=\s*\()/],className:{1:"title.function"},
+contains:[R]},x,{relevance:0,match:/\b[A-Z][A-Z_0-9]+\b/,
+className:"variable.constant"},O,M,{match:/\$[(.]/}]}}})()
+;hljs.registerLanguage("javascript",e)})();
+/* twine-user-script #5: "2_json.min.js" */
+/*! `json` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict";return e=>{const a=["true","false","null"],n={
+scope:"literal",beginKeywords:a.join(" ")};return{name:"JSON",keywords:{
+literal:a},contains:[{className:"attr",begin:/"(\\.|[^\\"\r\n])*"(?=\s*:)/,
+relevance:1.01},{match:/[{}[\],:]/,className:"punctuation",relevance:0
+},e.QUOTE_STRING_MODE,n,e.C_NUMBER_MODE,e.C_LINE_COMMENT_MODE,e.C_BLOCK_COMMENT_MODE],
+illegal:"\\S"}}})();hljs.registerLanguage("json",e)})();
+/* twine-user-script #6: "2_xml.min.js" */
+/*! `xml` grammar compiled for Highlight.js 11.9.0 */
+(()=>{var e=(()=>{"use strict";return e=>{
+const a=e.regex,n=a.concat(/[\p{L}_]/u,a.optional(/[\p{L}0-9_.-]*:/u),/[\p{L}0-9_.-]*/u),s={
+className:"symbol",begin:/&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;/},t={begin:/\s/,
+contains:[{className:"keyword",begin:/#?[a-z_][a-z1-9_-]+/,illegal:/\n/}]
+},i=e.inherit(t,{begin:/\(/,end:/\)/}),c=e.inherit(e.APOS_STRING_MODE,{
+className:"string"}),l=e.inherit(e.QUOTE_STRING_MODE,{className:"string"}),r={
+endsWithParent:!0,illegal:/</,relevance:0,contains:[{className:"attr",
+begin:/[\p{L}0-9._:-]+/u,relevance:0},{begin:/=\s*/,relevance:0,contains:[{
+className:"string",endsParent:!0,variants:[{begin:/"/,end:/"/,contains:[s]},{
+begin:/'/,end:/'/,contains:[s]},{begin:/[^\s"'=<>`]+/}]}]}]};return{
+name:"HTML, XML",
+aliases:["html","xhtml","rss","atom","xjb","xsd","xsl","plist","wsf","svg"],
+case_insensitive:!0,unicodeRegex:!0,contains:[{className:"meta",begin:/<![a-z]/,
+end:/>/,relevance:10,contains:[t,l,c,i,{begin:/\[/,end:/\]/,contains:[{
+className:"meta",begin:/<![a-z]/,end:/>/,contains:[t,i,l,c]}]}]
+},e.COMMENT(/<!--/,/-->/,{relevance:10}),{begin:/<!\[CDATA\[/,end:/\]\]>/,
+relevance:10},s,{className:"meta",end:/\?>/,variants:[{begin:/<\?xml/,
+relevance:10,contains:[l]},{begin:/<\?[a-z][a-z0-9]+/}]},{className:"tag",
+begin:/<style(?=\s|>)/,end:/>/,keywords:{name:"style"},contains:[r],starts:{
+end:/<\/style>/,returnEnd:!0,subLanguage:["css","xml"]}},{className:"tag",
+begin:/<script(?=\s|>)/,end:/>/,keywords:{name:"script"},contains:[r],starts:{
+end:/<\/script>/,returnEnd:!0,subLanguage:["javascript","handlebars","xml"]}},{
+className:"tag",begin:/<>|<\/>/},{className:"tag",
+begin:a.concat(/</,a.lookahead(a.concat(n,a.either(/\/>/,/>/,/\s/)))),
+end:/\/?>/,contains:[{className:"name",begin:n,relevance:0,starts:r}]},{
+className:"tag",begin:a.concat(/<\//,a.lookahead(a.concat(n,/>/))),contains:[{
+className:"name",begin:n,relevance:0},{begin:/>/,relevance:0,endsParent:!0}]}]}}
+})();hljs.registerLanguage("xml",e)})();
+/* twine-user-script #7: "3_debug.js" */
+window.hljs = hljs;
+/* twine-user-script #8: "printCodeMacro.js" */
+(function () {
+    'use strict';
+
+    Macro.add('AddCodeBlock', {
+        tags : null,
+        handler: function () {
+            let showHideLinkText = this.args[0] ?? null;
+            let language = this.args[1] ?? 'xml';
+            let code = this.payload[0].contents.split('\n');
+            while (code.length > 0) {
+                if (code[0].trim() === '') {
+                    code.shift();
+                } else if (code[code.length - 1].trim() === '') {
+                    code.pop();
+                } else {
+                    break;
+                }
+            } // remove first and last empty lines
+
+            let minSpace = Math.min(...code.filter((line) => line.trim() !== '').map((line) => line.match(/^( +)?/)[0].length));
+            code = code.map((line) => line.slice(minSpace)).join('\n'); // remove indentation
+
+            let $divWrapper = $('<div>');
+            let $pre = $('<pre>', { class: 'code-block' });
+            let $code = $('<code>').appendTo($pre);
+
+            $code.html(
+                hljs.highlight(
+                    code,
+                    { language: language }
+                ).value
+            );
+
+            if (showHideLinkText !== null) {
+                $pre.hide();
+                let $toggleButton = $('<a>', {
+                    class: 'toggle-code-block-link',
+                    html: showHideLinkText
+                }).on('click',  function() {
+                    $(this).parent().find('pre.code-block').toggle();
+                });
+
+                $divWrapper.append($toggleButton);
+            }
+
+            $divWrapper.append($pre);
+
+            $(this.output).append($divWrapper);
+        }
+    });
+
+    Macro.add('PrintCode', {
+        handler: function () {
+            if (this.args.length === 0) {
+				return this.error('No code specified');
+			}
+
+            let code = this.args[0];
+
+            let $divWrapper = $('<div>');
+            let $pre = $('<pre>', {
+                class: 'code-block',
+            });
+            let $code = $('<code>').appendTo($pre);
+            $code.html(hljs.highlight(
+                code,
+                { language: 'xml' }
+              ).value);
+
+            $divWrapper
+                .append($pre);
+
+            $(this.output).append($divWrapper);
+        }
+    });
+
+    Macro.add('PassageCode', {
+        handler: function () {
+            if (this.args.length === 0) {
+				return this.error('No passage name specified');
+			}
+
+            let passageName;
+			if (typeof this.args[0] === 'object') {
+				passageName = this.args[0].link;
+			} else {
+				passageName = this.args[0];
+			}
+
+            let $divWrapper = $('<div>');
+            let $pre = $('<pre>', {
+                class: 'code-block',
+                style: 'display: none'
+            });
+            let $code = $('<code>').appendTo($pre);
+            $code.html(hljs.highlight(
+                Story.get(passageName).text.trim(),
+                { language: 'xml' }
+              ).value);
+
+            let $toggleButton = $('<button>', {
+                html: 'show/hide passage code'
+            }).on('click',  function() {
+                $(this).parent().find('pre.code-block').toggle();
+            });
+
+            $divWrapper
+                .append($toggleButton)
+                .append($pre);
+
+            $(this.output).append($divWrapper);
+        }
+    });
+}());
+/* twine-user-script #9: "random-event.js" */
 // repository: https://github.com/TweePower/twee-sugarcube-random-events
 (function () {
     'use strict';
@@ -463,6 +1215,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     );
     re.init();
 
+    // For detail see: https://github.com/tmedwards/sugarcube-2/pull/299
+    let realCurrentPassage = null;
+    $(document).on(':passageinit', (ev) => {
+        realCurrentPassage = ev.passage.title;
+    });
+
     // TODO start: If somebody knows how to rewrite these more beautifully/correctly, please let me know :)
     $(document).on(':passageend', function() {
         re.releaseLock();
@@ -490,7 +1248,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     Config.navigation.override = (destinationPassage) => {
         if (re.isLocked && !re.has(destinationPassage)) {
             // if random event fired in <<button>> or <<link>>, return previous passage to normal history forward work
-            return passage();
+            return realCurrentPassage ?? passage();
         }
 
         return destinationPassage;
@@ -650,6 +1408,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 			}
 
             try {
+                re.loadState(State.variables);
                 // TODO: maybe need to add more rewrite widget arguments
                 var result = re.runRandomEvent(randomEventPassageName, {
                     threshold: this.args[1]
@@ -698,7 +1457,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
             var groupName = this.args[0].toLowerCase();
 
             try {
-                // TODO: maybe need to add more rewrite widget arguments
+                re.loadState(State.variables);
+                // TODO: maybe need to add more arguments
                 var result = re.runGroup(groupName, this.args[1]);
             } catch (err) {
                 this.error(err.message);
@@ -745,7 +1505,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     }
 
     window.isPassageRE = function() {
-        return re.has(passage());
+        return re.has(realCurrentPassage ?? passage());
     }
 
     window.isPreviousRE = function() {
@@ -754,10 +1514,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
     window.isREFired = (passageName = '', isUseHistory = true) => {
         if (isUseHistory) {
-            return re.history.getHistoryFiredEventCount(passageName) > 0;
+            return re.history.getHistoryFiredEventCount(passageName.toLowerCase()) > 0;
         }
 
-        return re.history.getActualFiredEventCount(passageName) > 0;
+        return re.history.getActualFiredEventCount(passageName.toLowerCase()) > 0;
     }
 
     window.isRETagFired = (tag = '', isUseHistory = true) => {
@@ -772,26 +1532,36 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
     &lt;&lt;set $DayTimeArray = [&quot;morning&quot;, &quot;noon&quot;, &quot;afternoon&quot;, &quot;evening&quot;, &quot;night&quot;]&gt;&gt;
     &lt;&lt;set $CurrentDayTime = &quot;morning&quot;&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
-&lt;&lt;button [[DebugRandomEventPage]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="225,100" size="100,100">Current time: $CurrentDayTime</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="350,100" size="100,100">&lt;&lt;button [[Main page|Start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Quick start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+TODO: None of the below has been done yet.
+&lt;&lt;button &quot;Cookbook&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &quot;Documentation&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;Event based minigame&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Debug page|DebugRandomEventPage]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events&quot;&gt;Return to Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="225,100" size="100,100">Current time: $CurrentDayTime</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="350,100" size="100,100">&lt;&lt;link [[Main page|Start]]&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link [[Move time|passage()]]&gt;&gt;
-	&lt;&lt;set _index = $DayTimeArray.indexOf($CurrentDayTime)&gt;&gt;
-	&lt;&lt;if (_index + 1 &gt;= $DayTimeArray.length)&gt;&gt;
-		&lt;&lt;set $CurrentDayTime = $DayTimeArray[0]&gt;&gt;
-	&lt;&lt;else&gt;&gt;
-		&lt;&lt;set $CurrentDayTime = $DayTimeArray[_index + 1]&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
+	&lt;&lt;ChangeTime&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Open debug&quot;&gt;&gt;
 	&lt;&lt;run
 		Dialog.setup(&quot;Debug&quot;);
-		Dialog.wiki(&quot;&lt;pre&gt;&quot; + (
+		Dialog.wiki(&quot;&lt;pre&gt;&lt;code&gt;&quot; + (
 			State.variables.randomEventHistory !== undefined
-        	? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
-        	: &#39;Currently empty&#39;
-		) + &quot;&lt;/pre&gt;&quot;);
+				? hljs.highlight(
+					JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4),
+					{ language: &#39;json&#39; }
+				).value
+				: &#39;Currently empty&#39;
+		) + &quot;&lt;/code&gt;&lt;/pre&gt;&quot;);
 		Dialog.open();
 	&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="DebugRandomEventPage" tags="" position="475,100" size="100,100">&lt;&lt;link &quot;run testRandomEvent1&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Cookbook" tags="" position="475,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="EnableDisableEventsByStoryMailstones" tags="" position="600,100" size="100,100">TODO: Describe how to enable disable events based on story mailstones (disabled by default, enable by tag)</tw-passagedata><tw-passagedata pid="6" name="PageWithManyEvents" tags="" position="725,100" size="100,100">TODO: Describe how to work with pages where we have many events (_Page)</tw-passagedata><tw-passagedata pid="7" name="VSCode" tags="" position="850,100" size="100,100">TODO: VScode plugins
+TODO: VScode Snippents</tw-passagedata><tw-passagedata pid="8" name="DebugRandomEventPage" tags="" position="975,100" size="100,100">&lt;&lt;link &quot;run testRandomEvent1&quot;&gt;&gt;
     &lt;&lt;replace &quot;#testRandomEventBlock&quot;&gt;&gt;&lt;&lt;RE [[testRandomEvent1]]&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;run testRandomEvent2&quot;&gt;&gt;
@@ -878,7 +1648,7 @@ Disable by tag: &lt;&lt;nobr&gt;&gt;
 &lt;hr&gt;
 Reset by event name: &lt;&lt;nobr&gt;&gt;
     &lt;&lt;link &quot;testRandomEvent1&quot;&gt;&gt;
-        &lt;&lt;REReset &quot;testRandomEvent1&quot;&gt;&gt;
+        &lt;&lt;REReset [[testRandomEvent1]]&gt;&gt;
     &lt;&lt;/link&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;hr&gt;
@@ -907,7 +1677,1597 @@ Reset by tag: &lt;&lt;nobr&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
 &lt;h2&gt;Random event block:&lt;/h2&gt;
-&lt;div id=&quot;testRandomEventBlock&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="testRandomEvent1" tags="passage_metadata" position="600,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+&lt;div id=&quot;testRandomEventBlock&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Documentation" tags="" position="1100,100" size="100,100">[[EnableDisableEventsDocumentation]]
+[[EventTypesDocumentation]]
+[[EventsTreshholdDocumentation]]
+[[EventFiltersDocumentation]]
+[[EventGroupsDocumentation]]
+[[EventLimitationsDocumentation]]</tw-passagedata><tw-passagedata pid="10" name="EnableDisableEventsDocumentation" tags="" position="1225,100" size="100,100">TODO: enable/disable (boolean (default disabled), variables, methods to enable/disable, link to cookbook)</tw-passagedata><tw-passagedata pid="11" name="EventFiltersDocumentation" tags="" position="100,225" size="100,100">TODO: Filter (base + complex multiline)</tw-passagedata><tw-passagedata pid="12" name="EventGroupsDocumentation" tags="" position="225,225" size="100,100">TODO: Groups (base/extended, sequental groups, link to cookbook)</tw-passagedata><tw-passagedata pid="13" name="EventLimitationsDocumentation" tags="" position="350,225" size="100,100">TODO: Limitations (tags, strategy, resset counters, what chose filter or limits?)</tw-passagedata><tw-passagedata pid="14" name="EventTypesDocumentation" tags="" position="475,225" size="100,100">TODO: Type enmedded/goto documentation</tw-passagedata><tw-passagedata pid="15" name="TypeEmbeddedDoc" tags="" position="600,225" size="100,100">&lt;h3&gt;Embedded event below:&lt;/h3&gt;
+
+&lt;&lt;AddCodeBlock &#39;show/hide run code&#39;&gt;&gt;
+    &lt;&lt;RE [[TypeEmbeddedEvent]]&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;AddCodeBlock &#39;show/hide passage code&#39;&gt;&gt;
+    :: TypeEmbeddedEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    &lt;h3&gt;Embeded event 1&lt;/h3&gt;
+
+    This is an example of an event which may be embedded to current passage
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;button &quot;run TypeEmbeddedEvent&quot;&gt;&gt;
+    &lt;&lt;replace &quot;#resultBlock&quot;&gt;&gt;&lt;&lt;RE [[TypeEmbeddedEvent]]&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;div id=&quot;resultBlock&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="TypeEmbeddedEvent" tags="passage_metadata" position="725,225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+&lt;h3&gt;Embeded event example&lt;/h3&gt;
+
+This is an example of an event which may be embedded to current passage</tw-passagedata><tw-passagedata pid="17" name="EventsTreshholdDocumentation" tags="" position="850,225" size="100,100">TODO: treshhold documentation (static + using variables)</tw-passagedata><tw-passagedata pid="18" name="Examples" tags="" position="975,225" size="100,100">&lt;h3&gt;Embedded event below:&lt;/h3&gt;
+
+&lt;&lt;AddCodeBlock &#39;show/hide run code&#39;&gt;&gt;
+    &lt;&lt;RE [[TypeEmbeddedEvent]]&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;AddCodeBlock &#39;show/hide passage code&#39;&gt;&gt;
+    :: TypeEmbeddedEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    &lt;h3&gt;Embeded event 1&lt;/h3&gt;
+
+    This is an example of an event which may be embedded to current passage
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;button &quot;run TypeEmbeddedEvent&quot;&gt;&gt;
+    &lt;&lt;replace &quot;#resultBlock&quot;&gt;&gt;&lt;&lt;RE [[TypeEmbeddedEvent]]&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;div id=&quot;resultBlock&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="MinigameStart" tags="" position="1100,225" size="100,100">TODO: Build event based minigame</tw-passagedata><tw-passagedata pid="20" name="QuickStart" tags="" position="1225,225" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $appleCount = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+! Quick Start
+
+Let&#39;s say you wrote the [[&quot;market passage&quot;|QuickStartStep0Market]]
+&lt;&lt;AddCodeBlock &quot;show/hide market passage code&quot;&gt;&gt;
+    :: QuickStartStep0Market
+    &lt;img src=&quot;images/market.jpg&quot;&gt;
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    You have $appleCount apple(s).
+    &lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+But the page looks very static, lifeless.
+Let&#39;s add random events to make it more live
+Step by step.
+
+!! Step 0 - Preparation
+Here we will find out how to install random events library to your project
+[[Let&#39;s install random events library|QuickStartStep0]]
+
+!! Step 1 - Embedded events (type: &quot;embedded&quot;)
+Here we will look at how to add embedded events to a passage.
+Embedded events do not change the passage but only complement it.
+Players can simply ignore this, so such events can be used to add optional events or to add background dialogs.
+[[Let&#39;s add embed random events|QuickStartStep1]]
+
+!! Step 2 - Interrupting events (type: &quot;goto&quot;)
+Here we will look at how interrupting events works and how to add it to a passage.
+Interrupting events redirects player to a event passage
+Players can&#39;t skip it, so such events can be used to completely change the behavior of a passage.
+[[Let&#39;s add interrupting random event|QuickStartStep2]]
+
+!! Step 3 - Groupe events
+Now, in the market passage, different events are called sequentially
+It looks good, but there are several problems
+* There is a possibility that several events will be called at once
+* The probability that at least one event out of three will trigger is 87.5% (because three events are called sequentially by 50%)
+* It is not clear how to make it so that exactly one event is called with 100% probability
+To solve these problems, you can use groups
+[[Let&#39;s use group to call random events|QuickStartStep3]]
+
+!! Step 4 - Adding new events to the group
+Groups also have one advantage: to add new events to groups, you no longer need to change the market passage
+Now easy to add new events to group
+[[Let&#39;s add events to the group|QuickStartStep4]]
+
+!! Step 5 - Enable/disable events
+As the story progresses, some events can be turned on or off
+In our example, this could be the QuickStartStep5MarketNeedHeroEvent event. After finishing this side quest need to disable the event
+[[Let&#39;s disable event after finishing side quest|QuickStartStep5]]
+
+!! Step 6 - Filters
+Some events should not be available immediately after the start
+Sometimes, you can enable them after some plot twist, but most often, it is easier to use filters
+In our example, this could be QuickStartStep6MarketHiddenStoreEvent. You can add a filter so that this event is available only after five apples are purchased
+[[Let&#39;s add filters|QuickStartStep6]]
+
+!! Step 7 - Limits
+Everything looks good, but there are inconsistencies in the events that are repeated constantly
+For example, some events are more logical to limit running only once a day, and other events can be limited by the time of day
+We can use filters for that, but better to use limitations for that
+[[Let&#39;s add limitations|QuickStartStep7]]
+
+!! Results
+Now the market looks more alive. There are side quests, dialogues, and a hidden store. And it all looks logical. Not all events are available from the start, some are available only once, and there are those that are available only at a certain time of day.
+But the most important thing is that these events are very easy to maintain and add new events. Market passage does not have hundreds of if/else constructions that plunge you into horror, all the settings are in the events themselves, and market passage contains only one line
+&lt;&lt;AddCodeBlock&gt;&gt;&lt;&lt;REGroup &quot;QuickStartStep7MarketEvents&quot; 100&gt;&gt;&lt;&lt;/AddCodeBlock&gt;&gt;
+
+!! Documentations TODO list
+* Add warnings and notes
+* Add some stylization
+* enable/disable debug switcher
+
+!! Next steps - TBD
+* Detailed Documentations
+* Enable/Disable events vs filters vs limits
+* Complex passage with many possible events and groups
+* How to debug events
+* JS API
+
+&lt;&lt;button [[Return to start page|Start]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="QuickStartStep0" tags="" position="100,350" size="100,100">! Quick Start - Step 0 - Preparation
+
+How to install
+
+!!! If you use &lt;a href=&quot;https://www.motoslave.net/tweego/&quot;&gt;tweego&lt;/a&gt; to build your project, then
+Copy file &lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js&quot;&gt;random-event.min.js&lt;/a&gt; (or you can use debug build: &lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js&quot;&gt;random-event.js&lt;/a&gt;)
+And paste it into folder with other js files
+
+Note: if you don&#39;t use specific folder with js files then you can copy/paste content to passage with &lt;code&gt;`[script]`&lt;/code&gt; tag
+
+!!! If you use &lt;a href=&quot;https://twinery.org/&quot;&gt;twinery&lt;/a&gt; to build your project, then
+Copy content from file &lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js&quot;&gt;random-event.min.js&lt;/a&gt; (or you can use debug build: &lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js&quot;&gt;random-event.js&lt;/a&gt;)
+Open JavaScript window:
+&lt;img src=&quot;images/twinery_js.png&quot;&gt;
+And paste content theare
+
+&lt;&lt;button [[Next step - Embedded events (type: &quot;embedded&quot;)|QuickStartStep1]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="QuickStartStep0Market" tags="" position="225,350" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="QuickStartStep1" tags="" position="350,350" size="100,100">!Quick Start - Step 1 - Embedded events (type: &quot;embedded&quot;)
+
+Create event passages
+&lt;&lt;AddCodeBlock&gt;&gt;
+    :: QuickStartStep1MarketNeedHeroEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hey, I know you! You are hero! Can you help me?
+
+    &lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep1MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep1MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock&gt;&gt;
+    :: QuickStartStep1MarketHiddenStoreEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hi there, do you want to buy really rare?
+
+    &lt;&lt;link [[Go to shop|QuickStartStep1MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Add events into your passage
+&lt;&lt;AddCodeBlock&gt;&gt;
+    &lt;&lt;RE [[QuickStartStep1MarketNeedHeroEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep1MarketHiddenStoreEvent]]&gt;&gt;\
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;AddCodeBlock &quot;show/hide market passage code&quot;&gt;&gt;
+    :: QuickStartStep1Market
+    &lt;img src=&quot;images/market.jpg&quot;&gt;
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    &lt;&lt;RE [[QuickStartStep1MarketNeedHeroEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep1MarketHiddenStoreEvent]]&gt;&gt;\
+
+    You have $appleCount apple(s).
+    &lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+That&#39;s it, now market passage looks better.
+But those events are just optional. In the next step, let&#39;s add an event that interrupts the market and redirects the player to the event passage.
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep1Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Next step - Interrupting events (type: &quot;goto&quot;)|QuickStartStep2]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step1&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="24" name="QuickStartStep1Market" tags="" position="475,350" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;RE [[QuickStartStep1MarketNeedHeroEvent]]&gt;&gt;\
+&lt;&lt;RE [[QuickStartStep1MarketHiddenStoreEvent]]&gt;&gt;\
+
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 1|QuickStartStep1]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="QuickStartStep1MarketHiddenStoreEvent" tags="passage_metadata" position="600,350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep1MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="QuickStartStep1MarketHiddenStoreEventHiddenStore" tags="" position="725,350" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep1Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="QuickStartStep1MarketNeedHeroEvent" tags="passage_metadata" position="850,350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep1MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep1MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="QuickStartStep1MarketNeedHeroEventAcceptQuest" tags="" position="975,350" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+
+&lt;&lt;button [[Return to market|QuickStartStep1Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="QuickStartStep1MarketNeedHeroEventDeclineQuest" tags="" position="1100,350" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep1Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="QuickStartStep2" tags="" position="1225,350" size="100,100">!Quick Start - Step 2 - Interrupting events (type: &quot;goto&quot;)
+
+Create event passages
+&lt;&lt;AddCodeBlock&gt;&gt;
+    :: QuickStartStep2MarketStealEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;goto&quot;,
+        threshold: 50,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    &lt;&lt;link [[Go left|QuickStartStep2MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;link [[Go right|QuickStartStep2MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+Add events into your passage
+&lt;&lt;AddCodeBlock&gt;&gt;
+    &lt;&lt;RE [[QuickStartStep2MarketStealEvent]]&gt;&gt;\
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;AddCodeBlock &quot;show/hide market passage code&quot;&gt;&gt;
+    :: QuickStartStep2Market
+    &lt;img src=&quot;images/market.jpg&quot;&gt;
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    &lt;&lt;RE [[QuickStartStep2MarketNeedHeroEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep2MarketHiddenStoreEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep2MarketStealEvent]]&gt;&gt;\
+
+    You have $appleCount apple(s).
+    &lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button [[Return to Step 2|QuickStartStep2]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+Now market passage contain interupting event
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Embedded events (type: &quot;embedded&quot;)|QuickStartStep1]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Next step - Groupe events|QuickStartStep3]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step2&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="31" name="QuickStartStep2Market" tags="" position="100,475" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;RE [[QuickStartStep2MarketNeedHeroEvent]]&gt;&gt;\
+&lt;&lt;RE [[QuickStartStep2MarketHiddenStoreEvent]]&gt;&gt;\
+&lt;&lt;RE [[QuickStartStep2MarketStealEvent]]&gt;&gt;\
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 2|QuickStartStep2]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="QuickStartStep2MarketHiddenStoreEvent" tags="passage_metadata" position="225,475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep2MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="QuickStartStep2MarketHiddenStoreEventHiddenStore" tags="" position="350,475" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="QuickStartStep2MarketNeedHeroEvent" tags="passage_metadata" position="475,475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep2MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep2MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="QuickStartStep2MarketNeedHeroEventAcceptQuest" tags="" position="600,475" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+
+&lt;&lt;button [[Return to market|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="QuickStartStep2MarketNeedHeroEventDeclineQuest" tags="" position="725,475" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="QuickStartStep2MarketStealEvent" tags="passage_metadata" position="850,475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep2MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep2MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="QuickStartStep2MarketStealEventLeft" tags="" position="975,475" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="QuickStartStep2MarketStealEventRight" tags="" position="1100,475" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep2Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="QuickStartStep3" tags="" position="1225,475" size="100,100">!Quick Start - Step 3 - Groupe events
+
+Add group to all events
+&lt;&lt;AddCodeBlock&gt;&gt;
+    groups: [&quot;QuickStartStep3MarketEvents&quot;],
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+&lt;&lt;AddCodeBlock &quot;show/hide events passages&quot;&gt;&gt;
+    :: QuickStartStep3MarketHiddenStoreEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep3MarketEvents&quot;],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    ...
+
+    :: QuickStartStep3MarketNeedHeroEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep3MarketEvents&quot;],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    ...
+
+    :: QuickStartStep3MarketStealEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;goto&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep3MarketEvents&quot;],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    ...
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+Replace events calling to group call in marker passage
+replace:
+&lt;&lt;AddCodeBlock&gt;&gt;
+    &lt;&lt;RE [[QuickStartStep3MarketNeedHeroEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep3MarketHiddenStoreEvent]]&gt;&gt;\
+    &lt;&lt;RE [[QuickStartStep3MarketStealEvent]]&gt;&gt;\
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+to:
+&lt;&lt;AddCodeBlock&gt;&gt;
+    &lt;&lt;REGroup &quot;QuickStartStep3MarketEvents&quot; 100&gt;&gt;\
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide market passage code&quot;&gt;&gt;
+    :: QuickStartStep3Market
+    &lt;img src=&quot;images/market.jpg&quot;&gt;
+
+    You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+    As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+    &lt;&lt;REGroup &quot;QuickStartStep3MarketEvents&quot; 100&gt;&gt;\
+
+    You have $appleCount apple(s).
+    &lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button [[Return to Step 3|QuickStartStep3]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;\
+
+Now in the market passage with 100% probability exactly one event from the group will be called
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Interrupting events (type: &quot;goto&quot;)|QuickStartStep2]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Next step - Adding new events to the group|QuickStartStep4]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step3&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="41" name="QuickStartStep3Market" tags="" position="100,600" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;REGroup &quot;QuickStartStep3MarketEvents&quot; 100&gt;&gt;\
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 3|QuickStartStep3]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="QuickStartStep3MarketHiddenStoreEvent" tags="passage_metadata" position="225,600" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep3MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep3MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="QuickStartStep3MarketHiddenStoreEventHiddenStore" tags="" position="350,600" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="QuickStartStep3MarketNeedHeroEvent" tags="passage_metadata" position="475,600" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep3MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep3MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep3MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="QuickStartStep3MarketNeedHeroEventAcceptQuest" tags="" position="600,600" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+
+&lt;&lt;button [[Return to market|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="QuickStartStep3MarketNeedHeroEventDeclineQuest" tags="" position="725,600" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="QuickStartStep3MarketStealEvent" tags="passage_metadata" position="850,600" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep3MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep3MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep3MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="QuickStartStep3MarketStealEventLeft" tags="" position="975,600" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="QuickStartStep3MarketStealEventRight" tags="" position="1100,600" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep3Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="QuickStartStep4" tags="" position="1225,600" size="100,100">!Quick Start - Step 4 - Adding new events to the group
+
+Create event passages
+&lt;&lt;AddCodeBlock &quot;show/hide events&quot;&gt;&gt;
+    :: QuickStartStep4MarketDialogEvent1 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep4MarketEvents&quot;]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+    Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+    Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+    Seller: &quot;Quality has a price, my friend.&quot;
+
+    :: QuickStartStep4MarketDialogEvent2 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep4MarketEvents&quot;]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+    Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+    Buyer: &quot;I don’t think so. You should lower the price.&quot;
+    Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;
+
+    :: QuickStartStep4MarketDialogEvent3 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep4MarketEvents&quot;]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+    Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+    Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+    Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;
+
+    :: QuickStartStep4MarketDialogEvent4 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep4MarketEvents&quot;]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+    Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+    Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+    Seller: &quot;Quality over quantity. You won’t regret it.&quot;
+
+    :: QuickStartStep4MarketDialogEvent5 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep4MarketEvents&quot;]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+    Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+    Buyer: &quot;I expected more for the price.&quot;
+    Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+And that&#39;s all, the events have already been added to the groups and now in market passage there are both old events and new events with dialogues
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Groupe events|QuickStartStep3]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Next step - Enable/disable events|QuickStartStep5]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step4&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="51" name="QuickStartStep4Market" tags="" position="100,725" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;REGroup &quot;QuickStartStep4MarketEvents&quot; 100&gt;&gt;
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 4|QuickStartStep4]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="QuickStartStep4MarketDialogEvent1" tags="passage_metadata" position="225,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+Seller: &quot;Quality has a price, my friend.&quot;</tw-passagedata><tw-passagedata pid="53" name="QuickStartStep4MarketDialogEvent2" tags="passage_metadata" position="350,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+Buyer: &quot;I don’t think so. You should lower the price.&quot;
+Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;</tw-passagedata><tw-passagedata pid="54" name="QuickStartStep4MarketDialogEvent3" tags="passage_metadata" position="475,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;</tw-passagedata><tw-passagedata pid="55" name="QuickStartStep4MarketDialogEvent4" tags="passage_metadata" position="600,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+Seller: &quot;Quality over quantity. You won’t regret it.&quot;</tw-passagedata><tw-passagedata pid="56" name="QuickStartStep4MarketDialogEvent5" tags="passage_metadata" position="725,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+Buyer: &quot;I expected more for the price.&quot;
+Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;</tw-passagedata><tw-passagedata pid="57" name="QuickStartStep4MarketHiddenStoreEvent" tags="passage_metadata" position="850,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep4MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="QuickStartStep4MarketHiddenStoreEventHiddenStore" tags="" position="975,725" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="QuickStartStep4MarketNeedHeroEvent" tags="passage_metadata" position="1100,725" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep4MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep4MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="QuickStartStep4MarketNeedHeroEventAcceptQuest" tags="" position="1225,725" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+
+&lt;&lt;button [[Return to market|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="QuickStartStep4MarketNeedHeroEventDeclineQuest" tags="" position="100,850" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="QuickStartStep4MarketStealEvent" tags="passage_metadata" position="225,850" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep4MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep4MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep4MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="QuickStartStep4MarketStealEventLeft" tags="" position="350,850" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="QuickStartStep4MarketStealEventRight" tags="" position="475,850" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep4Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="QuickStartStep5" tags="" position="600,850" size="100,100">!Quick Start - Step 5 - Enable/disable events
+
+Disable the event after completing the side quest. For this, add to the passage &quot;QuickStartStep5MarketNeedHeroEventAcceptQuest&quot;
+&lt;&lt;AddCodeBlock&gt;&gt;
+    Side quest was complite
+    &lt;&lt;REDisable [[QuickStartStep5MarketNeedHeroEvent]]&gt;&gt;\
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep5MarketNeedHeroEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep5MarketEvents&quot;],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hey, I know you! You are hero! Can you help me?
+
+    &lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep5MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep5MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    :: QuickStartStep5MarketNeedHeroEventAcceptQuest
+    Some content with super hero quest here
+
+    Your hero reputation was increased
+    Side quest was complite
+    &lt;&lt;REDisable [[QuickStartStep5MarketNeedHeroEvent]]&gt;&gt;\
+
+    &lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+    :: QuickStartStep5MarketNeedHeroEventDeclineQuest
+    Rumors about your declined quest were spreading...
+
+    Your hero reputation was decreased
+
+    &lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+And that&#39;s all, player will see notification about that the quest was complite and this event willn&#39;t start again
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Adding new events to the group|QuickStartStep4]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Next step - Filters|QuickStartStep6]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step5&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="66" name="QuickStartStep5Market" tags="" position="725,850" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;REGroup &quot;QuickStartStep5MarketEvents&quot; 100&gt;&gt;
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 5|QuickStartStep5]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="QuickStartStep5MarketDialogEvent1" tags="passage_metadata" position="850,850" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+Seller: &quot;Quality has a price, my friend.&quot;</tw-passagedata><tw-passagedata pid="68" name="QuickStartStep5MarketDialogEvent2" tags="passage_metadata" position="975,850" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+Buyer: &quot;I don’t think so. You should lower the price.&quot;
+Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;</tw-passagedata><tw-passagedata pid="69" name="QuickStartStep5MarketDialogEvent3" tags="passage_metadata" position="1100,850" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;</tw-passagedata><tw-passagedata pid="70" name="QuickStartStep5MarketDialogEvent4" tags="passage_metadata" position="1225,850" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+Seller: &quot;Quality over quantity. You won’t regret it.&quot;</tw-passagedata><tw-passagedata pid="71" name="QuickStartStep5MarketDialogEvent5" tags="passage_metadata" position="100,975" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+Buyer: &quot;I expected more for the price.&quot;
+Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;</tw-passagedata><tw-passagedata pid="72" name="QuickStartStep5MarketHiddenStoreEvent" tags="passage_metadata" position="225,975" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep5MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="QuickStartStep5MarketHiddenStoreEventHiddenStore" tags="" position="350,975" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="QuickStartStep5MarketNeedHeroEvent" tags="passage_metadata" position="475,975" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep5MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep5MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="75" name="QuickStartStep5MarketNeedHeroEventAcceptQuest" tags="" position="600,975" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+Side quest was complite
+&lt;&lt;REDisable [[QuickStartStep5MarketNeedHeroEvent]]&gt;&gt;\
+
+&lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="QuickStartStep5MarketNeedHeroEventDeclineQuest" tags="" position="725,975" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="77" name="QuickStartStep5MarketStealEvent" tags="passage_metadata" position="850,975" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep5MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep5MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep5MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="QuickStartStep5MarketStealEventLeft" tags="" position="975,975" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="79" name="QuickStartStep5MarketStealEventRight" tags="" position="1100,975" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep5Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="QuickStartStep6" tags="" position="1225,975" size="100,100">!Quick Start - Step 6 - Filters
+
+Add a filter to the hidden store PassageMetadata to make it accessible only after 5 apples have been purchased
+&lt;&lt;AddCodeBlock&gt;&gt;
+    filter: `$appleCount &gt;= 5`,
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep6MarketHiddenStoreEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep6MarketEvents&quot;],
+        filter: `$appleCount &gt;= 5`,
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hi there, do you want to buy really rare?
+
+    &lt;&lt;link [[Go to shop|QuickStartStep6MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    :: QuickStartStep6MarketHiddenStoreEventHiddenStore
+    You followed the seller and he led you to a shop full of various artifacts.
+
+    &lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+And that&#39;s it, the player won&#39;t see the hidden shop event until he buys 5 apples
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Enable/disable events|QuickStartStep5]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Next step - Limits|QuickStartStep7]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step6&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="81" name="QuickStartStep6Market" tags="" position="100,1100" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;REGroup &quot;QuickStartStep6MarketEvents&quot; 100&gt;&gt;
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 6|QuickStartStep6]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="QuickStartStep6MarketDialogEvent1" tags="passage_metadata" position="225,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+Seller: &quot;Quality has a price, my friend.&quot;</tw-passagedata><tw-passagedata pid="83" name="QuickStartStep6MarketDialogEvent2" tags="passage_metadata" position="350,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+Buyer: &quot;I don’t think so. You should lower the price.&quot;
+Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;</tw-passagedata><tw-passagedata pid="84" name="QuickStartStep6MarketDialogEvent3" tags="passage_metadata" position="475,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;</tw-passagedata><tw-passagedata pid="85" name="QuickStartStep6MarketDialogEvent4" tags="passage_metadata" position="600,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+Seller: &quot;Quality over quantity. You won’t regret it.&quot;</tw-passagedata><tw-passagedata pid="86" name="QuickStartStep6MarketDialogEvent5" tags="passage_metadata" position="725,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;]
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+Buyer: &quot;I expected more for the price.&quot;
+Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;</tw-passagedata><tw-passagedata pid="87" name="QuickStartStep6MarketHiddenStoreEvent" tags="passage_metadata" position="850,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;],
+    filter: `$appleCount &gt;= 5`,
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep6MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="QuickStartStep6MarketHiddenStoreEventHiddenStore" tags="" position="975,1100" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="QuickStartStep6MarketNeedHeroEvent" tags="passage_metadata" position="1100,1100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep6MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep6MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="90" name="QuickStartStep6MarketNeedHeroEventAcceptQuest" tags="" position="1225,1100" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+Side quest was complite
+&lt;&lt;REDisable [[QuickStartStep6MarketNeedHeroEvent]]&gt;&gt;\
+
+&lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="QuickStartStep6MarketNeedHeroEventDeclineQuest" tags="" position="100,1225" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="QuickStartStep6MarketStealEvent" tags="passage_metadata" position="225,1225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep6MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep6MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep6MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="QuickStartStep6MarketStealEventLeft" tags="" position="350,1225" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="94" name="QuickStartStep6MarketStealEventRight" tags="" position="475,1225" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep6Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="95" name="QuickStartStep7" tags="" position="600,1225" size="100,100">!Quick Start - Step 7 - Limits
+
+This is probably one of the most difficult steps, the strategies of limitations are complex functionality, but I will try to add a description for each step
+
+!! Step 7.1 - Simple limitation strategy
+Add limitations to QuickStartStep7MarketStealEvent so that it is only available once per day.
+For this need to add tags and limitationStrategy to PassageMetadata
+&lt;&lt;AddCodeBlock&gt;&gt;
+    tags: [&quot;Market&quot;, &quot;Daily&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;]},
+    ],
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep7MarketStealEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;goto&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;],
+        limitationStrategy: [
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;]},
+        ]
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    &lt;&lt;link [[Go left|QuickStartStep7MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;link [[Go right|QuickStartStep7MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+    :: QuickStartStep7MarketStealEventLeft
+    You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+    :: QuickStartStep7MarketStealEventRight
+    You found nothing but clothing stalls.
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Note: &lt;code&gt;`tags: [&quot;Market&quot;, &quot;Daily&quot;],`&lt;/code&gt; are needed to understand what strategy can be applied now.
+In this example, the tags match because it is a simple strategy, but tags can also store variables or even expressions (for example: &lt;code&gt;`tags: [&quot;$CurrentPlace&quot;, &quot;$appleCount &gt; 10 ? &#39;buyer&#39;: &#39;just_watch&#39;&quot;],`&lt;/code&gt;).
+Note: &lt;code&gt;`max`&lt;/code&gt; in limitationStrategy means how many times an event may be started by that limitation.
+Warning: However, the event will be skipped if limitationStrategy contains items with tags and no one item doesn&#39;t contain tags that exist in PassageMetadata tags.
+
+!! Step 7.2 - Using variables
+Let&#39;s do the same for QuickStartStep7MarketHiddenStoreEvent but make it available only in noon and afternoon
+&lt;&lt;AddCodeBlock&gt;&gt;
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;]},
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;]},
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;]},
+    ],
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep7MarketHiddenStoreEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        filter: `$appleCount &gt;= 5`,
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;]},
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;]},
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;]},
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hi there, do you want to buy really rare?
+
+    &lt;&lt;link [[Go to shop|QuickStartStep7MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    :: QuickStartStep7MarketHiddenStoreEventHiddenStore
+    You followed the seller and he led you to a shop full of various artifacts.
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Note: Here we use variable in tags and have limitationStrategy with 3 items
+* &lt;code&gt;`{ max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;]},`&lt;/code&gt; - mean that this event may start just once at the noon
+* &lt;code&gt;`{ max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;]},`&lt;/code&gt; - mean that this event may start just once at the afternoon
+* &lt;code&gt;`{ max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;]},`&lt;/code&gt; - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
+
+Looks good, but there is a problem here, it is that limitationStrategy works globally for all events, this is done to remove &quot;spam&quot; of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategy
+We have two events with the strategy &lt;code&gt;`[&quot;Market&quot;, &quot;Daily&quot;]`&lt;/code&gt;, which means that after one event has triggered, the second event will no longer trigger because an event with such tags has already been triggered earlier
+
+!! Step 7.3 - Resolve the same tags issue
+There are two ways to fix this:
+* Add a specific tag to each event (example: &lt;code&gt;`[&quot;Market&quot;, &quot;Daily&quot;, &quot;MyCustomTag&quot;]`&lt;/code&gt;)
+* Add &lt;code&gt;`isSeparate: true`&lt;/code&gt; to necessary limitationStrategy items
+We will consider the second way
+&lt;&lt;AddCodeBlock&gt;&gt;
+    tags: [&quot;Market&quot;, &quot;Daily&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+    ],
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep7MarketStealEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;goto&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;],
+        limitationStrategy: [
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    You ran after her but discovered that the market diverges in 2 directions.
+    On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+    You decide:
+    &lt;&lt;link [[Go left|QuickStartStep7MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;link [[Go right|QuickStartStep7MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+    :: QuickStartStep7MarketStealEventLeft
+    You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+    :: QuickStartStep7MarketStealEventRight
+    You found nothing but clothing stalls.
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+&lt;&lt;AddCodeBlock&gt;&gt;
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;], isSeparate: true },
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;], isSeparate: true },
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+    ],
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide event code&quot;&gt;&gt;
+    :: QuickStartStep7MarketHiddenStoreEvent [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        filter: `$appleCount &gt;= 5`,
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;], isSeparate: true },
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;], isSeparate: true },
+            { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+    Hi there, do you want to buy really rare?
+
+    &lt;&lt;link [[Go to shop|QuickStartStep7MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+    :: QuickStartStep7MarketHiddenStoreEventHiddenStore
+    You followed the seller and he led you to a shop full of various artifacts.
+
+    &lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Events now work independently of each other
+
+!! Step 7.4 - Dialogs beautify
+Now, the dialogues between the seller and the buyer work at any time of the day. This looks implausible.
+Add limitationStrategy to each dialogue to make them available only during noon and afternoon
+&lt;&lt;AddCodeBlock&gt;&gt;
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide events code&quot;&gt;&gt;
+    :: QuickStartStep7MarketDialogEvent1 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+    Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+    Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+    Seller: &quot;Quality has a price, my friend.&quot;
+
+    :: QuickStartStep7MarketDialogEvent2 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+    Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+    Buyer: &quot;I don’t think so. You should lower the price.&quot;
+    Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;
+
+    :: QuickStartStep7MarketDialogEvent3 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+    Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+    Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+    Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;
+
+    :: QuickStartStep7MarketDialogEvent4 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+    Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+    Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+    Seller: &quot;Quality over quantity. You won’t regret it.&quot;
+
+    :: QuickStartStep7MarketDialogEvent5 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+            { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between the Buyer and the Seller:
+
+    Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+    Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+    Buyer: &quot;I expected more for the price.&quot;
+    Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Also add dialogues for morning and evening
+&lt;&lt;AddCodeBlock &quot;show/hide events code&quot;&gt;&gt;
+    :: QuickStartStep7MarketDialogEvent6 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;evening&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between sellers:
+
+    Seller 1: &quot;Today was rough. Hardly anyone bought anything after noon.&quot;
+    Seller 2: &quot;Tell me about it. I’ve got crates of unsold tomatoes just sitting here.&quot;
+    Seller 1: &quot;Same here. Maybe tomorrow will be better.&quot;
+
+    :: QuickStartStep7MarketDialogEvent7 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;evening&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between sellers:
+
+    Seller 1: &quot;Not a bad day, huh? Sold out of all my peppers by lunchtime!&quot;
+    Seller 2: &quot;Lucky you! I had a good run with the zucchinis, but still have some left.&quot;
+    Seller 1: &quot;Seems like people were really into fresh veggies today. Let’s hope it keeps up.&quot;
+
+    :: QuickStartStep7MarketDialogEvent8 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;morning&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between sellers:
+
+    Seller 1: &quot;Looks like it’s going to be a busy day. The weather’s perfect for the market.&quot;
+    Seller 2: &quot;Yeah, I’m expecting a good crowd. Hope I brought enough fresh greens.&quot;
+    Seller 1: &quot;Same here. Let’s see if we can sell out before lunch.&quot;
+
+    :: QuickStartStep7MarketDialogEvent9 [passage_metadata]
+    &lt;&lt;PassageMetadata&gt;&gt;{
+        type: &quot;embedded&quot;,
+        threshold: 50,
+        groups: [&quot;QuickStartStep7MarketEvents&quot;],
+        tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+        limitationStrategy: [
+            { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;morning&quot;] },
+        ],
+    }&lt;&lt;/PassageMetadata&gt;&gt;
+
+    You hear a dialogue between sellers:
+
+    Seller 1: &quot;You think we’ll get many customers today? It’s a bit cloudy.&quot;
+    Seller 2: &quot;Clouds won’t keep people away. As long as it doesn’t rain, we should be fine.&quot;
+    Seller 1: &quot;Good point. I’ve got a feeling it’ll pick up by mid-morning.&quot;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Perfect, now dialogs loocs really good
+
+!! Step 7.5 - The last but not least, reset limits on day-end
+All restrictions must be reset to play the events again on the new day.
+A widget &quot;ChangeTime&quot; was created to change the time.
+&lt;&lt;AddCodeBlock &quot;show/hide widget code&quot;&gt;&gt;
+    :: DayTimeWidgets [widget]
+    &lt;&lt;widget &quot;ChangeTime&quot;&gt;&gt;
+        &lt;&lt;set _index = $DayTimeArray.indexOf($CurrentDayTime)&gt;&gt;
+        &lt;&lt;if (_index + 1 &gt;= $DayTimeArray.length)&gt;&gt;
+            &lt;&lt;set $CurrentDayTime = $DayTimeArray[0]&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            &lt;&lt;set $CurrentDayTime = $DayTimeArray[_index + 1]&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/widget&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+Let&#39;s add a reset limits code at the end of this widget.
+&lt;&lt;AddCodeBlock&gt;&gt;
+    &lt;&lt;if $CurrentDayTime === &#39;morning&#39;&gt;&gt;
+        &lt;&lt;REResetByTag &quot;Daily&quot;&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+&lt;&lt;AddCodeBlock &quot;show/hide widget code&quot;&gt;&gt;
+    :: DayTimeWidgets [widget]
+    &lt;&lt;widget &quot;ChangeTime&quot;&gt;&gt;
+        &lt;&lt;set _index = $DayTimeArray.indexOf($CurrentDayTime)&gt;&gt;
+        &lt;&lt;if (_index + 1 &gt;= $DayTimeArray.length)&gt;&gt;
+            &lt;&lt;set $CurrentDayTime = $DayTimeArray[0]&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            &lt;&lt;set $CurrentDayTime = $DayTimeArray[_index + 1]&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+
+        &lt;&lt;if $CurrentDayTime === &#39;morning&#39;&gt;&gt;
+            &lt;&lt;REResetByTag &quot;Daily&quot;&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/widget&gt;&gt;
+&lt;&lt;/AddCodeBlock&gt;&gt;
+
+Excellent. Now, all limits work fine. We have daily events and different dialogues depending on the time of day, and at the end of the day, all limits are reset.
+
+Note: To change time, use the button &quot;Move time&quot; in the sidebar
+&lt;img src=&quot;images/move_time_button.png&quot; style=&quot;max-width: 300px&quot;&gt;
+
+&lt;&lt;button [[&quot;Open market passage&quot;|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[Previous step - Filters|QuickStartStep6]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Quick Start|QuickStart]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/twee/quickStart/step7&quot;&gt;Open folder with .twee files in Github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="96" name="QuickStartStep7Market" tags="" position="725,1225" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+&lt;&lt;REGroup &quot;QuickStartStep7MarketEvents&quot; 100&gt;&gt;
+
+You have $appleCount apple(s).
+&lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[Return to Step 7|QuickStartStep7]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="97" name="QuickStartStep7MarketDialogEvent1" tags="passage_metadata" position="850,1225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These tomatoes look overripe. How can you charge so much for them?&quot;
+Seller: &quot;They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket.&quot;
+Buyer: &quot;I still think they’re too expensive for their condition.&quot;
+Seller: &quot;Quality has a price, my friend.&quot;</tw-passagedata><tw-passagedata pid="98" name="QuickStartStep7MarketDialogEvent2" tags="passage_metadata" position="975,1225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;Why is this lettuce so wilted? It’s hardly fresh.&quot;
+Seller: &quot;That’s just the outer leaves. Inside, it’s crisp and fresh.&quot;
+Buyer: &quot;I don’t think so. You should lower the price.&quot;
+Seller: &quot;I stand by my price. You’ll see it’s worth it once you taste it.&quot;</tw-passagedata><tw-passagedata pid="99" name="QuickStartStep7MarketDialogEvent3" tags="passage_metadata" position="1100,1225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;These potatoes have too many blemishes. They’re not worth the asking price.&quot;
+Seller: &quot;A few spots don’t affect the taste. They’re still the best you’ll find.&quot;
+Buyer: &quot;I’m not paying full price for something that doesn’t look perfect.&quot;
+Seller: &quot;Then you’re missing out on some excellent potatoes.&quot;</tw-passagedata><tw-passagedata pid="100" name="QuickStartStep7MarketDialogEvent4" tags="passage_metadata" position="1225,1225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;This bunch of parsley is too small for what you’re charging.&quot;
+Seller: &quot;It’s small because it’s packed with flavor. A little goes a long way.&quot;
+Buyer: &quot;I’m not convinced. It seems overpriced.&quot;
+Seller: &quot;Quality over quantity. You won’t regret it.&quot;</tw-passagedata><tw-passagedata pid="101" name="QuickStartStep7MarketDialogEvent5" tags="passage_metadata" position="100,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;] },
+        { max: 10, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: &quot;The strawberries are not as sweet as you said they’d be.&quot;
+Seller: &quot;They’re naturally sweet, just not overloaded with sugar like store-bought ones.&quot;
+Buyer: &quot;I expected more for the price.&quot;
+Seller: &quot;These are fresh from the farm. You’re paying for real taste, not just sugar.&quot;</tw-passagedata><tw-passagedata pid="102" name="QuickStartStep7MarketDialogEvent6" tags="passage_metadata" position="225,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;evening&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between sellers:
+
+Seller 1: &quot;Today was rough. Hardly anyone bought anything after noon.&quot;
+Seller 2: &quot;Tell me about it. I’ve got crates of unsold tomatoes just sitting here.&quot;
+Seller 1: &quot;Same here. Maybe tomorrow will be better.&quot;</tw-passagedata><tw-passagedata pid="103" name="QuickStartStep7MarketDialogEvent7" tags="passage_metadata" position="350,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;evening&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between sellers:
+
+Seller 1: &quot;Not a bad day, huh? Sold out of all my peppers by lunchtime!&quot;
+Seller 2: &quot;Lucky you! I had a good run with the zucchinis, but still have some left.&quot;
+Seller 1: &quot;Seems like people were really into fresh veggies today. Let’s hope it keeps up.&quot;</tw-passagedata><tw-passagedata pid="104" name="QuickStartStep7MarketDialogEvent8" tags="passage_metadata" position="475,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;morning&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between sellers:
+
+Seller 1: &quot;Looks like it’s going to be a busy day. The weather’s perfect for the market.&quot;
+Seller 2: &quot;Yeah, I’m expecting a good crowd. Hope I brought enough fresh greens.&quot;
+Seller 1: &quot;Same here. Let’s see if we can sell out before lunch.&quot;</tw-passagedata><tw-passagedata pid="105" name="QuickStartStep7MarketDialogEvent9" tags="passage_metadata" position="600,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 4, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;morning&quot;] },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+You hear a dialogue between sellers:
+
+Seller 1: &quot;You think we’ll get many customers today? It’s a bit cloudy.&quot;
+Seller 2: &quot;Clouds won’t keep people away. As long as it doesn’t rain, we should be fine.&quot;
+Seller 1: &quot;Good point. I’ve got a feeling it’ll pick up by mid-morning.&quot;</tw-passagedata><tw-passagedata pid="106" name="QuickStartStep7MarketHiddenStoreEvent" tags="passage_metadata" position="725,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    filter: `$appleCount &gt;= 5`,
+    tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;$CurrentDayTime&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;noon&quot;], isSeparate: true },
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;, &quot;afternoon&quot;], isSeparate: true },
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hi there, do you want to buy really rare?
+
+&lt;&lt;link [[Go to shop|QuickStartStep7MarketHiddenStoreEventHiddenStore]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="QuickStartStep7MarketHiddenStoreEventHiddenStore" tags="" position="850,1350" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
+
+&lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="QuickStartStep7MarketNeedHeroEvent" tags="passage_metadata" position="975,1350" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;embedded&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+Hey, I know you! You are hero! Can you help me?
+
+&lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|QuickStartStep7MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[&quot;Sorry, I have no time (-reputation)&quot;|QuickStartStep7MarketNeedHeroEventDeclineQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="QuickStartStep7MarketNeedHeroEventAcceptQuest" tags="" position="1100,1350" size="100,100">Some content with super hero quest here
+
+Your hero reputation was increased
+Side quest was complite
+&lt;&lt;REDisable [[QuickStartStep7MarketNeedHeroEvent]]&gt;&gt;\
+
+&lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="QuickStartStep7MarketNeedHeroEventDeclineQuest" tags="" position="1225,1350" size="100,100">Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+&lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="QuickStartStep7MarketStealEvent" tags="passage_metadata" position="100,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+    type: &quot;goto&quot;,
+    threshold: 50,
+    groups: [&quot;QuickStartStep7MarketEvents&quot;],
+    tags: [&quot;Market&quot;, &quot;Daily&quot;],
+    limitationStrategy: [
+        { max: 1, tags: [&quot;Market&quot;, &quot;Daily&quot;], isSeparate: true },
+    ],
+}&lt;&lt;/PassageMetadata&gt;&gt;
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+&lt;&lt;link [[Go left|QuickStartStep7MarketStealEventLeft]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [[Go right|QuickStartStep7MarketStealEventRight]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="QuickStartStep7MarketStealEventLeft" tags="" position="225,1475" size="100,100">You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+&lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="QuickStartStep7MarketStealEventRight" tags="" position="350,1475" size="100,100">You found nothing but clothing stalls.
+
+&lt;&lt;button [[Return to market|QuickStartStep7Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="DayTimeWidgets" tags="widget" position="475,1475" size="100,100">&lt;&lt;widget &quot;ChangeTime&quot;&gt;&gt;
+    &lt;&lt;set _index = $DayTimeArray.indexOf($CurrentDayTime)&gt;&gt;
+	&lt;&lt;if (_index + 1 &gt;= $DayTimeArray.length)&gt;&gt;
+		&lt;&lt;set $CurrentDayTime = $DayTimeArray[0]&gt;&gt;
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;set $CurrentDayTime = $DayTimeArray[_index + 1]&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+
+	&lt;&lt;if $CurrentDayTime === &#39;morning&#39;&gt;&gt;
+		&lt;&lt;REResetByTag &quot;Daily&quot;&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="testRandomEvent1" tags="passage_metadata" position="600,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -934,7 +3294,7 @@ This event may be resetted only by event name
     limitationStrategy: [
         { max: 3 }
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="6" name="testRandomEvent2" tags="passage_metadata" position="725,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="116" name="testRandomEvent2" tags="passage_metadata" position="725,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -960,7 +3320,7 @@ This event may be resetted by tags Uni or Daily
     limitationStrategy: [
         { max: 1, tags: [&quot;Uni&quot;, &quot;Daily&quot;] }
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="7" name="testRandomEvent3" tags="passage_metadata" position="850,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="117" name="testRandomEvent3" tags="passage_metadata" position="850,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -994,7 +3354,7 @@ This event may be resetted by tags Uni, Daily, mySpecificTag AND Morning, Aftern
         { max: 1, tags: [&quot;Uni&quot;, &quot;Evening&quot;] },
         { max: 2 }
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="8" name="testRandomEvent4" tags="passage_metadata" position="975,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="118" name="testRandomEvent4" tags="passage_metadata" position="975,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -1027,7 +3387,7 @@ This event may be resetted by tags Uni, Daily, mySpecificTag AND Morning, Aftern
         { max: 1, tags: [&quot;Uni&quot;, &quot;Night&quot;], isSeparate: true },
         { max: 2 }
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="9" name="testRandomEvent5" tags="passage_metadata" position="1100,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="119" name="testRandomEvent5" tags="passage_metadata" position="1100,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -1060,7 +3420,7 @@ In this exapmle we have `limitationStrategy` with `LimitationTagWitout` tag that
         { max: 1, tags: [&quot;Street&quot;, &quot;Night&quot;] },
         { max: 1, tags: [&quot;LimitationTagWitout&quot;]}
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="10" name="testRandomEvent6" tags="passage_metadata" position="1225,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="120" name="testRandomEvent6" tags="passage_metadata" position="1225,1475" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,
@@ -1087,7 +3447,7 @@ But after when some event with `limitationStrategy[...].tags: [&quot;Street&quot
     limitationStrategy: [
         { max: 1, tags: [&quot;Street&quot;, &quot;Daily&quot;] }
     ]
-}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="11" name="testRandomEvent7" tags="passage_metadata" position="100,225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
+}&lt;/pre&gt;</tw-passagedata><tw-passagedata pid="121" name="testRandomEvent7" tags="passage_metadata" position="100,1600" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     isEnabled: true,
     type: &quot;embedded&quot;,
     threshold: 100,

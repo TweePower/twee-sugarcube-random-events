@@ -1,0 +1,69 @@
+:: QuickStartStep5MarketDialogEvent1 [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep5MarketEvents"]
+}<</PassageMetadata>>
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: "These tomatoes look overripe. How can you charge so much for them?"
+Seller: "They’re perfectly ripe, just how they should be. If you want green ones, try the supermarket."
+Buyer: "I still think they’re too expensive for their condition."
+Seller: "Quality has a price, my friend."
+
+:: QuickStartStep5MarketDialogEvent2 [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep5MarketEvents"]
+}<</PassageMetadata>>
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: "Why is this lettuce so wilted? It’s hardly fresh."
+Seller: "That’s just the outer leaves. Inside, it’s crisp and fresh."
+Buyer: "I don’t think so. You should lower the price."
+Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
+
+:: QuickStartStep5MarketDialogEvent3 [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep5MarketEvents"]
+}<</PassageMetadata>>
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: "These potatoes have too many blemishes. They’re not worth the asking price."
+Seller: "A few spots don’t affect the taste. They’re still the best you’ll find."
+Buyer: "I’m not paying full price for something that doesn’t look perfect."
+Seller: "Then you’re missing out on some excellent potatoes."
+
+:: QuickStartStep5MarketDialogEvent4 [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep5MarketEvents"]
+}<</PassageMetadata>>
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: "This bunch of parsley is too small for what you’re charging."
+Seller: "It’s small because it’s packed with flavor. A little goes a long way."
+Buyer: "I’m not convinced. It seems overpriced."
+Seller: "Quality over quantity. You won’t regret it."
+
+:: QuickStartStep5MarketDialogEvent5 [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["QuickStartStep5MarketEvents"]
+}<</PassageMetadata>>
+
+You hear a dialogue between the Buyer and the Seller:
+
+Buyer: "The strawberries are not as sweet as you said they’d be."
+Seller: "They’re naturally sweet, just not overloaded with sugar like store-bought ones."
+Buyer: "I expected more for the price."
+Seller: "These are fresh from the farm. You’re paying for real taste, not just sugar."
