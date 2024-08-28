@@ -16,7 +16,7 @@ You have $appleCount apple(s).
 <<button [[Return to Quick Start|QuickStart]]>><</button>>
 ```
 
-[Open market passage page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html)
+[Open market passage preview](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html)
 
 But the page looks very static, lifeless.
 Let's add random events to make it more live
@@ -36,7 +36,9 @@ And paste it into folder with other js files
 **If you use [Twinery](https://twinery.org/") to build your project, then**
 Copy content from file [random-event.min.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js) (or you can use debug build: [random-event.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js))
 Open JavaScript window:
+
 ![How to open JS in Twinery](./images/twinery_js.png)
+
 And paste content theare
 
 ## Step 1 - Embedded events (type: "embedded")
@@ -45,11 +47,75 @@ Here we will look at how to add embedded events to a passage.
 Embedded events do not change the passage but only complement it.
 Players can simply ignore this, so such events can be used to add optional events or to add background dialogs.
 
+Create two event passages
+
+```html
+    :: QuickStartStep1MarketNeedHeroEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+    }<</PassageMetadata>>
+    Hey, I know you! You are hero! Can you help me?
+    ...
+```
+
+[Open full passage code](../twee/quickStart/step1/events/QuickStartStep1MarketNeedHeroEvent.twee)
+
+```html
+    :: QuickStartStep1MarketHiddenStoreEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+    }<</PassageMetadata>>
+    Hi there, do you want to buy really rare?
+    ...
+```
+
+[Open full passage code](../twee/quickStart/step1/events/QuickStartStep1MarketHiddenStoreEvent.twee)
+
+Add events into your passage
+
+```html
+    <<RE [[QuickStartStep1MarketNeedHeroEvent]]>>\
+    <<RE [[QuickStartStep1MarketHiddenStoreEvent]]>>\
+```
+
+[Open full passage code](../twee/quickStart/step1/QuickStartStep1Market.twee)
+
+That's it, now market passage looks better.
+But those events are just optional. In the next step, let's add an event that interrupts the market and redirects the player to the event passage.
+
 ## Step 2 - Interrupting events (type: "goto")
 
 Here we will look at how interrupting events works and how to add it to a passage.
 Interrupting events redirects player to a event passage
 Players can't skip it, so such events can be used to completely change the behavior of a passage.
+
+Create event passages
+
+```html
+    :: QuickStartStep2MarketStealEvent [passage_metadata]
+    <<PassageMetadata>>{
+        type: "goto",
+        threshold: 50,
+    }<</PassageMetadata>>
+
+    Entering the market, a girl ran up to you, hugged you, giggled and ran on
+    As soon as you came to your senses, you discovered that she had pulled out your wallet
+    ...
+```
+
+[Open full passage code](../twee/quickStart/step2/events/QuickStartStep2MarketStealEvent.twee)
+
+Add events into your passage
+
+```html
+    <<RE [[QuickStartStep2MarketStealEvent]]>>\
+```
+
+[Open full passage code](../twee/quickStart/step2/QuickStartStep2Market.twee)
+
+Now market passage contain interupting event
 
 ## Step 3 - Groupe events
 
