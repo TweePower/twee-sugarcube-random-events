@@ -50,25 +50,25 @@ Players can simply ignore this, so such events can be used to add optional event
 Create two event passages
 
 ```html
-    :: QuickStartStep1MarketNeedHeroEvent [passage_metadata]
-    <<PassageMetadata>>{
-        type: "embedded",
-        threshold: 50,
-    }<</PassageMetadata>>
-    Hey, I know you! You are hero! Can you help me?
-    ...
+:: QuickStartStep1MarketNeedHeroEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+}<</PassageMetadata>>
+Hey, I know you! You are hero! Can you help me?
+...
 ```
 
 [Open full passage code](../twee/quickStart/step1/events/QuickStartStep1MarketNeedHeroEvent.twee)
 
 ```html
-    :: QuickStartStep1MarketHiddenStoreEvent [passage_metadata]
-    <<PassageMetadata>>{
-        type: "embedded",
-        threshold: 50,
-    }<</PassageMetadata>>
-    Hi there, do you want to buy really rare?
-    ...
+:: QuickStartStep1MarketHiddenStoreEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+}<</PassageMetadata>>
+Hi there, do you want to buy really rare?
+...
 ```
 
 [Open full passage code](../twee/quickStart/step1/events/QuickStartStep1MarketHiddenStoreEvent.twee)
@@ -76,8 +76,8 @@ Create two event passages
 Add events into your passage
 
 ```html
-    <<RE [[QuickStartStep1MarketNeedHeroEvent]]>>\
-    <<RE [[QuickStartStep1MarketHiddenStoreEvent]]>>\
+<<RE [[QuickStartStep1MarketNeedHeroEvent]]>>\
+<<RE [[QuickStartStep1MarketHiddenStoreEvent]]>>\
 ```
 
 [Open full passage code](../twee/quickStart/step1/QuickStartStep1Market.twee)
@@ -94,15 +94,15 @@ Players can't skip it, so such events can be used to completely change the behav
 Create event passages
 
 ```html
-    :: QuickStartStep2MarketStealEvent [passage_metadata]
-    <<PassageMetadata>>{
-        type: "goto",
-        threshold: 50,
-    }<</PassageMetadata>>
+:: QuickStartStep2MarketStealEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "goto",
+    threshold: 50,
+}<</PassageMetadata>>
 
-    Entering the market, a girl ran up to you, hugged you, giggled and ran on
-    As soon as you came to your senses, you discovered that she had pulled out your wallet
-    ...
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+...
 ```
 
 [Open full passage code](../twee/quickStart/step2/events/QuickStartStep2MarketStealEvent.twee)
@@ -110,7 +110,7 @@ Create event passages
 Add events into your passage
 
 ```html
-    <<RE [[QuickStartStep2MarketStealEvent]]>>\
+<<RE [[QuickStartStep2MarketStealEvent]]>>\
 ```
 
 [Open full passage code](../twee/quickStart/step2/QuickStartStep2Market.twee)
@@ -127,15 +127,63 @@ It looks good, but there are several problems
 * It is not clear how to make it so that exactly one event is called with 100% probability
 To solve these problems, you can use groups
 
+Add group to all events
+
+```html
+    groups: ["QuickStartStep3MarketEvents"],
+```
+
+Replace events calling to group call in marker passage
+replace:
+
+```html
+    <<RE [[QuickStartStep3MarketNeedHeroEvent]]>>\
+    <<RE [[QuickStartStep3MarketHiddenStoreEvent]]>>\
+    <<RE [[QuickStartStep3MarketStealEvent]]>>\
+```
+
+to:
+
+```html
+    <<REGroup "QuickStartStep3MarketEvents" 100>>\
+```
+
+Now in the market passage with 100% probability exactly one event from the group will be called
+
 ## Step 4 - Adding new events to the group
 
 Groups also have one advantage: to add new events to groups, you no longer need to change the market passage
 Now easy to add new events to group
 
+Create five event passages
+
+```html
+    :: QuickStartStep4MarketDialogEvent1 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep4MarketEvents"]
+    }<</PassageMetadata>>
+
+    You hear a dialogue between the Buyer and the Seller:
+    ...
+```
+
+And that's all, the events have already been added to the groups and now in market passage there are both old events and new events with dialogues
+
 ## Step 5 - Enable/disable events
 
 As the story progresses, some events can be turned on or off
 In our example, this could be the QuickStartStep5MarketNeedHeroEvent event. After finishing this side quest need to disable the event
+
+Disable the event after completing the side quest. For this, add to the passage "QuickStartStep5MarketNeedHeroEventAcceptQuest"
+
+```html
+    Side quest was complite
+    <<REDisable [[QuickStartStep5MarketNeedHeroEvent]]>>\
+```
+
+And that's all, player will see notification about that the quest was complite and this event willn't start again
 
 ## Step 6 - Filters
 
@@ -143,16 +191,155 @@ Some events should not be available immediately after the start
 Sometimes, you can enable them after some plot twist, but most often, it is easier to use filters
 In our example, this could be QuickStartStep6MarketHiddenStoreEvent. You can add a filter so that this event is available only after five apples are purchased
 
+Add a filter to the hidden store PassageMetadata to make it accessible only after 5 apples have been purchased
+
+```html
+    filter: `$appleCount >= 5`,
+```
+
+And that's it, the player won't see the hidden shop event until he buys 5 apples
+
 ## Step 7 - Limits
 
 Everything looks good, but there are inconsistencies in the events that are repeated constantly
 For example, some events are more logical to limit running only once a day, and other events can be limited by the time of day
 We can use filters for that, but better to use limitations for that
 
+This is probably one of the most difficult steps, the strategies of limitations are complex functionality, but I will try to add a description for each step
+
+### Step 7.1 - Simple limitation strategy
+
+Add limitations to QuickStartStep7MarketStealEvent so that it is only available once per day.
+For this need to add tags and limitationStrategy to PassageMetadata
+
+```html
+    tags: ["Market", "Daily"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily"]},
+    ],
+```
+
+Note: `tags: ["Market", "Daily"],` are needed to understand what strategy can be applied now.
+In this example, the tags match because it is a simple strategy, but tags can also store variables or even expressions (for example: `tags: ["$CurrentPlace", "$appleCount > 10 ? 'buyer': 'just_watch'"],`).
+Note: `max` in limitationStrategy means how many times an event may be started by that limitation.
+Warning: However, the event will be skipped if limitationStrategy contains items with tags and no one item doesn't contain tags that exist in PassageMetadata tags.
+
+### Step 7.2 - Using variables
+
+Let's do the same for QuickStartStep7MarketHiddenStoreEvent but make it available only in noon and afternoon
+
+```html
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily", "noon"]},
+        { max: 1, tags: ["Market", "Daily", "afternoon"]},
+        { max: 1, tags: ["Market", "Daily"]},
+    ],
+```
+
+Note: Here we use variable in tags and have limitationStrategy with 3 items
+
+* `{ max: 1, tags: ["Market", "Daily", "noon"]},` - mean that this event may start just once at the noon
+* `{ max: 1, tags: ["Market", "Daily", "afternoon"]},` - mean that this event may start just once at the afternoon
+* `{ max: 1, tags: ["Market", "Daily"]},` - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
+
+Looks good, but there is a problem here, it is that limitationStrategy works globally for all events, this is done to remove "spam" of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategy
+We have two events with the strategy `["Market", "Daily"]`, which means that after one event has triggered, the second event will no longer trigger because an event with such tags has already been triggered earlier
+
+### Step 7.3 - Resolve the same tags issue
+
+There are two ways to fix this:
+
+* Add a specific tag to each event (example: `["Market", "Daily", "MyCustomTag"]`)
+* Add `isSeparate: true` to necessary limitationStrategy items
+
+We will consider the second way
+
+```html
+    tags: ["Market", "Daily"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+    ],
+```
+
+```html
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily", "noon"], isSeparate: true },
+        { max: 1, tags: ["Market", "Daily", "afternoon"], isSeparate: true },
+        { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+    ],
+```
+
+Events now work independently of each other
+
+### Step 7.4 - Dialogs beautify
+
+Now, the dialogues between the seller and the buyer work at any time of the day. This looks implausible.
+Add limitationStrategy to each dialogue to make them available only during noon and afternoon
+
+```html
+    tags: ["Market", "Daily", "$CurrentDayTime"],
+    limitationStrategy: [
+        { max: 10, tags: ["Market", "Daily", "noon"] },
+        { max: 10, tags: ["Market", "Daily", "afternoon"] },
+    ],
+```
+
+Also add dialogues for morning and evening
+
+```html
+    :: QuickStartStep7MarketDialogEvent6 [passage_metadata]
+    <<PassageMetadata>>{
+        type: "embedded",
+        threshold: 50,
+        groups: ["QuickStartStep7MarketEvents"],
+        tags: ["Market", "Daily", "$CurrentDayTime"],
+        limitationStrategy: [
+            { max: 4, tags: ["Market", "Daily", "evening"] },
+        ],
+    }<</PassageMetadata>>
+
+    You hear a dialogue between sellers:
+    ...
+```
+
+Perfect, now dialogs loocs really good
+
+### Step 7.5 - The last but not least, reset limits on day-end
+
+All restrictions must be reset to play the events again on the new day.
+A widget "ChangeTime" was created to change the time.
+
+```html
+    :: DayTimeWidgets [widget]
+    <<widget "ChangeTime">>
+        <<set _index = $DayTimeArray.indexOf($CurrentDayTime)>>
+        <<if (_index + 1 >= $DayTimeArray.length)>>
+            <<set $CurrentDayTime = $DayTimeArray[0]>>
+        <<else>>
+            <<set $CurrentDayTime = $DayTimeArray[_index + 1]>>
+        <</if>>
+    <</widget>>
+```
+
+Let's add a reset limits code at the end of this widget.
+
+```html
+    <<if $CurrentDayTime === 'morning'>>
+        <<REResetByTag "Daily">>
+    <</if>>
+```
+
+Excellent. Now, all limits work fine. We have daily events and different dialogues depending on the time of day, and at the end of the day, all limits are reset.
+
+Note: To change time, use the button "Move time" in the sidebar
+![Move time button](./images/move_time_button.png)
+
 ## Results
 
 Now the market looks more alive. There are side quests, dialogues, and a hidden store. And it all looks logical. Not all events are available from the start, some are available only once, and there are those that are available only at a certain time of day.
-But the most important thing is that these events are very easy to maintain and add new events. Market passage does not have hundreds of if/else constructions that plunge you into horror, all the settings are in the events themselves, and market passage contains only one line
+**But the most important thing** is that these events are very easy to maintain and add new events. Market passage does not have hundreds of if/else constructions that plunge you into horror, all the settings are in the events themselves, and market passage contains only one line
 
 ```html
 <<REGroup "QuickStartStep7MarketEvents" 100>>
