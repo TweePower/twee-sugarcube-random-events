@@ -1,0 +1,4 @@
+:: StoryInit
+<<set $dayTimeArray = ["Morning", "Noon", "Afternoon", "Evening", "Night"]>>
+<<set $currentDayTime = "Morning">>
+<<set $appleCount = 0>>

@@ -1,0 +1,31 @@
+:: MarketStealEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "goto",
+    threshold: 50,
+    groups: ["MarketEvents"],
+    tags: ["Market", "Daily"],
+    limitationStrategy: [
+        { max: 1, tags: ["Market", "Daily"], isSeparate: true },
+    ],
+}<</PassageMetadata>>
+
+Entering the market, a girl ran up to you, hugged you, giggled and ran on
+As soon as you came to your senses, you discovered that she had pulled out your wallet
+You ran after her but discovered that the market diverges in 2 directions.
+On the left side is an abandoned part of the market, and on the right side is a clothing market.
+
+You decide:
+<<link [[Go left|MarketStealEventLeft]]>><</link>>
+<<link [[Go right|MarketStealEventRight]]>><</link>>
+
+<<button [[Reload page|passage()]]>><</button>>
+
+:: MarketStealEventLeft
+You found the girl, without saying a word she gave you your wallet and ran into the depths of the abandoned market
+
+<<button [[Return to market|Market]]>><</button>>
+
+:: MarketStealEventRight
+You found nothing but clothing stalls.
+
+<<button [[Return to market|Market]]>><</button>>

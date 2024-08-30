@@ -1,0 +1,24 @@
+:: MarketNeedHeroEvent [passage_metadata]
+<<PassageMetadata>>{
+    type: "embedded",
+    threshold: 50,
+    groups: ["MarketEvents"],
+}<</PassageMetadata>>
+Hey, I know you! You are hero! Can you help me?
+
+<<link [["Sure (+sidequest +reputation)"|MarketNeedHeroEventAcceptQuest]]>><</link>>
+<<link [["Sorry, I have no time (-reputation)"|MarketNeedHeroEventDeclineQuest]]>><</link>>
+
+:: MarketNeedHeroEventAcceptQuest
+Some content with super hero quest here
+
+Your hero reputation was increased
+
+<<button [[Return to market|Market]]>><</button>>
+
+:: MarketNeedHeroEventDeclineQuest
+Rumors about your declined quest were spreading...
+
+Your hero reputation was decreased
+
+<<button [[Return to market|Market]]>><</button>>

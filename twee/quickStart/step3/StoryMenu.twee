@@ -1,5 +1,4 @@
 :: StoryMenu
-<<link [[Main page|Start]]>><</link>>
 <<link [[Move time|passage()]]>><<ChangeTime>><</link>>
 <<link "Open debug">>
 	<<run

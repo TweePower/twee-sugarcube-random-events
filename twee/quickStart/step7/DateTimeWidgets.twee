@@ -1,0 +1,13 @@
+:: DayTimeWidgets [widget]
+<<widget "ChangeTime">>
+    <<set _index = $dayTimeArray.indexOf($currentDayTime)>>
+	<<if (_index + 1 >= $dayTimeArray.length)>>
+		<<set $currentDayTime = $dayTimeArray[0]>>
+	<<else>>
+		<<set $currentDayTime = $dayTimeArray[_index + 1]>>
+	<</if>>
+
+	<<if $currentDayTime === 'Morning'>>
+		<<REResetByTag "Daily">>
+	<</if>>
+<</widget>>

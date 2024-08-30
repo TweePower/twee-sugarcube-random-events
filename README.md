@@ -2,7 +2,7 @@
 
 Random event on steroids for Twee+SugarCube with percent threshold, limitations, enable/disable, and many more
 
-# Motivation
+## Motivation
 
 I found that many projects on Twee+Sugarcube write random events using.
 
@@ -19,7 +19,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 <<RE [[MyRandomEventName]]>>
 ```
 
-# Feature list
+## Feature list
 
 - **Configuration and Integration**: Add configuration directly to random event passage and effortlessly embed it into many passages using `<<RE>>`.
 - **Event Enablement/Disabling**: Create an enabled or disabled random event by default and enable or disable it after the player reaches a needed checkpoint.
@@ -30,22 +30,18 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 - **Tagging System And Limitation Strategy**: Leverage tags with variable support and limitation strategy to restrict event activation based on prior occurrences, ensuring diverse gameplay experiences.
 - **Event Blocking System**: A robust random event-blocking mechanism. Random events will be automatically blocked after the user is redirected to another random event passage to prevent multiple random events triggering in a single piece of time. Manual blocking from the JS code is also supported for advanced control.
 
-# Examples + Docs
+## Examples + Docs
 
-You can find quick start with examples and docs here https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/index.html
+You can find a quick start with examples and test pages here: [Quick start](./doc/QuickStart.md)
 
-Example twee files: https://github.com/TweePower/twee-sugarcube-random-events/tree/main/twee
+> [!NOTE]
+> TODO: Detailed documentation, JS API Documentation, CookBook with examples, minigame based on events
 
-# How to install
+## How to install
 
-- Open compiled file https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js
-  - or debug build https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js
-- Copy this file to your js folder
-- Or copy content to your passage with [script] tag
+You can find manual about how to install Random Events library here: [Quick start Step 0 - Preparation](./doc/QuickStart.md#step-0---preparation)
 
-That's it
-
-# How to use
+## How to use
 
 Open you random event passage, add tag 'passage_metadata', and add `<<PassageMetadata>>` with necessary settings
 
@@ -84,6 +80,7 @@ But let's add some filters, thresholds, and limitations.
 ```
 
 And now the random event will be triggered:
+
 - with a 30% chance
 - when variable $myVar is greater than 10
 - once when variable $CurrentDayTime is equal to "morning", "afternoon" or "evening" but no more than two times per day
@@ -93,6 +90,7 @@ Also, if you have the random event `MyRandomEvent2` with the same limitationStra
 Because limitationStrategy works globally using tags. So you willn't have a mess with random events when they are called one by one.
 
 But if you want to separate the random event from others, add `isSeparate: true` to limitationStrategy:
+
 ```html
     limitationStrategy: [
         { max: 1, tags: ["SomePlaceName", "Morning"], isSeparate: true },
@@ -103,6 +101,7 @@ But if you want to separate the random event from others, add `isSeparate: true`
 ```
 
 When the game day is over, you need to reset limitation counters. Just add this code in the necessary place:
+
 ```html
 <<REResetByTag "Morning">>
 <<REResetByTag "Afternoon">>
@@ -113,29 +112,33 @@ When the game day is over, you need to reset limitation counters. Just add this 
 In some cases, you need to disable or enable some events.
 
 It's especially useful when:
+
 - player reaches some checkpoint
 - Make some important decision
 - Found some item or got some skill
 - etc
 
 Use this code:
+
 ```html
 <<REDisable [[MyRandomEvent]]>>
 <<REEnable [[MyRandomEvent2]]>>
 ```
 
 Or by tag:
+
 ```html
 <<REDisableByTag "Chapter1">>
 <<REEnableByTag "Chapter2">>
 ```
 
-# Debug
+## Debug
 
 If debug is enabled (see: https://www.motoslave.net/sugarcube/2/docs/#config-api-property-debug)
 
 You can check logs in the browser console. Logs will look like this:
-```
+
+```text
 Start random event MyRandomEvent
   Verify:
     + verify IsEnable using: definition configuration
@@ -147,7 +150,7 @@ Start random event MyRandomEvent
       + threshold passed (random=97 <= threshold=100)
 ```
 
-# Support
+## Support
 
 If you find the bug, please create an issue or pull request.
 

@@ -4,8 +4,6 @@
     <<set $CurrentDayTime = "morning">>
 <</nobr>>\
 
-<<button [[Quick start|QuickStart]]>><</button>>
-
 TODO: None of the below has been done yet.
 <<button "Cookbook">><</button>>
 <<button "Documentation">><</button>>

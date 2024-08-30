@@ -1,6 +1,3 @@
-window.getDebug = () => {
-    return State.variables.randomEventHistory !== undefined
-        ? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
-        : 'Currently empty';
-}
+// Config.debug = true;
+window.Story = Story;
 window.State = State;
