@@ -34,8 +34,10 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 
 You can find a quick start with examples and test pages here: [Quick start](./doc/QuickStart.md)
 
+Detailed documentation: [Documentation](./doc/Documentation.md)
+
 > [!NOTE]
-> TODO: Detailed documentation, JS API Documentation, CookBook with examples, minigame based on events
+> TODO: JS API Documentation, CookBook with examples, minigame based on events
 
 ## How to install
 

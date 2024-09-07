@@ -1,5 +1,22 @@
 # Quick Start
 
+- [Quick Start](#quick-start)
+  - [Step 0 - How to install](#step-0---how-to-install)
+  - [Step 1 - Embedded events (`type: "embedded"`)](#step-1---embedded-events-type-embedded)
+  - [Step 2 - Interrupting events (`type: "goto"`)](#step-2---interrupting-events-type-goto)
+  - [Step 3 - Groupe events](#step-3---groupe-events)
+  - [Step 4 - Adding new events to the group](#step-4---adding-new-events-to-the-group)
+  - [Step 5 - Enable/disable events](#step-5---enabledisable-events)
+  - [Step 6 - Filters](#step-6---filters)
+  - [Step 7 - Limits](#step-7---limits)
+    - [Step 7.1 - Simple limitation strategy](#step-71---simple-limitation-strategy)
+    - [Step 7.2 - Using variables](#step-72---using-variables)
+    - [Step 7.3 - Resolve the same tags issue](#step-73---resolve-the-same-tags-issue)
+    - [Step 7.4 - Dialogs beautify](#step-74---dialogs-beautify)
+    - [Step 7.5 - The last but not least, reset limits on day-end](#step-75---the-last-but-not-least-reset-limits-on-day-end)
+  - [Results](#results)
+  - [Next steps](#next-steps)
+
 Let's say you wrote the market passage
 
 ```html
@@ -15,13 +32,13 @@ You have $appleCount apple(s).
 <<button [[Reload page|passage()]]>><</button>>
 ```
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step0.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step0.html)
 
 But the page looks very static, lifeless.
 Let's add random events to make it more live
 Step by step.
 
-## Step 0 - Preparation
+## Step 0 - How to install
 
 Here we will find out how to install random events library to your project
 
@@ -40,7 +57,7 @@ Open JavaScript window:
 
 And paste content theare
 
-## Step 1 - Embedded events (type: "embedded")
+## Step 1 - Embedded events (`type: "embedded"`)
 
 Here we will look at how to add embedded events to a passage.
 Embedded events do not change the passage but only complement it.
@@ -84,9 +101,9 @@ Add events into your passage
 That's it, now market passage looks better.
 But those events are just optional. In the next step, let's add an event that interrupts the market and redirects the player to the event passage.
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step1.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step1.html)
 
-## Step 2 - Interrupting events (type: "goto")
+## Step 2 - Interrupting events (`type: "goto"`)
 
 Here we will look at how interrupting events works and how to add it to a passage.
 Interrupting events redirects player to a event passage
@@ -118,7 +135,7 @@ Add events into your passage
 
 Now market passage contain interupting event
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step2.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step2.html)
 
 ## Step 3 - Groupe events
 
@@ -157,7 +174,7 @@ to:
 
 Now in the market passage with 100% probability exactly one event from the group will be called
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step3.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step3.html)
 
 ## Step 4 - Adding new events to the group
 
@@ -182,7 +199,7 @@ You hear a dialogue between the Buyer and the Seller:
 
 And that's all, the events have already been added to the groups and now in market passage there are both old events and new events with dialogues
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step4.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step4.html)
 
 ## Step 5 - Enable/disable events
 
@@ -200,7 +217,7 @@ Side quest was complite
 
 And that's all, player will see notification about that the quest was complite and this event willn't start again
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step5.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step5.html)
 
 ## Step 6 - Filters
 
@@ -218,7 +235,7 @@ filter: `$appleCount >= 5`,
 
 And that's it, the player won't see the hidden shop event until he buys 5 apples
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step6.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step6.html)
 
 ## Step 7 - Limits
 
@@ -369,7 +386,7 @@ Excellent. Now, all limits work fine. We have daily events and different dialogu
 Note: To change time, use the button "Move time" in the sidebar
 ![Move time button](./images/move_time_button.png)
 
-[Open market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
+[Open market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
 
 ## Results
 
@@ -381,7 +398,7 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 ```
 
 [Open the result code folder on GitHub](../twee/quickStart/step7)
-[Open the result market passage test page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
+[Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
 
 ## Next steps
 
