@@ -16,6 +16,8 @@
     - [Widget - `<<REDisable [[PassageName]]>>`](#widget---redisable-passagename)
     - [Widget - `<<REEnableByTag "TagName">>`](#widget---reenablebytag-tagname)
     - [Widget - `<<REDisableByTag "TagName">>`](#widget---redisablebytag-tagname)
+    - [Widget - `<<REReset [[PassageName]]>>`](#widget---rereset-passagename)
+    - [Widget - `<<REResetByTag "TagName">>`](#widget---reresetbytag-tagname)
 
 ## PassageMetadata
 
@@ -54,10 +56,18 @@ Example:
 
 ### PassageMetadata - `isEnable`
 
-The `isEnabled` key has a **boolean** value and is used to enable or disable a random event.
+**Syntaxis:** `isEnabled: true,`
 
-- Events with `isEnabled: true` can be called via [`<<RE [[PassageName]]>>`](#widget---re-passagename) or via [`<<REGroup "GroupName">>`](#widget---regroup-groupname)
-- Events with `isEnabled: false` will be skipped
+**Value type: Boolean** (`true` or `false`)
+
+**Default value:** `true`
+
+**Description:**
+
+Used to set default turn an event on or off.
+
+- Enabled events can be called via [`<<RE [[PassageName]]>>`](#widget---re-passagename) or via [`<<REGroup "GroupName">>`](#widget---regroup-groupname)
+- Disable events will be skipped
 
 > [!NOTE]
 > Even if an event has been disabled, it can still be navigated to as a normal passage (e.g. via the `[[ExampleEvent]]` link or `<<goto [[ExampleEvent]]>>`)
@@ -66,14 +76,30 @@ The `isEnabled` key has a **boolean** value and is used to enable or disable a r
 
 ### PassageMetadata - `type`
 
-The `type` key can have `"embedded"` or `"goto"` string value and is used to declare how events show.
+**Syntaxis:** `type: "embedded",`
+
+**Value type: Enum** (`"embedded"` or `"goto"`)
+
+**Default value:** `"embedded"`
+
+**Description:**
+
+Used to set how event show.
 
 - Events with `type: "embedded",` will be embade into the passage [`<<RE [[PassageName]]>>`](#widget---re-passagename) or via [`<<REGroup "GroupName">>`](#widget---regroup-groupname) (Example: [Quick start - Step 1 - Embedded events (type: "embedded")](./QuickStart.md#step-1---embedded-events-type-embedded))
 - Events with `type: "goto",` will redirect to event passage (Example: [Quick start - Step 2 - Interrupting events (`type: "goto"`))](./QuickStart.md#step-2---interrupting-events-type-goto))
 
 ### PassageMetadata - `threshold`
 
-The `threshold` key can have an integer or string value and is defined as the percentage probability that an event called via [`<<RE [[PassageName]]>>`](#widget---re-passagename) will be fired
+**Syntaxis:** `threshold: 100,`
+
+**Value type: Integer (from 0 to 100) or Twine script** (`10`, `50`, `"$myVariable"`, `"$myVariable + 20"`)
+
+**Default value:** `100`
+
+**Description:**
+
+Used to set percentage probability that an event called via [`<<RE [[PassageName]]>>`](#widget---re-passagename) will be fired
 
 - Events with **integer** `threshold` value will be called with the probability specified in the value
   - Example: `threshold: 30,` means that the event will be called with a 30 percent chance
@@ -87,7 +113,15 @@ The `threshold` key can have an integer or string value and is defined as the pe
 
 ### PassageMetadata - `filter`
 
-The `filter` key has a **string** Twine script value and checks that the event may be fired or skipped.
+**Syntaxis:** ```filter: `true`,```
+
+**Value type: Twine script** (``` `true` ```, ``` `$myVariable > 10` ```)
+
+**Default value:** ``` `true` ```
+
+**Description:**
+
+Used to set filter to check that the event may be fired or skipped.
 
 - If **true** was returned after executing the Twine script from the `filter` field, the event may be fired.
 - If return **false**, then event will be skipped.
@@ -108,18 +142,28 @@ Examples:
 
 Example of complex multiline filter with JS functions and comments:
 
-```json
-    ...
+```js
+{
     filter: `
         ($gameStage === 2 and $playerLevel > 5) or /* comment to main filter */
         myFunction($playerLevel, $someOption) > 10 or /* comment to main filter */
         $isDebugEnabled === true /* this is for debug */
     `,
+}
 ```
 
 ### PassageMetadata - `tags`
 
-The `tags` key has an **array of strings** value. Also, the string may contain a Twine script.
+**Syntaxis:** ```tags: ["Tag1", "Tag2", "$myVariable"],```
+
+**Value type: array of string or Twine script** (`["Tag1"]`, `["$myVariable"]`, `["Tag1", "$myVariable"]`)
+
+**Default value:** Empty
+
+**Description:**
+
+Used to set tags to event.
+
 Tags used in [`limitationStrategy`](#passagemetadata---limitationstrategy) and in widgets [`<<REEnableByTag "TagName">>`](#widget---reenablebytag-tagname), [`<<REDisableByTag "TagName">>`](#widget---redisablebytag-tagname)
 
 Examples:
@@ -148,19 +192,31 @@ TBD
 ### Widget - `<<REEnable [[PassageName]]>>`
 
 TBD
+
 Useful for enabling single event in one-time events
 
 ### Widget - `<<REDisable [[PassageName]]>>`
 
 TBD
+
 Useful for disabling single event in one-time events
 
 ### Widget - `<<REEnableByTag "TagName">>`
 
 TBD
+
 Useful for enabling events during a plot twist.
 
 ### Widget - `<<REDisableByTag "TagName">>`
 
 TBD
+
 Useful for disabling events during a plot twist.
+
+### Widget - `<<REReset [[PassageName]]>>`
+
+TBD
+
+### Widget - `<<REResetByTag "TagName">>`
+
+TBD

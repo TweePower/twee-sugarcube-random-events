@@ -142,9 +142,9 @@ Now market passage contain interupting event
 Now, in the market passage, different events are called sequentially
 It looks good, but there are several problems
 
-* There is a possibility that several events will be called at once
-* The probability that at least one event out of three will trigger is 87.5% (because three events are called sequentially by 50%)
-* It is not clear how to make it so that exactly one event is called with 100% probability
+- There is a possibility that several events will be called at once
+- The probability that at least one event out of three will trigger is 87.5% (because three events are called sequentially by 50%)
+- It is not clear how to make it so that exactly one event is called with 100% probability
 To solve these problems, you can use groups
 
 Add group to all events
@@ -281,9 +281,9 @@ limitationStrategy: [
 > [!NOTE]
 > Here we use variable in tags and have limitationStrategy with 3 items
 >
-> * `{ max: 1, tags: ["Market", "Daily", "Noon"]},` - mean that this event may start just once at the noon
-> * `{ max: 1, tags: ["Market", "Daily", "Afternoon"]},` - mean that this event may start just once at the afternoon
-> * `{ max: 1, tags: ["Market", "Daily"]},` - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
+> - `{ max: 1, tags: ["Market", "Daily", "Noon"]},` - mean that this event may start just once at the noon
+> - `{ max: 1, tags: ["Market", "Daily", "Afternoon"]},` - mean that this event may start just once at the afternoon
+> - `{ max: 1, tags: ["Market", "Daily"]},` - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
 
 Looks good, but there is a problem here, it is that limitationStrategy works globally for all events, this is done to remove "spam" of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategy
 We have two events with the strategy `["Market", "Daily"]`, which means that after one event has triggered, the second event will no longer trigger because an event with such tags has already been triggered earlier
@@ -292,8 +292,8 @@ We have two events with the strategy `["Market", "Daily"]`, which means that aft
 
 There are two ways to fix this:
 
-* Add a specific tag to each event (example: `["Market", "Daily", "MyCustomTag"]`)
-* Add `isSeparate: true` to necessary limitationStrategy items
+- Add a specific tag to each event (example: `["Market", "Daily", "MyCustomTag"]`)
+- Add `isSeparate: true` to necessary limitationStrategy items
 
 We will consider the second way
 
@@ -402,11 +402,4 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 
 ## Next steps
 
-> [!WARNING]
-> The following steps not done
-
-* Detailed Documentations
-* Enable/Disable events vs filters vs limits
-* Complex passage with many possible events and groups
-* How to debug events
-* JS API
+TBD
