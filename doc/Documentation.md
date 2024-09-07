@@ -181,7 +181,7 @@ Examples:
 
 **Value types in detailed group definition:**
 
-```json
+```js
 [
     {
         name: "GroupName",
@@ -210,7 +210,7 @@ TBD
 
 **Syntaxis:**
 
-```json
+```js
 {
     limitationStrategy: [
         { max: 1, tags: ["Place", "Morning"], isSeparate: true },
@@ -226,7 +226,7 @@ TBD
 
 **Value type: array of limitation strategy objects:**
 
-```json
+```js
 { max: 1, tags: ["Place", "Morning"], isSeparate: true }
 ```
 
