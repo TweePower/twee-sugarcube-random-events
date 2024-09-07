@@ -260,8 +260,10 @@ limitationStrategy: [
 > [!NOTE]
 > `tags: ["Market", "Daily"],` are needed to understand what strategy can be applied now.
 > In this example, the tags match because it is a simple strategy, but tags can also store variables or even expressions (for example: `tags: ["$CurrentPlace", "$appleCount > 10 ? 'buyer': 'just_watch'"],`).
+>
 > [!NOTE]
 > `max` in limitationStrategy means how many times an event may be started by that limitation.
+>
 > [!WARNING]
 > Warning: However, the event will be skipped if limitationStrategy contains items with tags and no one item doesn't contain tags that exist in PassageMetadata tags.
 

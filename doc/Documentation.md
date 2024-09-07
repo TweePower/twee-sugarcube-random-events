@@ -135,8 +135,10 @@ Examples:
 > [!NOTE]
 > You can write a multiline filter if necessary, but use the backticks for that!
 > Use backticks ``` ` ```, but not `'` or `"`
+>
 > [!NOTE]
 > In some cases when a filter is complex, a good idea is to add comments
+>
 > [!NOTE]
 > Some logic may be moved to the JS functions and used in the filters
 
@@ -173,9 +175,68 @@ Examples:
 
 ### PassageMetadata - `groups`
 
+**Syntaxis:** `["Group1", "Group2", ...]`
+
+**Value type: array of strings or group objects** (`["Group1"]`, `["Group1", "Group2", ...]`, `[{ json: "" }]`)
+
+**Value types in detailed group definition:**
+
+```json
+[
+    {
+        name: "GroupName",
+        weight: 10,
+        type: "sequential",
+        sequentialIndex: 1,
+        sequentialCount: 1
+    },
+    ...
+]
+```
+
+- **name** string
+- **weight** integer (default: 10)
+- **type** enum (`"random"`, `"sequential"`) (default: `"random"`)
+- **sequentialIndex**: integer (default: empty)
+- **sequentialCount**: integer (default: empty)
+
+**Default value:** Empty
+
+**Description:**
+
 TBD
 
 ### PassageMetadata - `limitationStrategy`
+
+**Syntaxis:**
+
+```json
+{
+    limitationStrategy: [
+        { max: 1, tags: ["Place", "Morning"], isSeparate: true },
+        { max: 1, tags: ["Place", "Noon"], isSeparate: true },
+        { max: 1, tags: ["Place", "Afternoon"], isSeparate: true },
+        { max: 1, tags: ["Place", "Evening"], isSeparate: true },
+        { max: 1, tags: ["Place", "Night"], isSeparate: true },
+        { max: 1, tags: ["Place", "Daily"], isSeparate: true },
+        { max: 1, tags: ["Place", "Weekly"], isSeparate: true },
+    ]
+}
+```
+
+**Value type: array of limitation strategy objects:**
+
+```json
+{ max: 1, tags: ["Place", "Morning"], isSeparate: true }
+```
+
+- **max** integer (default: 1)
+- **tags** array of strings (default: empty)
+- **isSeparate** boolean (default: false)
+
+**Default value:** Empty
+
+**Description:**
 
 TBD
 
