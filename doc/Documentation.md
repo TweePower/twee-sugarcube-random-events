@@ -71,6 +71,7 @@ Used to set default turn an event on or off.
 
 > [!NOTE]
 > Even if an event has been disabled, it can still be navigated to as a normal passage (e.g. via the `[[ExampleEvent]]` link or `<<goto [[ExampleEvent]]>>`)
+
 > [!NOTE]
 > To enable/disable events from code use [`<<REEnable [[PassageName]]>>`](#widget---reenable-passagename), [`<<REDisable [[PassageName]]>>`](#widget---redisable-passagename), [`<<REEnableByTag "TagName">>`](#widget---reenablebytag-tagname), [`<<REDisableByTag "TagName">>`](#widget---redisablebytag-tagname)
 
@@ -135,10 +136,10 @@ Examples:
 > [!NOTE]
 > You can write a multiline filter if necessary, but use the backticks for that!
 > Use backticks ``` ` ```, but not `'` or `"`
->
+
 > [!NOTE]
 > In some cases when a filter is complex, a good idea is to add comments
->
+
 > [!NOTE]
 > Some logic may be moved to the JS functions and used in the filters
 
@@ -244,40 +245,120 @@ TBD
 
 ### Widget - `<<RE [[PassageName]]>>`
 
-TBD
+**Syntaxis:** `<<RE [[PassageName]]>>`
+
+**Description:**
+
+The widget is needed to call the event.
+
+Below is a description of how the event is running:
+
+- Check that the lock was not accrued
+  - Lock will be accrued after the first event with `type: "goto"` was running. This is necessary to prevent running several events simultaneously with `type: "goto"`
+- Check that the event is enabled
+- Check that the event is pass filter
+- Check that the event passed the limitation strategies
+- Generate a random integer from 0 to 100 value and check that it is greater than the event threshold
+- If all checkers were passed, then:
+  - Increment counters for limitations strategy and history
+  - If the event type is `embedded` then draw the event on the page
+  - If the event type is `goto` then acquire the lock and redirect to the event passage
 
 ### Widget - `<<REGroup "GroupName">>`
 
-TBD
+**Syntaxis:** `<<REGroup "GroupName">>`
+
+**Description:**
+
+The widget is needed to call one event of the group of events.
+
+Below is a description of how the group is running:
+
+- Check that the lock was not accrued
+  - Lock will be accrued after the first event with `type: "goto"` was running. This is necessary to prevent running several events simultaneously with `type: "goto"`
+- Generate a random integer from 0 to 100 value and check that it is greater than the **group threshold**. Events threshold check will be skipped.
+- For each event from the group:
+  - Check that the event is enabled
+  - Check that the event is pass filter
+  - Check that the event passed the limitation strategies
+  - If all checkers were passed, then add the event to the **winner event array**
+- If the group type is `sequential` then:
+  - Sort events from **winner event array** by the `sequentialIndex` from the group config
+  - Chose the first of events from sorted **winner event array** where `sequentialCount` from the group config is less than the event fired count
+  - If the sequence is finished, then works like the group type is `random`
+- If the group type is `random` then randomly choose one of the **winner events array** considering the event `weight` from the group config
+- Increment counters for limitations strategy and history of the chosen event from the group
+  - If the chosen event from the group type is `embedded` then draw the event on the page
+  - If the chosen event from the group type is `goto` then acquire the lock and redirect to the event passage
 
 ### Widget - `<<REEnable [[PassageName]]>>`
 
-TBD
+**Syntaxis:** `<<REEnable [[PassageName]]>>`
 
-Useful for enabling single event in one-time events
+**Description:**
+
+The widget is needed to enable event by the name.
+
+TBD:
+
+- Useful for enabling single event in one-time events
 
 ### Widget - `<<REDisable [[PassageName]]>>`
 
-TBD
+**Syntaxis:** `<<REDisable [[PassageName]]>>`
 
-Useful for disabling single event in one-time events
+**Description:**
+
+The widget is needed to disable event by the name.
+
+TBD:
+
+- Useful for disabling single event in one-time events
 
 ### Widget - `<<REEnableByTag "TagName">>`
 
-TBD
+**Syntaxis:** `<<REEnableByTag "TagName">>`
 
-Useful for enabling events during a plot twist.
+**Description:**
+
+The widget is needed to enable event by the tag.
+
+TBD:
+
+- Only string tags are used, and no Twine scripts.
+- Useful for enabling events during a plot twist.
 
 ### Widget - `<<REDisableByTag "TagName">>`
 
-TBD
+**Syntaxis:** `<<REDisableByTag "TagName">>`
 
-Useful for disabling events during a plot twist.
+**Description:**
+
+The widget is needed to disable event by the tag.
+
+TBD:
+
+- Only string tags are used, and no Twine scripts.
+- Useful for disabling events during a plot twist.
 
 ### Widget - `<<REReset [[PassageName]]>>`
 
+**Syntaxis:** `<<REReset [[PassageName]]>>`
+
+**Description:**
+
+The widget is needed to reset counters by the event name. Counters are used in the limitation strategy checker.
+
 TBD
 
+- Don't reset counters with tags at all
+
 ### Widget - `<<REResetByTag "TagName">>`
+
+**Syntaxis:** `<<REResetByTag "TagName">>`
+
+**Description:**
+
+The widget is needed to reset counters by the tag. Counters are used in the limitation strategy checker.
 
 TBD
