@@ -1,15 +1,15 @@
 # Random event for Twee/Sugarcube
 
-Random event on steroids for Twee+SugarCube with percent threshold, limitations, enable/disable, and many more
+Random event on steroids for Twee+SugarCube with percent threshold, groups, limitations, enable/disable, and many more
 
 ## Motivation
 
 I found that many projects on Twee+Sugarcube write random events using.
 
 - a set of conditions
-- flags to enable/disable random events
+- flags to turn random events on/off
 - flags and counters to limit the triggering of events at a certain point in time
-- and duplicate all that code if needed to trigger random events in other passages or by other conditions
+- and many duplicated codes if needed to trigger random events in other passages or by other conditions
 
 As a result, the code is complex, difficult to maintain, and has bugs due to numerous duplicates.
 
