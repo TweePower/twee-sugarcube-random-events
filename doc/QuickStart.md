@@ -569,9 +569,9 @@ Without using the library, the code could look like this
 
 [Open the code without using a library on GitHub](../twee/quickStart/step7withoutRE/Market.twee)
 
-[Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7withoutRE.html)
+[Open the market passage demo page (without using a library)](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7withoutRE.html)
 
-As you see this code:
+As you see, without using the library, this code:
 
 - contains many duplicates (which means that if you need to change something, you will need to change it in several places)
 - it is quite difficult to understand
