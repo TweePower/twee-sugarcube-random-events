@@ -406,7 +406,9 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 
 Below, I tried to create an example of the result market passage but without using the library.
 
-What looks like `<<REGroup "MarketEvents" 100>>` using the library could look like this
+Without using the library, the code could look like this
+
+<details><summary>Show/Hide</summary>
 
 ```html
 <<switch $currentDayTime>>\
@@ -438,14 +440,132 @@ What looks like `<<REGroup "MarketEvents" 100>>` using the library could look li
             <</if>>\
         <</if>>\
     <<case "Noon">>\
-        ... You can find the link to the complete code below
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtNoonTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent1')>>\
+            <<set _events.push('MarketDialogEvent2')>>\
+            <<set _events.push('MarketDialogEvent3')>>\
+            <<set _events.push('MarketDialogEvent4')>>\
+            <<set _events.push('MarketDialogEvent5')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if ($appleCount >= 5 and !$isMarketHiddenStoreEventCalledToday)>>\
+            <<set _events.push('MarketHiddenStoreEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent1' or _event === 'MarketDialogEvent2' or _event === 'MarketDialogEvent3' or _event === 'MarketDialogEvent4' or _event === 'MarketDialogEvent5'>>\
+                <<set $marketDialogEventCalledAtNoonTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketHiddenStoreEvent'>>\
+                <<set $isMarketHiddenStoreEventCalledToday = true>>\
+                <<include [[MarketHiddenStoreEvent]]>>\
+            <</if>>\
+        <</if>>\
     <<case "Afternoon">>\
-        ...
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtAfternoonTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent1')>>\
+            <<set _events.push('MarketDialogEvent2')>>\
+            <<set _events.push('MarketDialogEvent3')>>\
+            <<set _events.push('MarketDialogEvent4')>>\
+            <<set _events.push('MarketDialogEvent5')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if ($appleCount >= 5 and !$isMarketHiddenStoreEventCalledToday)>>\
+            <<set _events.push('MarketHiddenStoreEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent1' or _event === 'MarketDialogEvent2' or _event === 'MarketDialogEvent3' or _event === 'MarketDialogEvent4' or _event === 'MarketDialogEvent5'>>\
+                <<set $marketDialogEventCalledAtAfternoonTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketHiddenStoreEvent'>>\
+                <<set $isMarketHiddenStoreEventCalledToday = true>>\
+                <<include [[MarketHiddenStoreEvent]]>>\
+            <</if>>\
+        <</if>>\
     <<case "Evening">>\
-        ...
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtEveningTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent6')>>\
+            <<set _events.push('MarketDialogEvent7')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent6' or _event === 'MarketDialogEvent7'>>\
+                <<set $marketDialogEventCalledAtEveningTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
     <<case "Night">>\
-        ...
+        <<set _events = []>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
+<</switch>>
 ```
+
+</details>
 
 [Open the code without using a library on GitHub](../twee/quickStart/step7withoutRE/Market.twee)
 
