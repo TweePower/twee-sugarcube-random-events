@@ -3,7 +3,7 @@
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"],
-}<</PassageMetadata>>
+}<</PassageMetadata>>\
 Hi there, do you want to buy really rare?
 
 <<link [[Go to shop|MarketHiddenStoreEventEnter]]>><</link>>

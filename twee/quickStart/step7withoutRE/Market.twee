@@ -1,0 +1,165 @@
+:: Market
+<img src="images/market.jpg">
+
+You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
+As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
+
+<<switch $currentDayTime>>\
+    <<case "Morning">>\
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtMorningTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent8')>>\
+            <<set _events.push('MarketDialogEvent9')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent8' or _event === 'MarketDialogEvent9'>>\
+                <<set $marketDialogEventCalledAtMorningTimes += 1>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
+    <<case "Noon">>\
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtNoonTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent1')>>\
+            <<set _events.push('MarketDialogEvent2')>>\
+            <<set _events.push('MarketDialogEvent3')>>\
+            <<set _events.push('MarketDialogEvent4')>>\
+            <<set _events.push('MarketDialogEvent5')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if ($appleCount >= 5 and !$isMarketHiddenStoreEventCalledToday)>>\
+            <<set _events.push('MarketHiddenStoreEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent1' or _event === 'MarketDialogEvent2' or _event === 'MarketDialogEvent3' or _event === 'MarketDialogEvent4' or _event === 'MarketDialogEvent5'>>\
+                <<set $marketDialogEventCalledAtNoonTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketHiddenStoreEvent'>>\
+                <<set $isMarketHiddenStoreEventCalledToday = true>>\
+                <<include [[MarketHiddenStoreEvent]]>>\
+            <</if>>\
+        <</if>>\
+    <<case "Afternoon">>\
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtAfternoonTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent1')>>\
+            <<set _events.push('MarketDialogEvent2')>>\
+            <<set _events.push('MarketDialogEvent3')>>\
+            <<set _events.push('MarketDialogEvent4')>>\
+            <<set _events.push('MarketDialogEvent5')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if ($appleCount >= 5 and !$isMarketHiddenStoreEventCalledToday)>>\
+            <<set _events.push('MarketHiddenStoreEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent1' or _event === 'MarketDialogEvent2' or _event === 'MarketDialogEvent3' or _event === 'MarketDialogEvent4' or _event === 'MarketDialogEvent5'>>\
+                <<set $marketDialogEventCalledAtAfternoonTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketHiddenStoreEvent'>>\
+                <<set $isMarketHiddenStoreEventCalledToday = true>>\
+                <<include [[MarketHiddenStoreEvent]]>>\
+            <</if>>\
+        <</if>>\
+    <<case "Evening">>\
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtEveningTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent6')>>\
+            <<set _events.push('MarketDialogEvent7')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent6' or _event === 'MarketDialogEvent7'>>\
+                <<set $marketDialogEventCalledAtEveningTimes += 1>>\
+                <<set _rr = random(0, 4)>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
+    <<case "Night">>\
+        <<set _events = []>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
+<</switch>>
+
+You have $appleCount apple(s).
+<<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>
+
+<<button [[Reload page|passage()]]>><</button>>
+
+<a href="https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/QuickStart.md#results">Return to github</a>

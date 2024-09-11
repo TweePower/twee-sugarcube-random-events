@@ -1,9 +1,4 @@
-:: MarketNeedHeroEvent [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"],
-}<</PassageMetadata>>\
+:: MarketNeedHeroEvent
 Hey, I know you! You are hero! Can you help me?
 
 <<link [["Sure (+sidequest +reputation)"|MarketNeedHeroEventAcceptQuest]]>><</link>>
@@ -14,7 +9,7 @@ Some content with super hero quest here
 
 Your hero reputation was increased
 Side quest was complite
-<<REDisable [[MarketNeedHeroEvent]]>>\
+<<set $isMarketNeedHeroEventFinished = true>>\
 
 <<button [[Return to market|Market]]>><</button>>
 

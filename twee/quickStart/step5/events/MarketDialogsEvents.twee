@@ -3,8 +3,7 @@
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"]
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These tomatoes look overripe. How can you charge so much for them?"
@@ -17,8 +16,7 @@ Seller: "Quality has a price, my friend."
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"]
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "Why is this lettuce so wilted? It’s hardly fresh."
@@ -31,8 +29,7 @@ Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"]
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These potatoes have too many blemishes. They’re not worth the asking price."
@@ -45,8 +42,7 @@ Seller: "Then you’re missing out on some excellent potatoes."
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"]
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "This bunch of parsley is too small for what you’re charging."
@@ -59,8 +55,7 @@ Seller: "Quality over quantity. You won’t regret it."
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"]
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "The strawberries are not as sweet as you said they’d be."

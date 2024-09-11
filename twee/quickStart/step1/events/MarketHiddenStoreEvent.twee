@@ -2,7 +2,7 @@
 <<PassageMetadata>>{
     type: "embedded",
     threshold: 50,
-}<</PassageMetadata>>
+}<</PassageMetadata>>\
 Hi there, do you want to buy really rare?
 
 <<link [[Go to shop|MarketHiddenStoreEventEnter]]>><</link>>

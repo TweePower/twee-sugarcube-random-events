@@ -1,9 +1,4 @@
-:: MarketDialogEvent1 [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"]
-}<</PassageMetadata>>\
+:: MarketDialogEvent1
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These tomatoes look overripe. How can you charge so much for them?"
@@ -11,12 +6,7 @@ Seller: "They’re perfectly ripe, just how they should be. If you want green on
 Buyer: "I still think they’re too expensive for their condition."
 Seller: "Quality has a price, my friend."
 
-:: MarketDialogEvent2 [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"]
-}<</PassageMetadata>>\
+:: MarketDialogEvent2
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "Why is this lettuce so wilted? It’s hardly fresh."
@@ -24,12 +14,7 @@ Seller: "That’s just the outer leaves. Inside, it’s crisp and fresh."
 Buyer: "I don’t think so. You should lower the price."
 Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
 
-:: MarketDialogEvent3 [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"]
-}<</PassageMetadata>>\
+:: MarketDialogEvent3
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These potatoes have too many blemishes. They’re not worth the asking price."
@@ -37,12 +22,7 @@ Seller: "A few spots don’t affect the taste. They’re still the best you’ll
 Buyer: "I’m not paying full price for something that doesn’t look perfect."
 Seller: "Then you’re missing out on some excellent potatoes."
 
-:: MarketDialogEvent4 [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"]
-}<</PassageMetadata>>\
+:: MarketDialogEvent4
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "This bunch of parsley is too small for what you’re charging."
@@ -50,15 +30,38 @@ Seller: "It’s small because it’s packed with flavor. A little goes a long wa
 Buyer: "I’m not convinced. It seems overpriced."
 Seller: "Quality over quantity. You won’t regret it."
 
-:: MarketDialogEvent5 [passage_metadata]
-<<PassageMetadata>>{
-    type: "embedded",
-    threshold: 50,
-    groups: ["MarketEvents"]
-}<</PassageMetadata>>\
+:: MarketDialogEvent5
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "The strawberries are not as sweet as you said they’d be."
 Seller: "They’re naturally sweet, just not overloaded with sugar like store-bought ones."
 Buyer: "I expected more for the price."
 Seller: "These are fresh from the farm. You’re paying for real taste, not just sugar."
+
+:: MarketDialogEvent6
+You hear a dialogue between sellers:
+
+Seller 1: "Today was rough. Hardly anyone bought anything after noon."
+Seller 2: "Tell me about it. I’ve got crates of unsold tomatoes just sitting here."
+Seller 1: "Same here. Maybe tomorrow will be better."
+
+:: MarketDialogEvent7
+You hear a dialogue between sellers:
+
+Seller 1: "Not a bad day, huh? Sold out of all my peppers by lunchtime!"
+Seller 2: "Lucky you! I had a good run with the zucchinis, but still have some left."
+Seller 1: "Seems like people were really into fresh veggies today. Let’s hope it keeps up."
+
+:: MarketDialogEvent8
+You hear a dialogue between sellers:
+
+Seller 1: "Looks like it’s going to be a busy day. The weather’s perfect for the market."
+Seller 2: "Yeah, I’m expecting a good crowd. Hope I brought enough fresh greens."
+Seller 1: "Same here. Let’s see if we can sell out before lunch."
+
+:: MarketDialogEvent9
+You hear a dialogue between sellers:
+
+Seller 1: "You think we’ll get many customers today? It’s a bit cloudy."
+Seller 2: "Clouds won’t keep people away. As long as it doesn’t rain, we should be fine."
+Seller 1: "Good point. I’ve got a feeling it’ll pick up by mid-morning."

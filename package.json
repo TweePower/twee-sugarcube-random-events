@@ -14,7 +14,8 @@
     "build-quick-start-step-5": "tweego -o ./twee_dist/quick_start_step5.html ./twee/quickStart/step5 ./dist/random-event.js",
     "build-quick-start-step-6": "tweego -o ./twee_dist/quick_start_step6.html ./twee/quickStart/step6 ./dist/random-event.js",
     "build-quick-start-step-7": "tweego -o ./twee_dist/quick_start_step7.html ./twee/quickStart/step7 ./dist/random-event.js",
-    "build-doc": "npm run build-quick-start-step-0 && npm run build-quick-start-step-1 && npm run build-quick-start-step-2 && npm run build-quick-start-step-3 && npm run build-quick-start-step-4 && npm run build-quick-start-step-5 && npm run build-quick-start-step-6 && npm run build-quick-start-step-7",
+    "build-quick-start-step-7-without-re": "tweego -o ./twee_dist/quick_start_step7withoutRE.html ./twee/quickStart/step7withoutRE",
+    "build-doc": "npm run build-quick-start-step-0 && npm run build-quick-start-step-1 && npm run build-quick-start-step-2 && npm run build-quick-start-step-3 && npm run build-quick-start-step-4 && npm run build-quick-start-step-5 && npm run build-quick-start-step-6 && npm run build-quick-start-step-7 && npm run build-quick-start-step-7-without-re",
     "build-all": "npm run build-prod && npm run build-dev && npm run build-doc",
     "lint": "eslint src",
     "test": "jest --coverage --collectCoverageFrom='src/**/*.ts'"

@@ -782,7 +782,7 @@ As they moved through the crowd, the mix of sounds and smells enveloped them, gr
 
 &lt;&lt;RE [[MarketNeedHeroEvent]]&gt;&gt;\
 &lt;&lt;RE [[MarketHiddenStoreEvent]]&gt;&gt;\
-&lt;&lt;RE [[MarketStealEvent]]&gt;&gt;\
+&lt;&lt;RE [[MarketStealEvent]]&gt;&gt;
 
 You have $appleCount apple(s).
 &lt;&lt;link [[Buy an apple|passage()]]&gt;&gt;&lt;&lt;set $appleCount += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -805,7 +805,7 @@ You have $appleCount apple(s).
 &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="StorySubtitle" tags="" position="725,100" size="100,100">Quick Start - Step 2</tw-passagedata><tw-passagedata pid="7" name="MarketHiddenStoreEvent" tags="passage_metadata" position="850,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     type: &quot;embedded&quot;,
     threshold: 50,
-}&lt;&lt;/PassageMetadata&gt;&gt;
+}&lt;&lt;/PassageMetadata&gt;&gt;\
 Hi there, do you want to buy really rare?
 
 &lt;&lt;link [[Go to shop|MarketHiddenStoreEventEnter]]&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="MarketHiddenStoreEventEnter" tags="" position="975,100" size="100,100">You followed the seller and he led you to a shop full of various artifacts.
@@ -813,7 +813,7 @@ Hi there, do you want to buy really rare?
 &lt;&lt;button [[Return to market|Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="MarketNeedHeroEvent" tags="passage_metadata" position="1100,100" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     type: &quot;embedded&quot;,
     threshold: 50,
-}&lt;&lt;/PassageMetadata&gt;&gt;
+}&lt;&lt;/PassageMetadata&gt;&gt;\
 Hey, I know you! You are hero! Can you help me?
 
 &lt;&lt;link [[&quot;Sure (+sidequest +reputation)&quot;|MarketNeedHeroEventAcceptQuest]]&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -828,8 +828,7 @@ Your hero reputation was decreased
 &lt;&lt;button [[Return to market|Market]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="MarketStealEvent" tags="passage_metadata" position="225,225" size="100,100">&lt;&lt;PassageMetadata&gt;&gt;{
     type: &quot;goto&quot;,
     threshold: 50,
-}&lt;&lt;/PassageMetadata&gt;&gt;
-
+}&lt;&lt;/PassageMetadata&gt;&gt;\
 Entering the market, a girl ran up to you, hugged you, giggled and ran on
 As soon as you came to your senses, you discovered that she had pulled out your wallet
 You ran after her but discovered that the market diverges in 2 directions.

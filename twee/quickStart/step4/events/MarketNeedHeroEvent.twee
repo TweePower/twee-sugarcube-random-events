@@ -3,7 +3,7 @@
     type: "embedded",
     threshold: 50,
     groups: ["MarketEvents"],
-}<</PassageMetadata>>
+}<</PassageMetadata>>\
 Hey, I know you! You are hero! Can you help me?
 
 <<link [["Sure (+sidequest +reputation)"|MarketNeedHeroEventAcceptQuest]]>><</link>>

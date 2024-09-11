@@ -2,7 +2,7 @@
 <<PassageMetadata>>{
     type: "embedded",
     threshold: 50,
-}<</PassageMetadata>>
+}<</PassageMetadata>>\
 Hey, I know you! You are hero! Can you help me?
 
 <<link [["Sure (+sidequest +reputation)"|MarketNeedHeroEventAcceptQuest]]>><</link>>

@@ -10,7 +10,7 @@
         { max: 1, tags: ["Market", "Daily", "Afternoon"], isSeparate: true },
         { max: 1, tags: ["Market", "Daily"], isSeparate: true },
     ],
-}<</PassageMetadata>>
+}<</PassageMetadata>>\
 Hi there, do you want to buy really rare?
 
 <<link [[Go to shop|MarketHiddenStoreEventEnter]]>><</link>>

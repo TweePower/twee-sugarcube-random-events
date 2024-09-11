@@ -8,8 +8,7 @@
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These tomatoes look overripe. How can you charge so much for them?"
@@ -27,8 +26,7 @@ Seller: "Quality has a price, my friend."
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "Why is this lettuce so wilted? It’s hardly fresh."
@@ -46,8 +44,7 @@ Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "These potatoes have too many blemishes. They’re not worth the asking price."
@@ -65,8 +62,7 @@ Seller: "Then you’re missing out on some excellent potatoes."
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "This bunch of parsley is too small for what you’re charging."
@@ -84,8 +80,7 @@ Seller: "Quality over quantity. You won’t regret it."
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between the Buyer and the Seller:
 
 Buyer: "The strawberries are not as sweet as you said they’d be."
@@ -102,8 +97,7 @@ Seller: "These are fresh from the farm. You’re paying for real taste, not just
     limitationStrategy: [
         { max: 4, tags: ["Market", "Daily", "Evening"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between sellers:
 
 Seller 1: "Today was rough. Hardly anyone bought anything after noon."
@@ -119,8 +113,7 @@ Seller 1: "Same here. Maybe tomorrow will be better."
     limitationStrategy: [
         { max: 4, tags: ["Market", "Daily", "Evening"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between sellers:
 
 Seller 1: "Not a bad day, huh? Sold out of all my peppers by lunchtime!"
@@ -136,8 +129,7 @@ Seller 1: "Seems like people were really into fresh veggies today. Let’s hope 
     limitationStrategy: [
         { max: 4, tags: ["Market", "Daily", "Morning"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between sellers:
 
 Seller 1: "Looks like it’s going to be a busy day. The weather’s perfect for the market."
@@ -153,8 +145,7 @@ Seller 1: "Same here. Let’s see if we can sell out before lunch."
     limitationStrategy: [
         { max: 4, tags: ["Market", "Daily", "Morning"] },
     ],
-}<</PassageMetadata>>
-
+}<</PassageMetadata>>\
 You hear a dialogue between sellers:
 
 Seller 1: "You think we’ll get many customers today? It’s a bit cloudy."

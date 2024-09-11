@@ -6,7 +6,7 @@ As they moved through the crowd, the mix of sounds and smells enveloped them, gr
 
 <<RE [[MarketNeedHeroEvent]]>>\
 <<RE [[MarketHiddenStoreEvent]]>>\
-<<RE [[MarketStealEvent]]>>\
+<<RE [[MarketStealEvent]]>>
 
 You have $appleCount apple(s).
 <<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>

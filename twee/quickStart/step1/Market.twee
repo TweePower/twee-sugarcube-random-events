@@ -5,7 +5,7 @@ You are in vegetable market, where the air was rich with the scent of fresh prod
 As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
 
 <<RE [[MarketNeedHeroEvent]]>>\
-<<RE [[MarketHiddenStoreEvent]]>>\
+<<RE [[MarketHiddenStoreEvent]]>>
 
 You have $appleCount apple(s).
 <<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>

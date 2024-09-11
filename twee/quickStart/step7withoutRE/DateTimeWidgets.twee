@@ -1,0 +1,18 @@
+:: DayTimeWidgets [widget]
+<<widget "ChangeTime">>
+    <<set _index = $dayTimeArray.indexOf($currentDayTime)>>
+	<<if (_index + 1 >= $dayTimeArray.length)>>
+		<<set $currentDayTime = $dayTimeArray[0]>>
+	<<else>>
+		<<set $currentDayTime = $dayTimeArray[_index + 1]>>
+	<</if>>
+
+	<<if $currentDayTime === 'Morning'>>
+		<<set $marketDialogEventCalledAtMorningTimes = 0>>
+		<<set $marketDialogEventCalledAtNoonTimes = 0>>
+		<<set $marketDialogEventCalledAtAfternoonTimes = 0>>
+		<<set $marketDialogEventCalledAtEveningTimes = 0>>
+		<<set $isMarketStealEventCalledToday = false>>
+		<<set $isMarketHiddenStoreEventCalledToday = false>>
+	<</if>>
+<</widget>>

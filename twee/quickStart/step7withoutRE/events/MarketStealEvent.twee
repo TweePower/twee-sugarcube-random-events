@@ -1,9 +1,4 @@
-:: MarketStealEvent [passage_metadata]
-<<PassageMetadata>>{
-    type: "goto",
-    threshold: 50,
-    groups: ["MarketEvents"],
-}<</PassageMetadata>>\
+:: MarketStealEvent
 Entering the market, a girl ran up to you, hugged you, giggled and ran on
 As soon as you came to your senses, you discovered that she had pulled out your wallet
 You ran after her but discovered that the market diverges in 2 directions.

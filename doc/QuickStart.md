@@ -393,6 +393,7 @@ Note: To change time, use the button "Move time" in the sidebar
 ## Results
 
 Now the market looks more alive. There are side quests, dialogues, and a hidden store. And it all looks logical. Not all events are available from the start, some are available only once, and there are those that are available only at a certain time of day.
+
 **But the most important thing** is that these events are very easy to maintain and add new events. Market passage does not have hundreds of if/else constructions that plunge you into horror, all the settings are in the events themselves, and market passage contains only one line
 
 ```html
@@ -401,6 +402,60 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 
 [Open the result code folder on GitHub](../twee/quickStart/step7)
 [Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
+
+Below, I tried to create an example of the result market passage but without using the library.
+
+What looks like `<<REGroup "MarketEvents" 100>>` using the library could look like this
+
+```html
+<<switch $currentDayTime>>\
+    <<case "Morning">>\
+        <<set _events = []>>\
+        <<if ($marketDialogEventCalledAtMorningTimes < 10)>>\
+            <<set _events.push('MarketDialogEvent8')>>\
+            <<set _events.push('MarketDialogEvent9')>>\
+        <</if>>\
+        <<if (!$isMarketNeedHeroEventFinished)>>\
+            <<set _events.push('MarketNeedHeroEvent')>>\
+        <</if>>\
+        <<if (!$isMarketStealEventCalledToday)>>\
+            <<set _events.push('MarketStealEvent')>>\
+        <</if>>\
+        <<if _events.length > 0>>\
+            <<set _r = random(0, _events.length - 1)>>\
+            <<set _event = _events[_r]>>\
+            <<if _event === 'MarketDialogEvent8' or _event === 'MarketDialogEvent9'>>\
+                <<set $marketDialogEventCalledAtMorningTimes += 1>>\
+                <<include [[_event]]>>\
+            <</if>>\
+            <<if _event === 'MarketNeedHeroEvent'>>\
+                <<include [[MarketNeedHeroEvent]]>>\
+            <</if>>\
+            <<if _event === 'MarketStealEvent'>>\
+                <<set $isMarketStealEventCalledToday = true>>\
+                <<goto [[MarketStealEvent]]>>\
+            <</if>>\
+        <</if>>\
+    <<case "Noon">>\
+        ... You can find the link to the complete code below
+    <<case "Afternoon">>\
+        ...
+    <<case "Evening">>\
+        ...
+    <<case "Night">>\
+        ...
+```
+
+[Open the code without using a library on GitHub](../twee/quickStart/step7)
+[Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7withoutRE.html)
+
+As you see this code:
+
+- contains many duplicates (which means that if you need to change something, you will need to change it in several places)
+- it is quite difficult to understand
+- it is easy to make mistakes and it is difficult to find them later
+- and it is much more difficult to add new events
+- also, if you need to add the same events somewhere, there will be even more duplicate code
 
 ## Next steps
 
