@@ -447,7 +447,7 @@ What looks like `<<REGroup "MarketEvents" 100>>` using the library could look li
         ...
 ```
 
-[Open the code without using a library on GitHub](../twee/quickStart/step7)
+[Open the code without using a library on GitHub](../twee/quickStart/step7withoutRE/Market.twee)
 
 [Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7withoutRE.html)
 
