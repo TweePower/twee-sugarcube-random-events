@@ -401,6 +401,7 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 ```
 
 [Open the result code folder on GitHub](../twee/quickStart/step7)
+
 [Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7.html)
 
 Below, I tried to create an example of the result market passage but without using the library.
@@ -447,6 +448,7 @@ What looks like `<<REGroup "MarketEvents" 100>>` using the library could look li
 ```
 
 [Open the code without using a library on GitHub](../twee/quickStart/step7)
+
 [Open the result market passage demo page](https://twee-sugarcube-random-events.nyc3.cdn.digitaloceanspaces.com/quick_start_step7withoutRE.html)
 
 As you see this code:
