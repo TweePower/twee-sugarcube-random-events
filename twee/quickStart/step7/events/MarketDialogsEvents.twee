@@ -4,7 +4,7 @@
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
@@ -22,7 +22,7 @@ Seller: "Quality has a price, my friend."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
@@ -40,7 +40,7 @@ Seller: "I stand by my price. You’ll see it’s worth it once you taste it."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
@@ -58,7 +58,7 @@ Seller: "Then you’re missing out on some excellent potatoes."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
@@ -76,7 +76,7 @@ Seller: "Quality over quantity. You won’t regret it."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 10, tags: ["Market", "Daily", "Noon"] },
         { max: 10, tags: ["Market", "Daily", "Afternoon"] },
     ],
@@ -94,7 +94,7 @@ Seller: "These are fresh from the farm. You’re paying for real taste, not just
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 4, tags: ["Market", "Daily", "Evening"] },
     ],
 }<</PassageMetadata>>\
@@ -110,7 +110,7 @@ Seller 1: "Same here. Maybe tomorrow will be better."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 4, tags: ["Market", "Daily", "Evening"] },
     ],
 }<</PassageMetadata>>\
@@ -126,7 +126,7 @@ Seller 1: "Seems like people were really into fresh veggies today. Let’s hope 
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 4, tags: ["Market", "Daily", "Morning"] },
     ],
 }<</PassageMetadata>>\
@@ -142,7 +142,7 @@ Seller 1: "Same here. Let’s see if we can sell out before lunch."
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 4, tags: ["Market", "Daily", "Morning"] },
     ],
 }<</PassageMetadata>>\

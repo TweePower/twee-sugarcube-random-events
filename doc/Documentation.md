@@ -8,7 +8,7 @@
     - [PassageMetadata - `filter`](#passagemetadata---filter)
     - [PassageMetadata - `tags`](#passagemetadata---tags)
     - [PassageMetadata - `groups`](#passagemetadata---groups)
-    - [PassageMetadata - `limitationStrategy`](#passagemetadata---limitationstrategy)
+    - [PassageMetadata - `limitationStrategies`](#passagemetadata---limitationstrategies)
   - [Sugarcube widgets](#sugarcube-widgets)
     - [Widget - `<<RE [[PassageName]]>>`](#widget---re-passagename)
     - [Widget - `<<REGroup "GroupName">>`](#widget---regroup-groupname)
@@ -42,7 +42,7 @@ Example:
             sequentialCount: 1
         },
     ],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["Place", "Morning"], isSeparate: true },
         { max: 1, tags: ["Place", "Noon"], isSeparate: true },
         { max: 1, tags: ["Place", "Afternoon"], isSeparate: true },
@@ -167,12 +167,12 @@ Example of complex multiline filter with JS functions and comments:
 
 Used to set tags to event.
 
-Tags used in [`limitationStrategy`](#passagemetadata---limitationstrategy) and in widgets [`<<REEnableByTag "TagName">>`](#widget---reenablebytag-tagname), [`<<REDisableByTag "TagName">>`](#widget---redisablebytag-tagname)
+Tags used in [`limitationStrategies`](#passagemetadata---limitationstrategies) and in widgets [`<<REEnableByTag "TagName">>`](#widget---reenablebytag-tagname), [`<<REDisableByTag "TagName">>`](#widget---redisablebytag-tagname)
 
 Examples:
 
 - Example 1: `tags: ["Kitchen", "Weekly"],` - contain an array of strings `"Kitchen"` and `"Weekly"`
-- Example 2: `tags: ["Kitchen", "$currentDayTime"],` - contains array with string `"Kitchen"` and Twine script with variable `$currentDayTime`, this variable will convert to the string value during [`limitationStrategy`](#passagemetadata---limitationstrategy) check
+- Example 2: `tags: ["Kitchen", "$currentDayTime"],` - contains array with string `"Kitchen"` and Twine script with variable `$currentDayTime`, this variable will convert to the string value during [`limitationStrategies`](#passagemetadata---limitationstrategies) check
 
 ### PassageMetadata - `groups`
 
@@ -207,13 +207,13 @@ Examples:
 
 TBD
 
-### PassageMetadata - `limitationStrategy`
+### PassageMetadata - `limitationStrategies`
 
 **Syntaxis:**
 
 ```js
 {
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["Place", "Morning"], isSeparate: true },
         { max: 1, tags: ["Place", "Noon"], isSeparate: true },
         { max: 1, tags: ["Place", "Afternoon"], isSeparate: true },

@@ -5,7 +5,7 @@
     groups: ["MarketEvents"],
     filter: `$appleCount >= 5`,
     tags: ["Market", "Daily", "$currentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["Market", "Daily", "Noon"], isSeparate: true },
         { max: 1, tags: ["Market", "Daily", "Afternoon"], isSeparate: true },
         { max: 1, tags: ["Market", "Daily"], isSeparate: true },

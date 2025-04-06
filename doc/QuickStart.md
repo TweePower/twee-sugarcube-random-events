@@ -43,14 +43,22 @@ Step by step.
 Here we will find out how to install random events library to your project
 
 **If you use [Tweego](https://www.motoslave.net/tweego/) to build your project, then**
+
+Copy file [passage-metadata.min.js](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector/blob/main/dist/passage-metadata.min.js) (or you can use debug build: [passage-metadata.js](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector/blob/main/dist/passage-metadata.js))
+
 Copy file [random-event.min.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js) (or you can use debug build: [random-event.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js))
+
 And paste it into folder with other js files
 
 > [!NOTE]
 > if you don't use specific folder with js files then you can copy/paste content to passage with `[script]` tag
 
 **If you use [Twinery](https://twinery.org/") to build your project, then**
+
+Copy content from file [passage-metadata.min.js](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector/blob/main/dist/passage-metadata.min.js) (or you can use debug build: [passage-metadata.js](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector/blob/main/dist/passage-metadata.js))
+
 Copy content from file [random-event.min.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.min.js) (or you can use debug build: [random-event.js](https://github.com/TweePower/twee-sugarcube-random-events/blob/main/dist/random-event.js))
+
 Open JavaScript window:
 
 ![How to open JS popup in Twinery](./images/twinery_js.png)
@@ -248,11 +256,11 @@ This is probably one of the most difficult steps, the strategies of limitations 
 ### Step 7.1 - Simple limitation strategy
 
 Add limitations to `"MarketStealEvent"` so that it is only available once per day.
-For this need to add tags and limitationStrategy to PassageMetadata
+For this need to add tags and limitationStrategies to PassageMetadata
 
 ```html
 tags: ["Market", "Daily"],
-limitationStrategy: [
+limitationStrategies: [
     { max: 1, tags: ["Market", "Daily"] },
 ],
 ```
@@ -262,10 +270,10 @@ limitationStrategy: [
 > In this example, the tags match because it is a simple strategy, but tags can also store variables or even expressions (for example: `tags: ["$CurrentPlace", "$appleCount > 10 ? 'buyer': 'just_watch'"],`).
 
 > [!NOTE]
-> `max` in limitationStrategy means how many times an event may be started by that limitation.
+> `max` in limitationStrategies means how many times an event may be started by that limitation.
 
 > [!WARNING]
-> Warning: However, the event will be skipped if limitationStrategy contains items with tags and no one item doesn't contain tags that exist in PassageMetadata tags.
+> Warning: However, the event will be skipped if limitationStrategies contains items with tags and no one item doesn't contain tags that exist in PassageMetadata tags.
 
 ### Step 7.2 - Using variables
 
@@ -273,7 +281,7 @@ Let's do the same for MarketHiddenStoreEvent but make it available only in noon 
 
 ```html
 tags: ["Market", "Daily", "$CurrentDayTime"],
-limitationStrategy: [
+limitationStrategies: [
     { max: 1, tags: ["Market", "Daily", "Noon"]},
     { max: 1, tags: ["Market", "Daily", "Afternoon"]},
     { max: 1, tags: ["Market", "Daily"]},
@@ -281,13 +289,13 @@ limitationStrategy: [
 ```
 
 > [!NOTE]
-> Here we use variable in tags and have limitationStrategy with 3 items
+> Here we use variable in tags and have limitationStrategies with 3 items
 >
 > - `{ max: 1, tags: ["Market", "Daily", "Noon"]},` - mean that this event may start just once at the noon
 > - `{ max: 1, tags: ["Market", "Daily", "Afternoon"]},` - mean that this event may start just once at the afternoon
 > - `{ max: 1, tags: ["Market", "Daily"]},` - mean that this event may start just once during the day, without this limitation, an event may be started two times (at noon and afternoon)
 
-Looks good, but there is a problem here, it is that limitationStrategy works globally for all events, this is done to remove "spam" of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategy
+Looks good, but there is a problem here, it is that limitationStrategies works globally for all events, this is done to remove "spam" of events, so it is possible to run one event from a set and thus limit the launch of other events with the same tags in limitationStrategies
 We have two events with the strategy `["Market", "Daily"]`, which means that after one event has triggered, the second event will no longer trigger because an event with such tags has already been triggered earlier
 
 ### Step 7.3 - Resolve the same tags issue
@@ -295,13 +303,13 @@ We have two events with the strategy `["Market", "Daily"]`, which means that aft
 There are two ways to fix this:
 
 - Add a specific tag to each event (example: `["Market", "Daily", "MyCustomTag"]`)
-- Add `isSeparate: true` to necessary limitationStrategy items
+- Add `isSeparate: true` to necessary limitationStrategies items
 
 We will consider the second way
 
 ```html
 tags: ["Market", "Daily"],
-limitationStrategy: [
+limitationStrategies: [
     { max: 1, tags: ["Market", "Daily"], isSeparate: true },
 ],
 ```
@@ -310,7 +318,7 @@ limitationStrategy: [
 
 ```html
 tags: ["Market", "Daily", "$CurrentDayTime"],
-limitationStrategy: [
+limitationStrategies: [
     { max: 1, tags: ["Market", "Daily", "Noon"], isSeparate: true },
     { max: 1, tags: ["Market", "Daily", "Afternoon"], isSeparate: true },
     { max: 1, tags: ["Market", "Daily"], isSeparate: true },
@@ -324,11 +332,11 @@ Events now work independently of each other
 ### Step 7.4 - Dialogs beautify
 
 Now, the dialogues between the seller and the buyer work at any time of the day. This looks implausible.
-Add limitationStrategy to each dialogue to make them available only during noon and afternoon
+Add limitationStrategies to each dialogue to make them available only during noon and afternoon
 
 ```html
 tags: ["Market", "Daily", "$CurrentDayTime"],
-limitationStrategy: [
+limitationStrategies: [
     { max: 10, tags: ["Market", "Daily", "noon"] },
     { max: 10, tags: ["Market", "Daily", "afternoon"] },
 ],
@@ -343,7 +351,7 @@ Also add dialogues for morning and evening
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily", "$CurrentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 4, tags: ["Market", "Daily", "evening"] },
     ],
 }<</PassageMetadata>>

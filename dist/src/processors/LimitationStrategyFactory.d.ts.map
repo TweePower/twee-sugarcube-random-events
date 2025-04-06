@@ -1,0 +1,1 @@
+{"version":3,"file":"LimitationStrategyFactory.d.ts","sourceRoot":"","sources":["../../../src/processors/LimitationStrategyFactory.ts"],"names":[],"mappings":"AAKA,OAAO,cAAc,MAAM,iBAAiB,CAAC;AAE7C,MAAM,CAAC,OAAO,OAAO,yBAAyB;IAC9B,OAAO,CAAC,cAAc;gBAAd,cAAc,EAAE,cAAc;CAsCrD"}

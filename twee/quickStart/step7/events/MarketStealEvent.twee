@@ -4,7 +4,7 @@
     threshold: 50,
     groups: ["MarketEvents"],
     tags: ["Market", "Daily"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["Market", "Daily"], isSeparate: true },
     ],
 }<</PassageMetadata>>\

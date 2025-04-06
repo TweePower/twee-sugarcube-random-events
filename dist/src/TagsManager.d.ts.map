@@ -1,0 +1,1 @@
+{"version":3,"file":"TagsManager.d.ts","sourceRoot":"","sources":["../../src/TagsManager.ts"],"names":[],"mappings":"AAAA,OAAO,eAAe,MAAM,0BAA0B,CAAC;AAGvD,MAAM,CAAC,OAAO,OAAO,WAAW;IAChB,OAAO,CAAC,eAAe;gBAAf,eAAe,EAAE,eAAe;IAGpD,WAAW,CAAC,IAAI,EAAE,MAAM,EAAE;IAc1B,sBAAsB,CAAC,IAAI,EAAE,MAAM,EAAE,GAAG,MAAM;CAGjD"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"TagListFactory.d.ts","sourceRoot":"","sources":["../../../src/factory/TagListFactory.ts"],"names":[],"mappings":"AAEA,OAAO,OAAO,MAAM,kBAAkB,CAAC;AACvC,OAAO,UAAU,MAAM,cAAc,CAAC;AAEtC,MAAM,CAAC,OAAO,OAAO,cAAc;IAE3B,OAAO,CAAC,UAAU;gBAAV,UAAU,EAAE,UAAU;IAI3B,+BAA+B,CAClC,eAAe,CAAC,EAAE,MAAM,GAAG,MAAM,EAAE,GAAG,GAAG,GAC1C,OAAO;CA+Bb"}

@@ -27,7 +27,7 @@ sugarcube-2:
                       sequentialCount: 1
                   },
               ],
-              limitationStrategy: [
+              limitationStrategies: [
                   { max: 1, tags: ["Place", "Morning"], isSeparate: true },
                   { max: 1, tags: ["Place", "Noon"], isSeparate: true },
                   { max: 1, tags: ["Place", "Afternoon"], isSeparate: true },

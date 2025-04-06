@@ -1,10 +1,10 @@
-import History from "./History";
-import LimitationStrategyList from "./model/LimitationStrategyList";
 import DebugLogCollector from "./DebugLogCollector";
 import { RewriteConfigurationType } from "./type/RewriteConfiguration";
-import PassageMetadata from "./PassageMetadata";
-import SugarcubeFacade from "./facade/SugarcubeFacade";
 import TagsManager from "./TagsManager";
+import { LimitationStrategyType, RandomEventType } from "./type/PassageMetadata";
+import SugarcubeFacade from "./facade/SugarcubeFacade";
+import { isNumber } from "./tools/TypeChecker";
+import RandomEventStats from "./RandomEventStats";
 
 type ConstraintsVerificatingResult = {
     result: boolean,
@@ -16,80 +16,80 @@ export default class ConstraintsVerificator {
     constructor(
         private sugarcubeFacade: SugarcubeFacade,
         private tagsManager: TagsManager,
-        private history: History,
+        private randomEventStats: RandomEventStats,
     ) {
     }
 
-    verify(passageMetadata: PassageMetadata, rewriteConfiguration: RewriteConfigurationType): ConstraintsVerificatingResult {
+    verify(randomEvent: RandomEventType, compiledTags: string[], rewriteConfiguration: RewriteConfigurationType): ConstraintsVerificatingResult {
         let result = true;
         let usedLimitationStrategyTags = [];
         const debugLogCollector = new DebugLogCollector();
-        const compiledTags = this.tagsManager.prepareTags(passageMetadata.tags);
 
-        if (rewriteConfiguration.isValidateIsEnable === true) {
-            const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnable ?? passageMetadata.isEnabled);
+        if (rewriteConfiguration.isValidateIsEnable === false) {
+            debugLogCollector.addLog(true, 'skip IsEnable verify', 2);
+        } else {
+            const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnabled ?? randomEvent.isEnabled);
             result = checkResult.result;
             debugLogCollector
-                .addLog(
-                    checkResult.result,
-                    `verify IsEnable using: ${rewriteConfiguration.isEnable ? 'rewrite configuration' : 'definition configuration'}`,
-                    2
-                ).increaseLevel()
+                .addLog(checkResult.result, `verify IsEnable using: ${rewriteConfiguration.isEnabled ? 'rewrite configuration' : 'passage metadata'}`, 2)
+                .increaseLevel()
                 .merge(checkResult.debugLogCollector)
                 .decreaseLevel();
-        } else {
-            debugLogCollector.addLog(true, 'skip IsEnable verify', 2);
         }
 
         if (result) {
-            if (rewriteConfiguration.isValidateFilter === true) {
-                const checkResult = this.verifyFilter(rewriteConfiguration.filter ?? passageMetadata.filter);
-                result = checkResult.result;
-                debugLogCollector
-                    .addLog(
-                        checkResult.result,
-                        `verify filter using: ${rewriteConfiguration.filter ? 'rewrite configuration' : 'definition configuration'}`,
-                        2
-                    ).increaseLevel()
-                    .merge(checkResult.debugLogCollector)
-                    .decreaseLevel();
-            } else {
+            if (rewriteConfiguration.isValidateFilter === false) {
                 debugLogCollector.addLog(true, 'skip filter verify', 2);
+            } else {
+                const checkResult = this.verifyFilter(rewriteConfiguration.filter ?? randomEvent.filter);
+                result = checkResult.result;
+                debugLogCollector
+                    .addLog(checkResult.result, `verify filter using: ${rewriteConfiguration.filter ? 'rewrite configuration' : 'passage metadata'}`, 2)
+                    .increaseLevel()
+                    .merge(checkResult.debugLogCollector)
+                    .decreaseLevel();
             }
         }
 
         if (result) {
-            if (rewriteConfiguration.isValidateLimitationStrategy) {
-                const checkResult = this.verifyLimitationStrategy(compiledTags, rewriteConfiguration.limitationStrategy ?? passageMetadata.limitationStrategy, passageMetadata.name);
-                result = checkResult.result;
-                debugLogCollector
-                    .addLog(
-                        checkResult.result,
-                        `verify limitationStrategy using: ${rewriteConfiguration.limitationStrategy ? 'rewrite configuration' : 'definition configuration'}`,
-                        2
-                    ).increaseLevel()
-                    .merge(checkResult.debugLogCollector)
-                    .decreaseLevel();
-                usedLimitationStrategyTags = checkResult.additionalData.usedLimitationStrategyTags;
+            let checkResult: ConstraintsVerificatingResult;
+            if (randomEvent._isLimitationStrategiesTagged) {
+                checkResult = this.verifyTaggedLimitationStrategy(
+                    randomEvent.passageName,
+                    randomEvent.limitationStrategies,
+                    compiledTags
+                );
             } else {
-                debugLogCollector.addLog(true, 'skip limitationStrategy verify', 2);
+                checkResult = this.verifyNotTaggedLimitationStrategy(
+                    randomEvent.passageName,
+                    randomEvent.limitationStrategies,
+                    compiledTags
+                );
             }
+
+            result = checkResult.result;
+            debugLogCollector
+                .addLog(checkResult.result, `verify limitationStrategies using: 'passage metadata'`, 2)
+                .increaseLevel()
+                .merge(checkResult.debugLogCollector)
+                .decreaseLevel();
+            usedLimitationStrategyTags = checkResult.additionalData.usedLimitationStrategyTags;
         }
 
         if (result) {
-            if (rewriteConfiguration.isValidateThreshold) {
-                const checkResult = this.verifyThreshold(rewriteConfiguration.threshold ?? passageMetadata.threshold);
-                result = checkResult.result;
-                debugLogCollector
-                    .addLog(
-                        checkResult.result,
-                        `verify threshold using: ${rewriteConfiguration.threshold ? 'rewrite configuration' : 'definition configuration'}`,
-                        2
-                    ).increaseLevel()
-                    .merge(checkResult.debugLogCollector)
-                    .decreaseLevel();
-            } else {
+            if (rewriteConfiguration.isValidateThreshold === false) {
                 debugLogCollector.addLog(true, 'skip threshold verify', 2);
+            } else {
+                const checkResult = this.verifyThreshold(rewriteConfiguration.threshold ?? randomEvent.threshold);
+                result = checkResult.result;
+                debugLogCollector
+                    .addLog(
+                        checkResult.result,
+                        `verify threshold using: ${rewriteConfiguration.threshold ? 'rewrite configuration' : 'passage metadata'}`,
+                        2
+                    ).increaseLevel()
+                    .merge(checkResult.debugLogCollector)
+                    .decreaseLevel();
             }
         }
 
@@ -103,144 +103,133 @@ export default class ConstraintsVerificator {
     }
 
     verifyIsEnable(isEnabled: boolean): ConstraintsVerificatingResult {
+        const result = isEnabled;
+
         return {
-            result: isEnabled,
-            debugLogCollector: new DebugLogCollector().addLog(isEnabled, isEnabled ? 'event enabled': 'event disabled', 3)
+            result,
+            debugLogCollector: new DebugLogCollector().addLog(result, result ? 'event enabled': 'event disabled', 3)
         };
     }
 
-    verifyFilter(filter: string | null): ConstraintsVerificatingResult {
-        const debugLogCollector = new DebugLogCollector();
-
-        if (filter !== null) {
-            try {
-                if (!this.sugarcubeFacade.runTeweeScript(filter)) {
-                    debugLogCollector.addLog(false, 'filter expression returns false', 3);
-                    return { result: false, debugLogCollector };
-                }
-            } catch (err) {
-                err.message = "bad evaluation: " + err.message;
-                throw err;
-            }
+    verifyFilter(filter: string | boolean): ConstraintsVerificatingResult {
+        if (filter === true || filter === false) {
+            return {
+                result: filter,
+                debugLogCollector: new DebugLogCollector().addLog(filter, `filter expression returns ${filter ? 'true' : 'false'}`, 3)
+            };
         }
 
-        debugLogCollector.addLog(true, 'filter expression returns true', 3);
-        return { result: true, debugLogCollector };
+        let result;
+        try {
+            result = this.sugarcubeFacade.runTeweeScript(filter);
+        } catch (error) {
+            error.message = "bad evaluation: " + error.message;
+            throw error;
+        }
+
+        if (result !== true && result !== false) {
+            throw new Error(`invalid filter expression return type (expected: boolean: actual: ${typeof result})`);
+        }
+
+        return {
+            result,
+            debugLogCollector: new DebugLogCollector().addLog(result, `filter expression returns ${result ? 'true' : 'false'}`, 3)
+        };
     }
 
-    verifyLimitationStrategy(compiledTags: string[], limitationStrategyList: LimitationStrategyList, passageName: string): ConstraintsVerificatingResult {
+    verifyTaggedLimitationStrategy(passageName: string, limitationStrategies: LimitationStrategyType[], compiledTags: string[]): ConstraintsVerificatingResult {
         const debugLogCollector = new DebugLogCollector();
         const usedLimitationStrategyTags: [string[]?] = [];
         let isSuccess = true;
 
-        if (limitationStrategyList.length > 0) {
-            if (limitationStrategyList.isTaged) {
-                limitationStrategyList.all().forEach(limitationStrategy => {
-                    // skip all next if already found limitation which is not passed
-                    if (isSuccess === false) {
+        if (limitationStrategies.length <= 0) {
+            return {
+                result: true,
+                debugLogCollector: new DebugLogCollector(),
+                additionalData: {
+                    usedLimitationStrategyTags: []
+                },
+            };
+        }
+
+        limitationStrategies.forEach(limitationStrategy => {
+            // skip all next if already found limitation which is not passed
+            if (isSuccess === false) {
+                return;
+            }
+
+            if (limitationStrategy.max <= 0) {
+                debugLogCollector.addLog(true, 'limitationStrategy max value <= 0', 3);
+                return;
+            }
+
+            if (limitationStrategy.tags.length > 0) {
+                const limitationStrategyTags = [...this.tagsManager.prepareTags(limitationStrategy.tags)];
+
+                // skip checking limitationStrategy when current compiled tags have not included `limitation.tags`
+                for (let i = 0; i < limitationStrategyTags.length; i++) {
+                    if (!compiledTags.includes(limitationStrategyTags[i])) {
+                        debugLogCollector
+                            .addLog(false, `tag '${limitationStrategyTags[i]}' not found in current tags`, 3)
+                            .increaseLevel()
+                            .increaseLevel()
+                            .addLog(null, `current tags   : ${compiledTags.join(', ')}`, 3)
+                            .addLog(null, `limitation tags: ${limitationStrategyTags.join(', ')}`, 3)
+                            .decreaseLevel()
+                            .decreaseLevel();
                         return;
                     }
+                }
 
-                    // without limitation
-                    if (limitationStrategy.max <= 0) {
-                        debugLogCollector.addLog(true, 'limitationStrategy max value <= 0', 3);
-                        return;
-                    }
-
-                    if (limitationStrategy.tags.length > 0) {
-                        const limitationStrategyTags = [...this.tagsManager.prepareTags(limitationStrategy.tags)];
-
-                        // skip checking limitationStrategy when current compiled tags have not included `limitation.tags`
-                        for (let i = 0; i < limitationStrategyTags.length; i++) {
-                            if (!compiledTags.includes(limitationStrategyTags[i])) {
-                                debugLogCollector
-                                    .addLog(false, `tag '${limitationStrategyTags[i]}' not found in current tags`, 3)
-                                    .increaseLevel()
-                                    .increaseLevel()
-                                    .addLog(null, `current tags   : ${compiledTags.join(', ')}`, 3)
-                                    .addLog(null, `limitation tags: ${limitationStrategyTags.join(', ')}`, 3)
-                                    .decreaseLevel()
-                                    .decreaseLevel();
-                                return;
-                            }
-                        }
-
-                        const fullLimitationStrategyTags = [
-                            ...limitationStrategyTags,
-                            ...(limitationStrategy.isSeparate ? [passageName] : [])
-                        ];
-                        const fullLimitationStrategyTagsKey = this.tagsManager.convertTagsToStringKey(fullLimitationStrategyTags);
-                        const actualFiredTagCount = this.history.getActualFiredTagCount(fullLimitationStrategyTagsKey);
-                        if (actualFiredTagCount >= limitationStrategy.max) {
-                            isSuccess = false;
-                            debugLogCollector.addLog(
-                                false,
-                                `limitationStrategy with tags ['${limitationStrategyTags.join(', ')}'] have max value ${limitationStrategy.max} but already fired ${actualFiredTagCount} times`,
-                                3
-                            );
-                            return;
-                        } else {
-                            usedLimitationStrategyTags.push(fullLimitationStrategyTags);
-                            debugLogCollector.addLog(
-                                true,
-                                `limitationStrategy with tags ['${limitationStrategyTags.join(', ')}'] have max value ${limitationStrategy.max} and already fired ${actualFiredTagCount} times`,
-                                3
-                            );
-                        }
-                    } else {
-                        const actualFiredEventCount = this.history.getActualFiredEventCount(passageName);
-                        if (actualFiredEventCount >= limitationStrategy.max) {
-                            isSuccess = false;
-                            debugLogCollector.addLog(
-                                false,
-                                `limitationStrategy without tags have max value ${limitationStrategy.max} but already fired ${actualFiredEventCount} times`,
-                                3
-                            );
-                            return;
-                        } else {
-                            debugLogCollector.addLog(
-                                true,
-                                `limitationStrategy without tags have max value ${limitationStrategy.max} and already fired ${actualFiredEventCount} times`,
-                                3
-                            );
-                        }
-                    }
-                });
-
-                if (isSuccess && usedLimitationStrategyTags.length <= 0) {
+                const fullLimitationStrategyTags = [
+                    ...limitationStrategyTags,
+                    ...(limitationStrategy.isSeparate ? [passageName] : [])
+                ];
+                const fullLimitationStrategyTagsKey = this.tagsManager.convertTagsToStringKey(fullLimitationStrategyTags);
+                const actualFiredTagCount = this.randomEventStats.getTagRunCountActual(fullLimitationStrategyTagsKey);
+                if (actualFiredTagCount >= limitationStrategy.max) {
                     isSuccess = false;
                     debugLogCollector.addLog(
                         false,
-                        `not found any limitationStrategy where current tags cover all limitationStrategy tags (current tags: ${compiledTags.join(', ')}`,
+                        `limitationStrategy with tags ['${limitationStrategyTags.join(', ')}'] have max value ${limitationStrategy.max} but already fired ${actualFiredTagCount} times`,
+                        3
+                    );
+                    return;
+                } else {
+                    usedLimitationStrategyTags.push(fullLimitationStrategyTags);
+                    debugLogCollector.addLog(
+                        true,
+                        `limitationStrategy with tags ['${limitationStrategyTags.join(', ')}'] have max value ${limitationStrategy.max} and already fired ${actualFiredTagCount} times`,
                         3
                     );
                 }
             } else {
-                limitationStrategyList.all().forEach(limitationStrategy => {
-                    // without limitation
-                    if (limitationStrategy.max <= 0) {
-                        debugLogCollector.addLog(true, 'limitationStrategy max value <= 0', 3);
-                        return;
-                    }
-
-                    const actualFiredEventCount = this.history.getActualFiredEventCount(passageName);
-                    if (actualFiredEventCount >= limitationStrategy.max) {
-                        isSuccess = false;
-                        debugLogCollector.addLog(
-                            false,
-                            `random event have max value ${limitationStrategy.max} but already fired ${actualFiredEventCount} times`,
-                            3
-                        );
-                        return;
-                    } else {
-                        debugLogCollector.addLog(
-                            true,
-                            `random event have max value ${limitationStrategy.max} and already fired ${actualFiredEventCount} times`,
-                            3
-                        );
-                    }
-                });
+                const actualFiredEventCount = this.randomEventStats.getPassageRunCountActual(passageName);
+                if (actualFiredEventCount >= limitationStrategy.max) {
+                    isSuccess = false;
+                    debugLogCollector.addLog(
+                        false,
+                        `limitationStrategy without tags have max value ${limitationStrategy.max} but already fired ${actualFiredEventCount} times`,
+                        3
+                    );
+                    return;
+                } else {
+                    debugLogCollector.addLog(
+                        true,
+                        `limitationStrategy without tags have max value ${limitationStrategy.max} and already fired ${actualFiredEventCount} times`,
+                        3
+                    );
+                }
             }
+        });
+
+        if (isSuccess && usedLimitationStrategyTags.length <= 0) {
+            isSuccess = false;
+            debugLogCollector.addLog(
+                false,
+                `not found any limitationStrategy where current tags cover all limitationStrategy tags (current tags: ${compiledTags.join(', ')}`,
+                3
+            );
         }
 
         return {
@@ -250,35 +239,95 @@ export default class ConstraintsVerificator {
         };
     }
 
-    verifyThreshold(threshold: string | number): ConstraintsVerificatingResult {
+    verifyNotTaggedLimitationStrategy(passageName: string, limitationStrategies: LimitationStrategyType[], compiledTags: string[]): ConstraintsVerificatingResult {
         const debugLogCollector = new DebugLogCollector();
+        const usedLimitationStrategyTags: [string[]?] = [];
+        let isSuccess = true;
+
+        if (limitationStrategies.length <= 0) {
+            return {
+                result: true,
+                debugLogCollector: new DebugLogCollector(),
+                additionalData: {
+                    usedLimitationStrategyTags: []
+                },
+            };
+        }
+
+        limitationStrategies.forEach(limitationStrategy => {
+            if (limitationStrategy.max <= 0) {
+                debugLogCollector.addLog(true, 'limitationStrategy max value <= 0', 3);
+                return;
+            }
+
+            const actualFiredEventCount = this.randomEventStats.getPassageRunCountActual(passageName);
+            if (actualFiredEventCount >= limitationStrategy.max) {
+                isSuccess = false;
+                debugLogCollector.addLog(
+                    false,
+                    `random event have max value ${limitationStrategy.max} but already fired ${actualFiredEventCount} times`,
+                    3
+                );
+                return;
+            } else {
+                debugLogCollector.addLog(
+                    true,
+                    `random event have max value ${limitationStrategy.max} and already fired ${actualFiredEventCount} times`,
+                    3
+                );
+            }
+        });
+
+        return {
+            result: isSuccess,
+            debugLogCollector,
+            additionalData: { usedLimitationStrategyTags }
+        };
+    }
+
+    verifyThreshold(threshold: number | string): ConstraintsVerificatingResult {
         let thresholdResult = 0;
-        if (typeof threshold !== 'number' || isNaN(threshold) || threshold % 1 !== 0) {
+        if (!isNumber(threshold)) {
             try {
                 thresholdResult = this.sugarcubeFacade.runTeweeScript(threshold.toString());
-            } catch (err) {
-                err.message = "bad evaluation: " + err.message;
-                throw err;
+            } catch (error) {
+                error.message = "bad evaluation: " + error.message;
+                throw error;
             }
         } else {
-            thresholdResult = threshold;
+            thresholdResult = threshold as number;
+        }
+
+        if (thresholdResult >= 100) {
+            return {
+                result: true,
+                debugLogCollector: new DebugLogCollector().addLog(
+                    true,
+                    'threshold is equal to or greater than 100',
+                    3
+                )
+            }
         }
 
         const randomValue = Math.floor(Math.random() * 100);
         if (randomValue > thresholdResult) {
-            debugLogCollector.addLog(
-                false,
-                `random value is greater than threshold (random=${randomValue} > threshold=${thresholdResult})`,
-                3
-            );
-            return { result: false, debugLogCollector };
+            return {
+                result: false,
+                debugLogCollector: new DebugLogCollector().addLog(
+                    false,
+                    `random value is greater than threshold (random=${randomValue} > threshold=${thresholdResult})`,
+                    3
+                )
+            };
         }
 
-        debugLogCollector.addLog(
-            true,
-            'threshold passed (random=' + randomValue + ' <= threshold=' + thresholdResult + ')',
-            3
-        );
-        return { result: true, debugLogCollector };
+        return {
+            result: true,
+            debugLogCollector: new DebugLogCollector().addLog(
+                true,
+                'threshold passed (random=' + randomValue + ' <= threshold=' + thresholdResult + ')',
+                3
+            )
+        };
     }
 }

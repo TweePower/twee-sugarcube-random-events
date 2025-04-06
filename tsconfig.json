@@ -3,11 +3,13 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
-    "target": "es5",
+    "target": "es2018",
     "sourceMap": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "composite": true,
+    "declarationMap": true
   },
   "include": [
     "src/**/*",

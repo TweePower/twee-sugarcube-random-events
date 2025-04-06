@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11// --><tw-storydata name="Random events" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="A27A64DD-2FEA-499C-BE07-A9AF0D5D5D11" zoom="0.3" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="DayTimeWidgets" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;ChangeTime&quot;&gt;&gt;
+	<!-- UUID://91356800-6EFD-46A8-BC40-E18088E85CAA// --><tw-storydata name="Random events" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="91356800-6EFD-46A8-BC40-E18088E85CAA" zoom="0.3" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="DayTimeWidgets" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;ChangeTime&quot;&gt;&gt;
     &lt;&lt;set _index = $dayTimeArray.indexOf($currentDayTime)&gt;&gt;
 	&lt;&lt;if (_index + 1 &gt;= $dayTimeArray.length)&gt;&gt;
 		&lt;&lt;set $currentDayTime = $dayTimeArray[0]&gt;&gt;
@@ -112,6 +112,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		&lt;&lt;set $marketDialogEventCalledAtAfternoonTimes = 0&gt;&gt;
 		&lt;&lt;set $marketDialogEventCalledAtEveningTimes = 0&gt;&gt;
 		&lt;&lt;set $isMarketStealEventCalledToday = false&gt;&gt;
+		&lt;&lt;set $isMarketHiddenStoreEventCalledToday = false&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Market" tags="" position="225,100" size="100,100">&lt;img src=&quot;images/market.jpg&quot;&gt;
 
@@ -276,7 +277,7 @@ You have $appleCount apple(s).
 
 &lt;&lt;button [[Reload page|passage()]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/QuickStart.md#step-7---limits&quot;&gt;Return to github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryCaption" tags="" position="350,100" size="100,100">Current time: $currentDayTime</tw-passagedata><tw-passagedata pid="4" name="StoryInit" tags="" position="475,100" size="100,100">&lt;&lt;set $dayTimeArray = [&quot;Morning&quot;, &quot;Noon&quot;, &quot;Afternoon&quot;, &quot;Evening&quot;, &quot;Night&quot;]&gt;&gt;
+&lt;a href=&quot;https://github.com/TweePower/twee-sugarcube-random-events/blob/main/doc/QuickStart.md#results&quot;&gt;Return to github&lt;/a&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryCaption" tags="" position="350,100" size="100,100">Current time: $currentDayTime</tw-passagedata><tw-passagedata pid="4" name="StoryInit" tags="" position="475,100" size="100,100">&lt;&lt;set $dayTimeArray = [&quot;Morning&quot;, &quot;Noon&quot;, &quot;Afternoon&quot;, &quot;Evening&quot;, &quot;Night&quot;]&gt;&gt;
 &lt;&lt;set $currentDayTime = &quot;Morning&quot;&gt;&gt;
 &lt;&lt;set $appleCount = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryMenu" tags="" position="600,100" size="100,100">&lt;&lt;link [[Move time|passage()]]&gt;&gt;&lt;&lt;ChangeTime&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Open debug&quot;&gt;&gt;

@@ -2,6 +2,8 @@
 
 Random event on steroids for Twee+SugarCube with percent threshold, groups, limitations, enable/disable, and many more
 
+This library is based on [Twee SugarCube Passage Metadata Collector](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector).
+
 ## Motivation
 
 I found that many projects on Twee+Sugarcube write random events using.
@@ -34,7 +36,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 
 In the [Quick Start](./doc/QuickStart.md), you will learn step by step how to use the library to turn a huge piece of code into a single line `<<REGroup "MarketEvents" 100>>`.
 
-<details><summary>Show/Hide code which would be without the library</summary>
+<details><summary>!! Show/Hide how this code would be looked at without the library !!</summary>
 
 ```html
 <<switch $currentDayTime>>\
@@ -195,10 +197,6 @@ In the [Quick Start](./doc/QuickStart.md), you will learn step by step how to us
 
 ## Examples + Docs
 
-
-
-
-
 Detailed documentation: [Documentation](./doc/Documentation.md)
 
 > [!NOTE]
@@ -237,7 +235,7 @@ But let's add some filters, thresholds, and limitations.
     threshold: 30,
     filter: `$myVar > 10`,
     tags: ["Chapter1", "SomePlaceName", "Daily", "$CurrentDayTime"],
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["SomePlaceName", "Morning"] },
         { max: 1, tags: ["SomePlaceName", "Afternoon"] },
         { max: 1, tags: ["SomePlaceName", "Evening"] },
@@ -252,14 +250,14 @@ And now the random event will be triggered:
 - when variable $myVar is greater than 10
 - once when variable $CurrentDayTime is equal to "morning", "afternoon" or "evening" but no more than two times per day
 
-Also, if you have the random event `MyRandomEvent2` with the same limitationStrategy, it will not be triggered in the morning when `MyRandomEvent` is already triggered in the morning.
+Also, if you have the random event `MyRandomEvent2` with the same limitationStrategies, it will not be triggered in the morning when `MyRandomEvent` is already triggered in the morning.
 
-Because limitationStrategy works globally using tags. So you willn't have a mess with random events when they are called one by one.
+Because limitationStrategies works globally using tags. So you willn't have a mess with random events when they are called one by one.
 
-But if you want to separate the random event from others, add `isSeparate: true` to limitationStrategy:
+But if you want to separate the random event from others, add `isSeparate: true` to limitationStrategies:
 
 ```html
-    limitationStrategy: [
+    limitationStrategies: [
         { max: 1, tags: ["SomePlaceName", "Morning"], isSeparate: true },
         { max: 1, tags: ["SomePlaceName", "Afternoon"], isSeparate: true },
         { max: 1, tags: ["SomePlaceName", "Evening"], isSeparate: true },
@@ -312,7 +310,7 @@ Start random event MyRandomEvent
       + event enabled
     + verify filter using: definition configuration
       + filter expression returns true
-    + verify limitationStrategy using: definition configuration
+    + verify limitationStrategies using: definition configuration
     + verify threshold using: definition configuration
       + threshold passed (random=97 <= threshold=100)
 ```
@@ -322,3 +320,14 @@ Start random event MyRandomEvent
 If you find the bug, please create an issue or pull request.
 
 I'm not a professional frontend developer, so I'll be glad if you help me to make randome events better :)
+
+## Related Resources
+
+- [SugarCube official repository](https://github.com/tmedwards/sugarcube-2)
+- [SugarCube documentation](https://www.motoslave.net/sugarcube/2/)
+- [Tweego documentation](https://www.motoslave.net/tweego/docs/)
+- [Twee SugarCube Passage Metadata Collector](https://github.com/TweePower/twee-sugarcube-passage-metadata-collector)
+
+## License
+
+This project is licensed under the MIT License.

@@ -1,0 +1,1 @@
+{"version":3,"file":"GroupFactory.d.ts","sourceRoot":"","sources":["../../../src/factory/GroupFactory.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,gBAAgB,CAAC;AAEnC,OAAO,EAAE,wBAAwB,EAAE,MAAM,yBAAyB,CAAC;AAMnE,MAAM,CAAC,OAAO,OAAO,YAAY;IACtB,+BAA+B,CAClC,aAAa,CAAC,EAAE,MAAM,GAAG,wBAAwB,GAAG,GAAG,GACxD,KAAK;CA0DX"}

@@ -1,13 +1,9 @@
-:: StoryMenu
+:: StoryMenu [nobr]
 <<link [[Move time|passage()]]>><<ChangeTime>><</link>>
 <<link "Open debug">>
 	<<run
 		Dialog.setup("Debug");
-		Dialog.wiki("<pre><code>" + (
-			State.variables.randomEventHistory !== undefined
-				? JSON.stringify(JSON.parse(State.variables.randomEventHistory), null, 4)
-				: 'empty'
-		) + "</code></pre>");
+		Dialog.wiki(getDebug());
 		Dialog.open();
 	>>
 <</link>>
