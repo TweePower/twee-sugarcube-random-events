@@ -1,0 +1,7 @@
+sugarcube-2:
+  macros:
+    ChangeTime:
+      name: ChangeTime
+    PassageMetadata:
+      name: PassageMetadata
+      container: true

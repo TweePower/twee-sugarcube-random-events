@@ -202,9 +202,11 @@ Detailed documentation: [Documentation](./doc/Documentation.md)
 > [!NOTE]
 > TODO: JS API Documentation, CookBook with examples, minigame based on events
 
-## How to install
+## Installation & Usage
 
 You can find manual about how to install Random Events library here: [Quick start Step 0 - Preparation](./doc/QuickStart.md#step-0---how-to-install)
+
+If you're using VSCode with the [Twee 3 Language Tools extension](https://marketplace.visualstudio.com/items?itemName=t3lt.twee3-language-tools), simply copy `'random-events.twee-config.yml'` into your project to automatically apply the correct macro configuration.
 
 ## How to use
 
