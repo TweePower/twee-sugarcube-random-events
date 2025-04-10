@@ -129,9 +129,9 @@ export default class RandomEventPassageMetadataProcessor {
             throw new InvalidPassageMetadataValueType(passageMetadataObject.passageName, ['PassageMetadata', 'threshold'], 'integer or string', typeof passageMetadataObject.threshold);
         } else if (isNumber(passageMetadataObject.threshold)) {
             if (passageMetadataObject.threshold < 0) {
-                new PassageMetadataValidationError('Should equal or greater than 0', passageMetadataObject.passageName, ['PassageMetadata', 'threshold']);
+                throw new PassageMetadataValidationError('Should equal or greater than 0', passageMetadataObject.passageName, ['PassageMetadata', 'threshold']);
             } else if (passageMetadataObject.threshold > 100) {
-                new PassageMetadataValidationError('Should equal or less than 100', passageMetadataObject.passageName, ['PassageMetadata', 'threshold']);
+                throw new PassageMetadataValidationError('Should equal or less than 100', passageMetadataObject.passageName, ['PassageMetadata', 'threshold']);
             }
         }
     }
