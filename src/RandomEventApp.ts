@@ -24,10 +24,6 @@ declare type RunRandomEventResultType = {
     group?: GroupType,
 };
 
-declare let State: {
-    variables: { [key: string]: any } // eslint-disable-line @typescript-eslint/no-explicit-any
-}
-
 export default class RandomEventApp {
     lock: Lock;
     debugLogCollector: DebugLogCollector;
