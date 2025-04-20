@@ -14,6 +14,6 @@ export default class RequiredPassageMetadataValue extends PassageMetadataValidat
             super('Valie is required when ' + condition, passageName, path, expected, actual);
         }
 
-        Object.setPrototypeOf(this, PassageMetadataValidationError.prototype);
+        Object.setPrototypeOf(this, RequiredPassageMetadataValue.prototype);
     }
 }

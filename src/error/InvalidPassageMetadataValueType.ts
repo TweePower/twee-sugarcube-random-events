@@ -9,6 +9,6 @@ export default class InvalidPassageMetadataValueType extends PassageMetadataVali
     ) {
         super('Invalid type', passageName, path, expected, actual);
 
-        Object.setPrototypeOf(this, PassageMetadataValidationError.prototype);
+        Object.setPrototypeOf(this, InvalidPassageMetadataValueType.prototype);
     }
 }
