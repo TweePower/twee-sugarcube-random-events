@@ -22,35 +22,40 @@ export default class ConstraintsVerificator {
 
     verify(randomEvent: RandomEventType, compiledTags: string[], rewriteConfiguration: RewriteConfigurationType): ConstraintsVerificatingResult {
         let result = true;
-        let usedLimitationStrategyTags = [];
+        let usedLimitationStrategyTags: string[][] = [];
         const debugLogCollector = new DebugLogCollector();
 
+        // Verify isEnabled
         if (rewriteConfiguration.isValidateIsEnable === false) {
             debugLogCollector.addLog(true, 'skip IsEnable verify', 2);
         } else {
-            const checkResult = this.verifyIsEnable(rewriteConfiguration.isEnabled ?? randomEvent.isEnabled);
+            const isEnabled = rewriteConfiguration.isEnabled ?? randomEvent.isEnabled;
+            const checkResult = this.verifyIsEnable(isEnabled);
             result = checkResult.result;
             debugLogCollector
-                .addLog(checkResult.result, `verify IsEnable using: ${rewriteConfiguration.isEnabled ? 'rewrite configuration' : 'passage metadata'}`, 2)
+                .addLog(checkResult.result, `verify IsEnable using: ${rewriteConfiguration.isEnabled !== undefined ? 'rewrite configuration' : 'passage metadata'}`, 2)
                 .increaseLevel()
                 .merge(checkResult.debugLogCollector)
                 .decreaseLevel();
         }
 
+        // Verify filter if isEnabled check passed
         if (result) {
             if (rewriteConfiguration.isValidateFilter === false) {
                 debugLogCollector.addLog(true, 'skip filter verify', 2);
             } else {
-                const checkResult = this.verifyFilter(rewriteConfiguration.filter ?? randomEvent.filter);
+                const filter = rewriteConfiguration.filter ?? randomEvent.filter;
+                const checkResult = this.verifyFilter(filter);
                 result = checkResult.result;
                 debugLogCollector
-                    .addLog(checkResult.result, `verify filter using: ${rewriteConfiguration.filter ? 'rewrite configuration' : 'passage metadata'}`, 2)
+                    .addLog(checkResult.result, `verify filter using: ${rewriteConfiguration.filter !== undefined ? 'rewrite configuration' : 'passage metadata'}`, 2)
                     .increaseLevel()
                     .merge(checkResult.debugLogCollector)
                     .decreaseLevel();
             }
         }
 
+        // Verify limitation strategies if previous checks passed
         if (result) {
             let checkResult: ConstraintsVerificatingResult;
             if (randomEvent._isLimitationStrategiesTagged) {
@@ -76,16 +81,18 @@ export default class ConstraintsVerificator {
             usedLimitationStrategyTags = checkResult.additionalData.usedLimitationStrategyTags;
         }
 
+        // Verify threshold if previous checks passed
         if (result) {
             if (rewriteConfiguration.isValidateThreshold === false) {
                 debugLogCollector.addLog(true, 'skip threshold verify', 2);
             } else {
-                const checkResult = this.verifyThreshold(rewriteConfiguration.threshold ?? randomEvent.threshold);
+                const threshold = rewriteConfiguration.threshold ?? randomEvent.threshold;
+                const checkResult = this.verifyThreshold(threshold);
                 result = checkResult.result;
                 debugLogCollector
                     .addLog(
                         checkResult.result,
-                        `verify threshold using: ${rewriteConfiguration.threshold ? 'rewrite configuration' : 'passage metadata'}`,
+                        `verify threshold using: ${rewriteConfiguration.threshold !== undefined ? 'rewrite configuration' : 'passage metadata'}`,
                         2
                     ).increaseLevel()
                     .merge(checkResult.debugLogCollector)
