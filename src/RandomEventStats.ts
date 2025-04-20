@@ -91,8 +91,6 @@ export default class RandomEventStats {
         });
 
         passageMetadataApp.onBeforeRestore.add((state: PassageMetadataStateType) => {
-            console.log(state);
-
             const tagsIndex: {[tag: number]: string} = {};
             if (state.__tags !== undefined) {
                 state.__tags.forEach((tag: string, index: number) => {
