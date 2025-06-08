@@ -19,21 +19,24 @@ sugarcube-2:
     REGroup:
       name: REGroup
       description: |-
-        *Syntax:* `<<REGroup "groupName" 50>>`
+        *Syntax:* `<<REGroup "groupName" 1 50>>`
 
         The `<<REGroup>>` find all random events with group, check all, and run one of them
 
         *Arguments:*
           * `groupName`: random event group name.
-          * `groupThreshold`: group threshold.
+          * `resultCount`: count of how many random events will be displayed (default value: 1).
+          * `groupThreshold`: group threshold (if not empty, it disable random event threshold validation).
 
         *Usage:*
         ```
           <<REGroup "SomeRandomEventGroupName">>
-          <<REGroup "SomeRandomEventGroupName" 50>>
+          <<REGroup "SomeRandomEventGroupName" 2>>
+          <<REGroup "SomeRandomEventGroupName" null 50>>
+          <<REGroup "SomeRandomEventGroupName" 5 50>>
         ```
       parameters:
-        - string |+ number
+        - string |+ number |+ number
     REEnable:
       name: REEnable
       description: |-

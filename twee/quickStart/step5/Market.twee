@@ -4,7 +4,7 @@
 You are in vegetable market, where the air was rich with the scent of fresh produce and the vibrant colors of the stalls created a lively, welcoming atmosphere.
 As they moved through the crowd, the mix of sounds and smells enveloped them, grounding them in the simple beauty of the moment.
 
-<<REGroup "MarketEvents" 100>>
+<<REGroup "MarketEvents" 1 100>>
 
 You have $appleCount apple(s).
 <<link [[Buy an apple|passage()]]>><<set $appleCount += 1>><</link>>

@@ -138,7 +138,7 @@ export default (randomEventApp: RandomEventApp, passageMetadataApp: PassageMetad
                 return this.error('No random event passage name specified');
             }
 
-            var randomEventPassageName;
+            var randomEventPassageName: string;
             if (typeof this.args[0] === 'object') {
                 randomEventPassageName = this.args[0].link;
             } else {
@@ -159,7 +159,7 @@ export default (randomEventApp: RandomEventApp, passageMetadataApp: PassageMetad
                 if (result.debugLogCollector.debugLevel > 0) {
                     debugLog = result.debugLogCollector.toString();
                 }
-                this.debugView.name = 'RE "' + result.passageMetadata.passageName + '"';
+                this.debugView.name = 'RE "' + randomEventPassageName + '"';
                 this.debugView.title = debugLog;
                 this.debugView.modes({
                     nonvoid: true,
@@ -180,14 +180,14 @@ export default (randomEventApp: RandomEventApp, passageMetadataApp: PassageMetad
             }
 
             if (result.isSuccess) {
-                randomEventApp.incrementRunCounters(result.passageMetadata.passageName, result.usedTags);
+                randomEventApp.incrementRunCounters(randomEventPassageName, result.resultList[0].usedTags);
 
-                if (result.passageMetadata.type === 'embedded') {
+                if (result.resultList[0].passageMetadata.type === 'embedded') {
                     var $el = jQuery(this.output);
-                    $el.wiki(Story.get(result.passageMetadata.passageName).processText());
+                    $el.wiki(Story.get(randomEventPassageName).processText());
                 } else {
                     randomEventApp.acquireLock();
-                    setTimeout(function() { Engine.play(result.passageMetadata.passageName, true), Engine.minDomActionDelay });
+                    setTimeout(function() { Engine.play(randomEventPassageName, true), Engine.minDomActionDelay });
                 }
             }
         },
@@ -200,9 +200,19 @@ export default (randomEventApp: RandomEventApp, passageMetadataApp: PassageMetad
             }
             var groupName = this.args[0];
 
+            if (this.args[1] !== undefined && this.args[1] !== null &&  typeof this.args[1] !== 'number') {
+                return this.error('Random event result count should be a integer value');
+            }
+            var groupResultCount = this.args[1] ?? 1;
+
+            if (this.args[2] !== undefined &&  typeof this.args[2] !== 'number') {
+                return this.error('Random event group threshold should be a integer value');
+            }
+            var groupThreshold = this.args[2];
+
             try {
                 // TODO: maybe need to add more arguments
-                var result = randomEventApp.runGroup(groupName, this.args[1]);
+                var result = randomEventApp.runGroup(groupName, groupThreshold, groupResultCount);
             } catch (err) {
                 this.error(err.message);
             }
@@ -233,14 +243,24 @@ export default (randomEventApp: RandomEventApp, passageMetadataApp: PassageMetad
             }
 
             if (result.isSuccess) {
-                randomEventApp.incrementRunCounters(result.passageMetadata.passageName, result.usedTags);
+                for (let index = 0; index < result.resultList.length; index++) {
+                    if (result.resultList[index].passageMetadata.type !== 'embedded') {
+                        randomEventApp.incrementRunCounters(result.resultList[index].passageMetadata.passageName, result.resultList[index].usedTags);
 
-                if (result.passageMetadata.type === 'embedded') {
+                        randomEventApp.acquireLock();
+                        setTimeout(function() { Engine.play(result.resultList[index].passageMetadata.passageName, true), Engine.minDomActionDelay });
+                        return;
+                    }
+                }
+
+                for (let index = 0; index < result.resultList.length; index++) {
+                    const passageMetadata = result.resultList[index].passageMetadata;
+                    const usedTags = result.resultList[index].usedTags;
+
+                    randomEventApp.incrementRunCounters(passageMetadata.passageName, usedTags);
+
                     var $el = jQuery(this.output);
-                    $el.wiki(Story.get(result.passageMetadata.passageName).processText());
-                } else {
-                    randomEventApp.acquireLock();
-                    setTimeout(function() { Engine.play(result.passageMetadata.passageName, true), Engine.minDomActionDelay });
+                    $el.wiki(Story.get(passageMetadata.passageName).processText());
                 }
             }
         },

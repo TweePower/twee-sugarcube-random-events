@@ -34,7 +34,7 @@ I thought it would be convenient to describe trigger conditions and limit, and o
 
 ## Quick Start
 
-In the [Quick Start](./doc/QuickStart.md), you will learn step by step how to use the library to turn a huge piece of code into a single line `<<REGroup "MarketEvents" 100>>`.
+In the [Quick Start](./doc/QuickStart.md), you will learn step by step how to use the library to turn a huge piece of code into a single line `<<REGroup "MarketEvents" 1 100>>`.
 
 <details><summary>!! Show/Hide how this code would be looked at without the library !!</summary>
 

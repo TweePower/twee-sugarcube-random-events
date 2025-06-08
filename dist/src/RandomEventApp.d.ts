@@ -11,9 +11,13 @@ import RandomEventStats from "./RandomEventStats";
 declare type RunRandomEventResultType = {
     isSuccess: boolean;
     debugLogCollector?: DebugLogCollector;
-    passageMetadata?: RandomEventType;
-    usedTags?: [string[]?];
     group?: GroupType;
+    resultList?: [
+        {
+            passageMetadata?: RandomEventType;
+            usedTags?: [string[]?];
+        }?
+    ];
 };
 export default class RandomEventApp {
     private passageMetadataApp;
@@ -39,7 +43,9 @@ export default class RandomEventApp {
     enableByTag(tag: string): void;
     disableByTag(tag: string): void;
     runRandomEvent(passageName: string, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType;
-    runGroup(groupName: string, groupThreshold?: number, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType;
+    private weightedIndexChoice;
+    private weightedShuffle;
+    runGroup(groupName: string, groupThreshold?: number, groupResultCount?: number, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType;
     incrementRunCounters(passageName: string, usedTags?: [string[]?]): void;
     resetRunCounterByPassage(passageName: string): void;
     resetRunCounterByTag(tag: string): void;

@@ -19,9 +19,21 @@ import RandomEventStats from "./RandomEventStats";
 declare type RunRandomEventResultType = {
     isSuccess: boolean,
     debugLogCollector?: DebugLogCollector,
+    group?: GroupType,
+    resultList?: [
+        {
+            passageMetadata?: RandomEventType,
+            usedTags?: [string[]?],
+        }?
+    ],
+};
+
+declare type SingleRandomEventResultType = {
+    isSuccess: boolean,
+    debugLogCollector?: DebugLogCollector,
+    group?: GroupType,
     passageMetadata?: RandomEventType,
     usedTags?: [string[]?],
-    group?: GroupType,
 };
 
 export default class RandomEventApp {
@@ -246,8 +258,12 @@ export default class RandomEventApp {
             return {
                 isSuccess: result,
                 debugLogCollector: this.debugLogCollector,
-                passageMetadata,
-                usedTags: []
+                resultList: [
+                    {
+                        passageMetadata,
+                        usedTags: [],
+                    },
+                ],
             };
         }
 
@@ -264,8 +280,12 @@ export default class RandomEventApp {
             return {
                 isSuccess: checkResult.result,
                 debugLogCollector: this.debugLogCollector,
-                passageMetadata,
-                usedTags: passageMetadata._isLimitationStrategiesTagged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags]
+                resultList: [
+                    {
+                        passageMetadata,
+                        usedTags: passageMetadata._isLimitationStrategiesTagged ? checkResult.additionalData.usedLimitationStrategyTags : [compiledTags]
+                    },
+                ],
             };
         } catch (error) {
             // TODO add data to error
@@ -273,7 +293,24 @@ export default class RandomEventApp {
         }
     }
 
-    runGroup(groupName: string, groupThreshold?: number, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType {
+    private weightedIndexChoice(arr: SingleRandomEventResultType[]) {
+        const totalWeight = arr.map((v: SingleRandomEventResultType) => v.group.weight).reduce((x, y) => x + y);
+        const val = Math.random() * totalWeight;
+        for (let i = 0, cur = 0; ; i++) {
+            cur += arr[i].group.weight;
+            if (val <= cur) return i;
+        }
+    }
+    private weightedShuffle(arr: [SingleRandomEventResultType?]) {
+        for (let i = 0; i < arr.length; i++) {
+            const v = this.weightedIndexChoice(arr.slice(i));
+            [arr[i + v], arr[i]] = [arr[i], arr[i + v]];
+        }
+
+        return arr;
+    }
+
+    runGroup(groupName: string, groupThreshold?: number, groupResultCount: number = 1, rewriteConfiguration?: RewriteConfigurationType): RunRandomEventResultType {
         this.debugLogCollector.clear();
 
         rewriteConfiguration = {
@@ -338,8 +375,7 @@ export default class RandomEventApp {
             .addLog(null, 'Verify random events in group', 1)
             .increaseLevel();
 
-        let totalWeight = 0;
-        const sucessRandomEventsResults: [RunRandomEventResultType?] = [];
+        const sucessRandomEventsResults: [SingleRandomEventResultType?] = [];
         for (let groupIndex = 0; groupIndex < this._passagesByGroupIndex[groupName].length; groupIndex++) {
             const passageName = this._passagesByGroupIndex[groupName][groupIndex];
             const passageMetadata = (this.passageMetadataApp.get(passageName)).data as RandomEventType;
@@ -360,7 +396,6 @@ export default class RandomEventApp {
                     .decreaseLevel();
 
                 if (result) {
-                    totalWeight += group.weight;
                     sucessRandomEventsResults.push({
                         isSuccess: result,
                         passageMetadata: passageMetadata,
@@ -385,7 +420,7 @@ export default class RandomEventApp {
             };
         }
 
-        let winnerRandomEventResult: RunRandomEventResultType | null = null;
+        let winnerRandomEventResults: SingleRandomEventResultType[] = [];
         if (sucessRandomEventsResults[0].group.type === GroupTypeEnum.Sequential) {
             this.debugLogCollector
                 .addLog(true, `Find winner event`, 2)
@@ -396,40 +431,63 @@ export default class RandomEventApp {
             this.debugLogCollector.addLog(true, `sequential search found ${sucessRandomEventsSequentialResults.length} siutable events`, 3);
 
             if (sucessRandomEventsSequentialResults.length > 0) {
-                winnerRandomEventResult = sucessRandomEventsSequentialResults.sort((a: RunRandomEventResultType, b: RunRandomEventResultType): number => {
+                winnerRandomEventResults = sucessRandomEventsSequentialResults.sort((a: SingleRandomEventResultType, b: SingleRandomEventResultType): number => {
                     return a.group.sequentialIndex - b.group.sequentialIndex;
-                })[0];
-                this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.passageMetadata.passageName}`, 3);
+                }).slice(0, groupResultCount);
+
+                let resultList: [{passageMetadata?: RandomEventType, usedTags?: [string[]?]}?] = [];
+                if (winnerRandomEventResults.length > 1) {
+                    let winnerRandomEventResultsNames: string[] = [];
+
+                    winnerRandomEventResults.forEach((winnerRandomEventResult) => {
+                        winnerRandomEventResultsNames.push(winnerRandomEventResult.passageMetadata.passageName);
+                        resultList.push({
+                            passageMetadata: winnerRandomEventResult.passageMetadata,
+                            usedTags: winnerRandomEventResult.usedTags,
+                        });
+                    });
+                    this.debugLogCollector.addLog(true, `winner random events: ${winnerRandomEventResultsNames.join(', ')}`, 3);
+                } else {
+                    resultList.push({
+                        passageMetadata: winnerRandomEventResults[0].passageMetadata,
+                        usedTags: winnerRandomEventResults[0].usedTags,
+                    });
+                    this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResults[0].passageMetadata.passageName}`, 3);
+                }
 
                 return {
                     isSuccess: result,
                     debugLogCollector: this.debugLogCollector,
-                    passageMetadata: winnerRandomEventResult.passageMetadata,
-                    usedTags: winnerRandomEventResult.usedTags,
-                    group: winnerRandomEventResult.group,
+                    group: winnerRandomEventResults[0].group,
+                    resultList
                 };
             }
         }
 
-        let winnerWeight = Math.floor(Math.random() * totalWeight);
-        this.debugLogCollector.addLog(true, `total weight: ${totalWeight} | wittner weight: ${winnerWeight}`, 3);
-
-        for (let i = 0; i < sucessRandomEventsResults.length; i++) {
-            winnerWeight -= sucessRandomEventsResults[i].group.weight;
-
-            if (winnerWeight <= 0) {
-                winnerRandomEventResult = sucessRandomEventsResults[i];
-                break;
-            }
+        if (sucessRandomEventsResults.length < groupResultCount) {
+            groupResultCount = sucessRandomEventsResults.length;
         }
-        this.debugLogCollector.addLog(true, `winner random event: ${winnerRandomEventResult.passageMetadata.passageName}`, 3);
+
+        winnerRandomEventResults = (sucessRandomEventsResults.length > 1 ? this.weightedShuffle(sucessRandomEventsResults) : sucessRandomEventsResults).slice(0, groupResultCount);
+
+        let resultList: [{passageMetadata?: RandomEventType, usedTags?: [string[]?]}?] = [];
+        let winnerRandomEventResultsNames: string[] = [];
+
+        winnerRandomEventResults.forEach((winnerRandomEventResult) => {
+            winnerRandomEventResultsNames.push(winnerRandomEventResult.passageMetadata.passageName);
+            resultList.push({
+                passageMetadata: winnerRandomEventResult.passageMetadata,
+                usedTags: winnerRandomEventResult.usedTags,
+            });
+        });
+
+        this.debugLogCollector.addLog(true, `winner random events: ${winnerRandomEventResultsNames.join(', ')}`, 3);
 
         return {
             isSuccess: result,
             debugLogCollector: this.debugLogCollector,
-            passageMetadata: winnerRandomEventResult.passageMetadata,
-            usedTags: winnerRandomEventResult.usedTags,
-            group: winnerRandomEventResult.group,
+            group: winnerRandomEventResults[0].group,
+            resultList,
         };
     }
 

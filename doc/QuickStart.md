@@ -175,7 +175,7 @@ replace:
 to:
 
 ```html
-<<REGroup "MarketEvents" 100>>
+<<REGroup "MarketEvents" 1 100>>
 ```
 
 [Open the market passage code on Github](../twee/quickStart/step3/Market.twee)
@@ -405,7 +405,7 @@ Now the market looks more alive. There are side quests, dialogues, and a hidden 
 **But the most important thing** is that these events are very easy to maintain and add new events. Market passage does not have hundreds of if/else constructions that plunge you into horror, all the settings are in the events themselves, and market passage contains only one line
 
 ```html
-<<REGroup "MarketEvents" 100>>
+<<REGroup "MarketEvents" 1 100>>
 ```
 
 [Open the result code folder on GitHub](../twee/quickStart/step7)
